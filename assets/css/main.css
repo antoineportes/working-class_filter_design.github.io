@@ -10,3 +10,17 @@ body, html
   scroll-snap-type:  y proximity;
   scroll-behavior:  smooth;
 }
+
+/*  Titles  */
+h1, h2, h3
+{
+  display:  block;
+}
+h1
+{
+  color:  hsl(337, 100%, 71.5%);  /*  pink  */
+}
+h2
+{
+  color:  hsl(47, 100%, 60.5%);  /*  yellow  */
+}
