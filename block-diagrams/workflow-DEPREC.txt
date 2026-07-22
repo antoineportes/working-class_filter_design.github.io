@@ -1,0 +1,12 @@
+1. Create TikZ diagram on Overleaf.
+2. Download **pdf** and text files (to corresponding directory: ./block-diagrams/chapterXX/ ).
+3. Open pdf with Inkscape:
+  --> clip to media box
+  --> draw missing fonts
+  --> DO NOT embed images
+  --> DO NOT import pages
+4. Group layers as: FILL, STROKE & BOTH.
+5. Add CSS classes: .has-fill & .has-stroke accordingly.
+6. Save as **plain SVG**.
+7. CTRL+F: replace all: id=" with: id="CC-SS-DD-    //  meaning: chapter-section-diagram w/ zero-padding.
+8. Add to HTML in div.block-diagram.

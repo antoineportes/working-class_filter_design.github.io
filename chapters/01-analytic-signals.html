@@ -1,0 +1,4523 @@
+<!DOCTYPE html>
+<html>
+
+
+    <head>
+        <title>Working-class filter design | Chapter I: Analytic signals</title>
+        <meta charset='UTF-8'/>
+        <meta name="viewport" content='width=device-width, initial-scale=1'/>
+        <meta name='author' content='Antoine Portes'/>
+        <link rel="canonical" href="https://www.antoineportes.com/working-class_filter_design/">
+        <!-- Style -->
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauInfant[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauInfant-Italic[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauSC[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Unifont/unifont-17.0.05.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+        <link rel='stylesheet'  type='text/css'  href='../assets/css/main.css'/>
+        <style> /* Greek alphabet */
+          .greek
+          {
+            width: 100%;
+            overflow-x: auto;
+          }
+          .greek::-webkit-scrollbar
+          {
+            height: 8px;
+            background-color: transparent;
+            border-radius: 4px;
+            border: 1px solid var(--subliminal);
+          }
+          .greek::-webkit-scrollbar-thumb
+          {
+            height: 8px;
+            background-color: hsl(21, 22.5%, 12.25%);
+            border-radius: 4px;
+          }
+          .greek::-webkit-scrollbar-thumb:hover
+          {
+            background-color: hsl(21, 45%, 49%);
+          }
+          .greek table
+          {
+            width: fit-content;
+            margin: 0;
+            border-collapse: collapse;
+          }
+          .greek th
+          {
+            background-image:
+              linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.5) 20%,
+                rgba(0, 0, 0, 0) 95%
+              );
+            text-align: center;
+          }
+          .greek th, .greek td
+          {
+            border: 1px solid var(--subliminal);
+            padding: 0.5rem 1.41rem 0.75rem 1.41rem;
+          }
+          .greek td:nth-child(1), .greek td:nth-child(2)
+          {
+            text-align: center;
+          }
+          .greek td:nth-child(3), .greek td:nth-child(4)
+          {
+            text-align: left;
+          }
+          .greek tr:nth-child(even)
+          {
+            background-color: rgba(255, 255, 255, 0.0075);
+          }
+          .greek tr:nth-child(2n+1)
+          {
+            background-color: rgba(0, 0, 0, 0.0075);
+          }
+        </style>
+        <!-- Manifest -->
+        <link rel="manifest" href="../site.webmanifest">
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+        <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+        <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png">
+        <!-- ======== SCRIPTS ======== -->
+        <!-- #### Layout #### -->
+        <script
+          defer
+          src="../assets/javascript/layout.js"
+        >
+        </script>
+        <!-- #### MathJax #### -->
+        <script
+          async
+          src="../assets/javascript/mathjax/config.js"
+        >
+        </script>
+    </head>
+
+
+
+    <body>
+
+
+      <nav>
+
+        <a
+          title="Home"
+          target="_self"
+          type="text/html"
+          charset="UTF-8"
+          rel="home"
+          href="../"
+        >
+          <h1>
+            Working-class filter design
+          </h1>
+        </a>
+
+        <div class="dropdown">
+          <button
+            onclick="toggleDropdown(event)"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <svg
+              viewBox="0 0 120 120"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,20 h 80"
+                />
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,60 h 80"
+                />
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,100 h 80"
+                />
+              </g>
+            </svg>
+            chapters
+          </button>
+          <menu>
+            <!-- I. Analytic saignals -->
+            <li>
+              <a
+                href="#top"
+                class="current"
+              >
+                Chapter <span class="small-caps">i</span>: Analytic signals
+              </a>
+            </li>
+            <!-- II. RC -->
+            <li>
+              <a
+                href="./02-rc.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">ii</span>: RC
+              </a>
+            </li>
+            <!-- III. = I + II -->
+            <li>
+              <a
+                href="./03-equals-one-plus-two.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">iii</span>:
+                = <span class="small-caps">i</span>
+                + <span class="small-caps">ii</span>
+              </a>
+            <!-- IV. Jargon -->
+            </li>
+            <li>
+              <a
+                href="./04-jargon.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">iv</span>: Jargon
+              </a>
+            </li>
+            <!-- V. Poles and zeroes -->
+            <li>
+              <a
+                href="./05-poles-and-zeroes.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">v</span>: Poles and zeroes
+              </a>
+            </li>
+            <!-- VI. More jargon -->
+            <li>
+              <a
+                href="./06-more-jargon.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">vi</span>: More jargon
+              </a>
+            </li>
+            <!-- VII. Ones and zeroes -->
+            <li>
+              <a
+                href="./07-ones-and-zeroes.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">vii</span>: Ones and zeroes
+              </a>
+            </li>
+            <!-- Stephen Butterworth -->
+            <li>
+              <a
+                href="./08-stephen-butterworth.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">viii</span>: Stephen Butterworth
+              </a>
+            </li>
+          </menu>
+        </div>
+
+        <button class="gitHub">
+          <a
+            href="https://github.com/antoineportes/Working-class-filter-design"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="original (GitHub repository)"
+            title="original (GitHub repository)"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 512 512"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g transform="scale(4)">
+                <path
+                  class="octoCat"
+                  d="M 82.374999,128 C 90.249999,128 120,97.285025 120,70.18496 120,35.946913 94.843771,8.0000003 63.890627,8 32.937485,7.9999997 8.0000002,35.946913 8,70.18496 7.9999998,97.043069 37.75,128 45.625,128 Z"
+                />
+                <path
+                  d="M 54.125061,93.559792 C 37.624947,91.494958 25.999934,79.235401 25.999934,63.362485 c 0,-6.452321 2.250058,-13.420951 6.000066,-18.066659 -1.624947,-4.258577 -1.374955,-13.291907 0.499984,-17.034309 4.999967,-0.645219 11.750008,2.064699 15.750008,5.807102 4.749975,-1.548525 9.749942,-2.322787 15.875005,-2.322787 6.125061,0 11.125028,0.774262 15.625011,2.193743 3.875004,-3.613359 10.750041,-6.323277 15.750008,-5.678058 1.749943,3.484315 1.999935,12.517644 0.374987,16.905265 4,4.903796 6.124927,11.485295 6.124927,18.195703 0,15.872916 -11.624877,27.874385 -28.374983,30.068263 4.249992,2.838962 7.125028,9.033332 7.125028,16.131002 v 13.42095 c 0,3.87145 3.125028,6.06519 6.875037,4.51667 C 110.25006,118.59508 128,95.23736 128,66.330625 128,29.810041 99.250025,3.2178539e-7 63.875003,0 28.499984,-3.2178539e-7 2.6122451e-7,29.810041 0,66.330625 -2.4816324e-7,94.979273 17.624947,118.72412 41.374955,127.62841 44.749975,128.91885 48,126.59606 48,123.11175 v -10.32391 c -1.749942,0.7744 -4,1.29058 -6.000066,1.29058 -8.249992,0 -13.124962,-4.64571 -16.624979,-13.29205 C 24,97.302194 22.500049,95.23736 19.625012,94.850229 c -1.499951,-0.129044 -2.000065,-0.774262 -2.000065,-1.548524 0,-1.54866 2.50005,-2.710053 5.000098,-2.710053 3.625013,0 6.74991,2.322921 9.999935,7.097674 2.500048,3.742404 5.124962,5.419974 8.249992,5.419974 3.125028,0 5.124962,-1.1614 8,-4.129537 2.125061,-2.193878 3.750008,-4.129534 5.250089,-5.419971 z"
+                />
+              </g>
+            </svg>
+          </a>
+        </button>
+
+      </nav>
+
+
+
+      <!--  ======  ..C..O..S..M..I..C.. ..W..R..A..P..  ======  -->
+      <wc-cosmic-wrap>
+
+
+        <!-- ==== .L.E.F.T. .P.A.N.E.L. ==== -->
+        <aside>
+          <!-- Side-bar header -->
+          <header>
+            <!-- chapter title -->
+            <h2><u>Chapter I</u><br/>Analytic signals</h2>
+            <!-- arrow -->
+            <button onclick="toggleSidebar()">
+              <span>&xlarr;</span>
+            </button>
+          </header>
+          <!-- Sections list -->
+          <nav>
+            <ul>
+              <!-- top -->
+              <li>
+                <a href="#top">
+                  &uparrow; (Top)
+                </a>
+              </li>
+              <!-- #01 Complex numbers -->
+              <li>
+                <a
+                  href="#01"
+                  data-target="01"
+                  title="Complex numbers"
+                >
+                  01 — Complex numbers
+                </a>
+              </li>
+              <!-- #02 Euler's formula -->
+              <li>
+                <a
+                  href="#02"
+                  data-target="02"
+                  title="Euler's formula"
+                >
+                  02 — Euler's formula
+                </a>
+              </li>
+              <!-- #03 Amplitude, frequency & phase-->
+              <li>
+                <a
+                  href="#03"
+                  data-target="03"
+                  title="Amplitude, frequency & phase"
+                >
+                  03 — Amplitude, frequency & phase
+                </a>
+              </li>
+              <!-- #04 Fourier's integral -->
+              <li>
+                <a
+                  href="#04"
+                  data-target="04"
+                  title="Fourier's integral"
+                >
+                  04 — Fourier's integral
+                </a>
+              </li>
+              <!-- #05 Conclusion -->
+              <li>
+                <a
+                  href="#05"
+                  data-target="05"
+                  title="Conclusion"
+                >
+                  05 — Conclusion
+                </a>
+              </li>
+              <!-- #06 Not so fast... -->
+              <li>
+                <a
+                  href="#06"
+                  data-target="06"
+                  title="Not so fast..."
+                >
+                  06 — Not so fast...
+                </a>
+              </li>
+              <!-- #07 Ewige Wiederkunft -->
+              <li>
+                <a
+                  href="#07"
+                  data-target="07"
+                  title="Ewige Wiederkunft"
+                >
+                  07 — Ewige Wiederkunft
+                </a>
+              </li>
+              <!-- #08 ἀρχαί -->
+              <li>
+                <a
+                  href="#08"
+                  data-target="08"
+                  title="ἀρχαί"
+                >
+                  08 — ἀρχαί
+                </a>
+              </li>
+              <!-- #09 Swiss connection -->
+              <li>
+                <a
+                  href="#09"
+                  data-target="09"
+                  title="Swiß connection"
+                >
+                  09 — Swiß connection
+                </a>
+              </li>
+              <!-- #10 Cardinal sine -->
+              <li>
+                <a
+                  href="#10"
+                  data-target="10"
+                  title="Cardinal sine"
+                >
+                  10 — Cardinal sine
+                </a>
+              </li>
+              <!-- APPENDIX: Greek alphabet -->
+              <li>
+                <a
+                  href="#APPENDIX"
+                  data-target="APPENDIX"
+                  title="Greek alphabet"
+                >
+                  <span class="small-caps">Appendix:</span> Greek alphabet
+                </a>
+              </li>
+              <!-- BONUS: Complex arithmetic -->
+              <li>
+                <a
+                  href="#BONUS"
+                  data-target="BONUS"
+                  title="Complex arithmetic"
+                >
+                  <span class="small-caps">Bonus:</span> Complex arithmetic
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="handle"></div>
+        </aside>
+
+
+
+        <!-- ==== .M.A.I.N. .W.I.N.D.O.W. ==== -->
+        <main>
+
+
+          <!-- == CHAPTER == -->
+          <wc-chapter id="top">
+            <!-- = Chapter title = -->
+            <h2><u>Chapter I</u>: Analytic signals</h2>
+
+
+            <!-- = Section #01 = -->
+            <section id="01">
+              <!-- top quote -->
+              <header>
+                <blockquote>
+                  <q>Feed your head.</q>
+                  <footer>— Grace Slick (<cite>White Rabbit</cite>)</footer>
+                </blockquote>
+              </header>
+              <!-- section title -->
+              <h3>01 — Complex numbers</h3>
+
+              <wc-paragraph>
+                <wc-comment>
+                  <h4>Pre-scriptum 1:</h4>
+                  <wc-nested-p>
+                    <p>
+                      I use Greek letters.
+                      <br/>
+                      When I'm not familiar with a symbol,
+                      I can't pronounce the sentence using it
+                      and tend not to understand what I read.
+                      <br/>
+                      If you're not familiar with Greek letters,
+                      report to this chapter's
+                      <a
+                        href="#APPENDIX"
+                        target="_self"
+                        rel="help"
+                        type="text/html"
+                        hreflang="en"
+                        charset="UTF-8"
+                        title="APPENDIX — Greek alphabet"
+                      >appendix</a>
+                      and come back when you're ready.
+                      <br/>
+                      Just an advice. You'll do what you'll want to do of course.
+                    </p>
+                  </wc-nested-p>
+                  <h4>Pre-scriptum 2:</h4>
+                  <wc-nested-p>
+                    <p>
+                      Some
+                      <a
+                        title="Wikipedia.org | Trigonometry"
+                        target="_blank"
+                        type="text/html"
+                        charset="UTF-8"
+                        rel="external"
+                        href="https://en.wikipedia.org/wiki/Trigonometry"
+                      >trigonometry</a>
+                      happens in this chapter.
+                      <br/>
+                      Prior knowledge in fact required...
+                      <br/>
+                      You'll find all the pre-requirements at the end of
+                      <a
+                        href="./08-stephen_butterworth.html#APPENDIX"
+                        target="_blank"
+                        rel="help"
+                        type="text/html"
+                        hreflang="en"
+                        charset="UTF-8"
+                        title="Don't worry: new tab by default."
+                      >
+                        Chapter <span class="small-caps">viii</span>:
+                        <cite>Stephen Butterworth</cite>
+                        (<span class="small-caps">Appendix:</span>
+                        <cite>Post-apocalupsis trigonometry</cite>)
+                      </a>.
+                    </p>
+                  </wc-nested-p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  A
+                  <a
+                    title="Wikipedia.org | Complex number"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Complex_number"
+                  >complex number</a>
+                  is the sum of a real number and an imaginary number.
+                  <br/>
+                  It takes the form:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    z \ = \ x + \sqrt{-1} \cdot y
+                  $$
+                </wc-math>
+                <dl class="left">
+                  <dt>where $ x $ is the <b>real part</b> of $ z $:</dt>
+                  <dd><wc-math>$$ \Re (z) \ = \ x $$</wc-math></dd>
+                  <dt>and $ y $ is the <b>imaginary part</b> of $ z $:</dt>
+                  <dd><wc-math>$$ \Im (z) \ = \ y $$</wc-math></dd>
+                </dl>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p class="S">
+                  Let's imagine a
+                  <a
+                    title="Wikipedia.org | Cartesian coordinate system"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system"
+                  >Cartesian plane</a>
+                  whose horizontal axis (abscissa) is the set of real numbers,
+                  and whose vertical axis (ordinate) is the set pure imaginary numbers.
+                  This plane is called the
+                  <a
+                    title="Wikipedia.org | Complex plane"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Complex_plane"
+                  >complex plane</a>.
+                </p>
+                <p class="S">
+                  Now imagine we plot $ z $ on this plane.
+                  It shows how any complex number can be regarded as a
+                  <a
+                    title="Wikipedia.org | Vector (mathematics and physics)"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)"
+                  >vector</a>
+                  joining the origin of both axis and the point with coordinates
+                  $ \ [x = \Re (z) \ , \ y = \Im (z)] \ $.
+                </p>
+                <p class="S">
+                  This vector traces the diagonal of a rectangle with two sides
+                  $ \ = \Re (z) \ $ and two sides $ \ = \Im (z) \ $.
+                  <br/>
+                  The vector $ z $ splits this rectangle in two identical right triangles
+                  whose hypotenuse is the length (magnitude) of the vector.
+                  <br/>
+                  This hypotenuse is called the <b>absolute value</b> (or magnitude)
+                  of the complex number $ z $ and is notated $ \ \lvert z \rvert \ $
+                  — sometimes $ \ \abs (z) \ $.
+                </p>
+                <p>
+                  The
+                  <a
+                    title="Wikipedia.org | Pythagorean theorem"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Pythagorean_theorem"
+                  >theorem of Pythagoras</a>
+                  gives:
+                </p>
+                <wc-math class="ZZ">
+                  $$
+                    \lvert z \rvert \ = \ \sqrt{ \Re (z)^2 + \Im (z)^2 }
+                  $$
+                </wc-math>
+                <wc-comment>
+                  <p>
+                    Notice that if $ \ \Im (z) = 0 \ $
+                    then $ \ \lvert z \rvert = \sqrt{\Re (z)^2} \ $
+                    which results in ignoring $ z $'s sign.
+                    Which is often mistaken for the actual definition
+                    of a number's absolute value.
+                    <br/>
+                    It stops being valid once said number has an imaginary part,
+                    while the definition given by complex analysis
+                    applies to purely real numbers.
+                    <br/>
+                    This coincides with the fact that real numbers
+                    are a subset of complex numbers.
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <wc-split>
+                  <p>
+                    Let's call $ \theta $ the angle formed by the vector $ z $
+                    and the real (horizontal) axis.
+                    <br/>
+                    $ \theta $ is called the
+                    <a
+                      title="Wikipedia.org | Argument (complex analysis)"
+                      target="_blank"
+                      type="text/html"
+                      charset="UTF-8"
+                      rel="external"
+                      href="https://en.wikipedia.org/wiki/Argument_(complex_analysis)"
+                    ><b>argument</b></a>
+                    of the complex number $ z $ and is notated $ \ \arg (z) \ $.
+                    <br/>
+                    Since $ \ \Re (z) \ $ is its adjacent side
+                    and since $ \ \Im (z) \ $ is its opposite side:
+                  </p>
+                  <wc-comment>
+                    <p>
+                      $ \theta $ (theta), not $ 0 $ (zero).
+                    </p>
+                  </wc-comment>
+                </wc-split>
+                <wc-math class="fake Z">
+                  <a
+                    title="Wikipedia.org | Trigonometric functions"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Trigonometric_functions"
+                  >$ \tan $</a>$ (\theta) \ = \ \Im (z) / \Re (z) $
+                </wc-math>
+                <p>And thus:</p>
+                <wc-split class="grid-b y">
+                  <wc-math class="fake x s">
+                    $ \arg (z) \ = \ $<a
+                      title="Wikipedia.org | Inverse trigonometric functions"
+                      target="_blank"
+                      type="text/html"
+                      charset="UTF-8"
+                      rel="external"
+                      href="https://en.wikipedia.org/wiki/Inverse_trigonometric_functions"
+                    >$ \arctan $</a>$ \bigl( \Im (z) / \Re (z) \bigr) $
+                  </wc-math>
+                    <p>or&nbsp;rather:</p>
+                  <wc-math class="fake x s">
+                    <a
+                      title="Wikipedia.org | Inverse trigonometric functions"
+                      target="_blank"
+                      type="text/html"
+                      charset="UTF-8"
+                      rel="external"
+                      href="https://en.wikipedia.org/wiki/Inverse_trigonometric_functions"
+                    >$ \atanTwo $</a>$ \bigl( \Im (z) \ , \ \Re (z) \bigr) $
+                  </wc-math>
+                </wc-split>
+                <wc-comment>
+                  <h4>atan2:</h4>
+                  <wc-nested-p class="y outlined">
+                    <p class="zz">
+                      The regular $ \arctan $ function
+                      — $ \ \atan (x) \ $, $ \ \tan^{-1} (x) \ $ —
+                      tends to $ - \pi / 2 $ when $ x $ tends to $ - \infty $;
+                      <br/>
+                      it tends to $ + \pi / 2 $ when $ x $ tends to $ + \infty $.
+                      <br/>
+                      It only outputs angles in the North-East and South-East quadrants.
+                    </p>
+                    <p class="n">
+                      The argument of a complex number is in the range
+                      $ ] - \pi \ , \ + \pi ] $.
+                      It spans a full turn (4 quadrants):
+                    </p>
+                    <ul class="S">
+                      <li>
+                        <b>South-West</b>, $ ] - \pi \ , \ - \pi / 2 ] $:
+                        <br/>
+                        $ \Re (z) \ $ and $ \ \Im (z) \ $ are both negative.
+                        $ \ \Re (z) \ $ crosses zero at $ - \pi / 2 $.
+                      </li>
+                      <li>
+                        <b>South-East</b>, $ ] - \pi / 2 \ , \ 0 ] $:
+                        <br/>
+                        $ \Re (z) \ $ is positive, $ \ \Im (z) \ $ is negative.
+                        $ \ \Im (z) \ $ crosses zero at zero.
+                      </li>
+                      <li>
+                        <b>North-East</b>, $ ] 0 \ , \ + \pi / 2 ] $:
+                        <br/>
+                        $ \Re (z) \ $ and $ \ \Im (z) \ $ are both positive.
+                        $ \ \Re (z) \ $ crosses zero at $ + \pi / 2 $.
+                      </li>
+                      <li>
+                        <b>North-West</b>, $ ] + \pi / 2 \ , \ + \pi ] $:
+                        <br/>
+                        $ \Re (z) \ $ is negative, $ \ \Im (z) \ $ is positive.
+                        $ \ \Im (z) \ $ crosses zero at $ + \pi $.
+                      </li>
+                    </ul>
+                    <p class="s">
+                      If you feed the ratio directly to $ \arctan $,
+                      you've lost track of which term is responsible for the sign.
+                      <br/>
+                      All $ \arctan $ can possibly know is whether the denominator
+                      and the numerator have the same sign.
+                      <br/>
+                      By having two separate variables,
+                      $ \ \atanTwo (y , x) \ $ fixes that.
+                    </p>
+                    <p>
+                      E.g.:
+                    </p>
+                    <wc-nested-p class="n S">
+                      <p>
+                        You feed your ratio to $ \arctan $ and get $ \pi / 3 $.
+                        (So North-East quadrant.)
+                        <br/>
+                        But you know that both terms were negative.
+                        <br/>
+                        So you know that you should be in the South-West quadrant.
+                        <br/>
+                        That's a 2-quadrant jump. So half a circle. So $ \pm \pi $.
+                        <br/>
+                        $ + \pi $ would outreach the boundaries
+                        $ ] - \pi \ , \ + \pi ] $:
+                      </p>
+                      <wc-math class="Z">
+                        $$
+                          \frac{\pi}{3} + \pi \ = \ \frac{\pi + 3 \pi}{3} \
+                          = \ \frac{4}{3} \pi
+                        $$
+                      </wc-math>
+                      <wc-split class="grid-c s">
+                        <p>so you know the argument is:</p>
+                        <wc-math class="x">
+                          $$
+                            \pi / 3 - \pi \ = \ -2 \pi / 3
+                          $$
+                        </wc-math>
+                      </wc-split>
+                    </wc-nested-p>
+                    <p class="zz">
+                      Also: if $ \ x = 0 \ $,
+                      $ \ \arctan (y/x) \ $ is fed an exploding division by zero...
+                      <br/>
+                      $ \atanTwo (y , x) \ $ fixes that too.
+                    </p>
+                    <p class="S">
+                      Don't worry too much about actual computation.
+                      This is Chapter <span class="small-caps">i</span>.
+                      <br/>
+                      We'll have plenty of opportunities to dig a lot deeper
+                      around the unit-circle.
+                      (Notably in chapters <span class="small-caps">vii</span>
+                      and <span class="small-caps">viii</span>.)
+                    </p>
+                    <p class="S">
+                      For now:
+                      <br/>
+                      square root of a negative number ? $ \ \implies \ $
+                      imaginary $ \ \implies \ $ vertical
+                      <br/>
+                      If not ? $ \ \implies \ $ real $ \ \implies \ $ horizontal
+                      <br/>
+                      Two sets, two signs, ergo: four quadrants.
+                    </p>
+                    <h5>
+                      Cardinal points:
+                    </h5>
+                    <ul class="S">
+                      <li>
+                        <b>South</b> ($ - \pi / 2 $):
+                        <br/>
+                        purely imaginary, negative.
+                      </li>
+                      <li>
+                        <b>East</b> ($ 0 $):
+                        <br/>
+                        purely real, positive.
+                      </li>
+                      <li>
+                        <b>North</b> ($ + \pi / 2 $):
+                        <br/>
+                        purely imaginary, positive.
+                      </li>
+                      <li>
+                        <b>West</b> ($ \pi $):
+                        <br/>
+                        purely real, negative.
+                      </li>
+                    </ul>
+                    <p>
+                      Then there's the case: $ \ \Re (z) \ = \ \Im (z) \ = \ 0 \ $.
+                      <br/>
+                      Theoretically the argument is undefined
+                      (the magnitude has no length, the angle could be anything).
+                      <br/>
+                      But for the sake of continuity, usually:
+                    </p>
+                    <wc-math class="Z s">
+                      $$
+                        \arg (0) \ = \ \atanTwo (0 \ , \ 0) \ = \ 0
+                      $$
+                    </wc-math>
+                  </wc-nested-p>
+                  <p>
+                    I don't know exactly how $ \atanTwo $ is implemented in
+                    <wc-ascii>cmath</wc-ascii>
+                    and such
+                    (my uneducated guess is: a series of
+                    <wc-ascii>if/else</wc-ascii>
+                    statements);
+                    <br/>
+                    but, after tweaking Desmos a bit,
+                    I came up with this formula,
+                    which works for all quadrants and critical values:
+                  </p>
+                  <code class="y">
+<pre>
+    double wc.atan2 (double a, double b)
+    {
+      return
+        std::fmod(
+          std::atan(b / a)  +  M_PI * std::max( 0.0 , boost::math::sign(-a) )
+          ,
+          -M_PI
+        )
+        +  M_PI * std::max( 0.0 , boost::math::sign(b) );
+    }
+</pre>
+                  </code>
+                  <p>
+                    This outputs
+                    <wc-ascii>NaN</wc-ascii>
+                    when $ a $ and $ b $ are both zero.
+                    Which
+                    <wc-popup>
+                      it should
+                      <q class="actual-popup">
+                        <mark>Theoretically the argument is undefined
+                        <br/>
+                        (the magnitude has no length, the angle could be anything).</mark>
+                      </q>
+                    </wc-popup>...
+                    <br/>
+                    ... ok:
+                  </p>
+                  <code class="y">
+<pre>
+    double wc.atan2 (double a, double b)
+    {
+      return
+        (a == 0.0  &&  b == 0.0)  ?
+          0.0
+        :
+          std::fmod(
+            std::atan(b / a)  +  M_PI * std::max( 0.0 , boost::math::sign(-a) )
+            ,
+            -M_PI
+          )
+          +  M_PI * std::max( 0.0 , boost::math::sign(b) );
+    }
+</pre>
+                  </code>
+                  <p class="S">
+                    Still: don't implement that
+                    — it puts far too much confidence in IEEE 754
+                    floating-point division by zero.
+                    <br/>
+                    Don't go pushing fragile code out there in the wasteland
+                    just because some guy with OCDs doesn't like conditional branching.
+                    <br/>
+                    But at least now you get to see $ \atanTwo $ as
+                    neither a 6-line shopping-list nor a black-box incantation.
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <wc-math class="hybrid N E zz">
+                  $$
+                    \begin{alignat*}{9}
+                      % row 1
+                      & \text{We also know that:} &
+                      \cos (\theta) \ &=& \ \adj \ / & \ \hyp &
+                      \qquad \text{and} \quad &&
+                      \sin (\theta) \ &=& \ \opp \ / & \ \hyp
+                      \\[1.4142ex]
+                      % row 2
+                      & \text{which means:} &
+                      \adj \ &=& \ \cos (\theta) \ \cdot & \ \hyp &
+                      \qquad \text{and} \quad &&
+                      \opp \ &=& \ \sin (\theta) \ \cdot & \ \hyp
+                    \end{alignat*}
+                  $$
+                </wc-math>
+                <p class="S">
+                  Remember that $ \adj $ is $ \Re (z) $, $ \opp $ is $ \Im (z) $,
+                  $ \hyp $ is $ \lvert z \rvert $ and $ \theta $ is $ \arg (z) $.
+                  <br/>
+                  Also that $ \ z \ = \ \Re (z) + \sqrt{-1} \cdot \Im (z) \ $.
+                </p>
+                <p>Then:</p>
+                <wc-math class="Z">
+                  $$
+                    \begin{alignat*}{2}
+                      \Re (z) \ = \ & \cos \bigl( \arg (z) \bigr) \cdot \lvert z \rvert
+                      \\
+                      \Im (z) \ = \ & \sin \bigl( \arg (z) \bigr) \cdot \lvert z \rvert
+                    \end{alignat*}
+                  $$
+                </wc-math>
+                <p>Then:</p>
+                <wc-math class="Z">
+                  $$
+                    z \ = \ \lvert z \rvert \cdot
+                    \Bigl(
+                      \ \cos \bigl( \arg (z) \bigr) \
+                      + \ \sqrt{-1} \cdot \sin \bigl( \arg (z) \bigr) \
+                    \Bigr)
+                  $$
+                </wc-math>
+                <wc-nested-p>
+                  <p>
+                    This expression is called the <b>polar form</b>
+                    of the complex number $ z $.
+                  </p>
+                </wc-nested-p>
+                <wc-comment>
+                  <p>
+                    Complex numbers can be regarded as vectors.
+                    Vectors also have a polar form.
+                    <br/>
+                    The notation: $ \ \mathbf{v} \ = \ ( \ r \ , \ \angle \theta \ ) $
+                    <br/>
+                    means: $ \ \mathbf{v} $ is a vector of magnitude
+                    $ r $ and angle $ \theta $.
+                    <br/>
+                    If $ \mathbf{v} $ is represented with the complex number $ z $,
+                    then: $ \ \lvert z \rvert = r \ $ and $ \ \arg (z) = \theta \ $.
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  The absolute value $ \lvert z \rvert $ of $ z $
+                  is sometimes also called <cite>modulus</cite>
+                  or <cite><b>magnitude</b></cite>.
+                  <br/>
+                  The argument $ \ \arg (z) \ $ of $ z $
+                  is sometimes also called <cite><b>phase</b></cite>.
+                </p>
+              </wc-paragraph>
+
+            </section><!-- end #01 -->
+
+
+            <!-- = Section #02 = -->
+            <section id="02">
+              <!-- section title -->
+              <h3>02 — Euler's formula</h3>
+
+              <wc-paragraph>
+                <p>
+                  Let $ \ j = \sqrt{-1} \ $ and $ \ x \ $ be a real number, then
+                  <a
+                    title="Wikipedia.org | Euler's formula"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Euler's_formula"
+                  >
+                    Euler's formula
+                  </a>
+                  states that:
+                </p>
+                <wc-math class="fake ZZ">
+                  <a
+                    title="Wikipedia.org | Exponential function"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Exponential_function"
+                  >
+                    $ \exp $
+                  </a>
+                  $
+                    (j x) \ = \ \cos (x) + j \sin (x)
+                  $
+                </wc-math>
+                <wc-comment>
+                  <p>
+                    <wc-ascii class="Achtung">&uarr;&uarr;&uarr;</wc-ascii>
+                    Don't overlook that one.
+                    <wc-ascii class="Achtung">&uarr;&uarr;&uarr;</wc-ascii>
+                    <br/>
+                    (We'll demonstrate it at
+                    <span title="(Chapter VIII, appendix)">some point</span>.)
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  By making use of the 2 following
+                  <a
+                    title="Wikipedia.org | List of trigonometric identities — Reflections, shifts, and periodicity"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Reflections,_shifts,_and_periodicity"
+                  >
+                    trigonometric identities
+                  </a>:
+                </p>
+                <wc-math class="hybrid Z">
+                  $$
+                    \cos (-x) \ = \ \cos (x) \qquad
+                  \text{and}
+                    \qquad \sin (-x) \ = \ - \sin (x)
+                  $$
+                </wc-math>
+                <p>Euler's formula can be re-expressed as:</p>
+                <wc-math class="ZZ">
+                  $$
+                    \exp (j \cdot -x) \ = \ \cos (-x)  +  j \sin (-x) \ = \ \cos (x)  -  j \sin (x)
+                  $$
+                </wc-math>
+                <p>Then:</p>
+                <wc-math class="numbered ZZ" data-eq="1" id="eq-01">
+                  $$
+                    \exp (j x)  -  \exp (-j x) \ = \
+                    \cos (x)  +  j \sin (x)  -  ( \cos (x)  -  j \sin (x) ) \ = \
+                    2 j \sin (x)
+                  $$
+                </wc-math>
+                <p>And:</p>
+                <wc-math class="numbered ZZ" data-eq="2" id="eq-02">
+                  $$
+                    \exp (j x)  +  \exp (-j x) \ = \
+                    \cos (x)  +  j \sin (x)  +  ( \cos (x)  -  j \sin (x) )  =  2 \cos (x)
+                  $$
+                </wc-math>
+                <p>
+                  Solving
+                  <wc-popup>
+                    [1]
+                    <q class="actual-popup">
+                      $$
+                        \exp (j x) - \exp (-j x) \ = \ 2j \sin (x)
+                      $$
+                    </q>
+                  </wc-popup>
+                  for $ \sin (x) $ gives:
+                </p>
+                <wc-math class="ZZ">
+                  $$
+                    \sin (x) \ = \
+                    \frac{ \exp (j x) - \exp (-j x) }{2 j}
+                  $$
+                </wc-math>
+                <p>
+                  Solving
+                  <wc-popup>
+                    [2]
+                    <q class="actual-popup">
+                      $$
+                        \exp (j x) + \exp (-j x) \ = \ 2 \cos (x)
+                      $$
+                    </q>
+                  </wc-popup>
+                  for $ \cos (x) $ gives:
+                </p>
+                <wc-math class="numbered ZZ" data-eq="3" id="eq-03">
+                  $$
+                    \cos (x) \ = \
+                    \frac{ \exp (j x) + \exp (-j x) }{2}
+                  $$
+                </wc-math>
+                <p>Considering the identity:</p>
+                <wc-math class="Z">
+                  $$
+                    \cos ( \theta ) \ = \ \sin ( \theta + \pi / 2 )
+                  $$
+                </wc-math>
+                <p>
+                  equation
+                  <wc-popup>
+                    [3]
+                    <q class="actual-popup">
+                      $$
+                        \cos (x) \ = \ \frac{ \exp (j x) + \exp (-j x) }{2}
+                      $$
+                    </q>
+                  </wc-popup>
+                  shows that any real sinusoid can be expressed
+                  as half the sum of two complex exponentials.
+                  <br/>
+                  This is interesting because the rules of exponentiation
+                  are a lot simpler
+                  than the rules of trigonometry.
+                  <br/>
+                  For instance, $ \ \exp (x) \ $ is its own derivative
+                  (and thus anti-derivative) — by definition.
+                  <br/>
+                  This makes processes such as integration or differentiation
+                  become very trivial,
+                  compared to the same processes applied to
+                  $ \ \cos (x) \ $ or $ \ \sin (x) \ $.
+                  <br/>
+                  (Actually, derivatives and antiderivatives are not
+                  where real trigonometric functions are the trickiest,
+                  but: $ \ \cos ( a x + b ) \ $, etc.)
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  Let $ \quad z_1 \ = \ \exp (j x) / 2 \quad $,
+                  $ \quad z_2 \ = \ \exp (-j x) / 2 \quad $, then:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    z_1 \ = \ \cos (x) / 2 \ + \ j \ \times \ + \sin (x) / 2
+                    \\
+                    z_2 \ = \ \cos (x) / 2 \ + \ j \ \times \ - \sin (x) / 2
+                  $$
+                </wc-math>
+                <p>
+                  Their respective real ($ \Re $) and imaginary ($ \Im $) parts are thus:
+                </p>
+                <wc-math class="ZZ">
+                  $$
+                    \begin{align}
+                      \Re ( z_1 ) \ =& \ \cos (x) / 2 &;&& \Im ( z_1 ) \ =& \ + \sin (x) / 2&
+                      \\
+                      \Re ( z_2 ) \ =& \ \cos (x) / 2 &;&& \Im ( z_2 ) \ =& \ - \sin (x) / 2&
+                      \\ \\
+                      \implies \ \ \Re ( z_1 ) \ =& \ \Re ( z_2 ) &\quad ;&& \quad
+                      \Im ( z_1 ) \ =& \ - \Im ( z_2 )&
+                    \end{align}
+                  $$
+                </wc-math>
+                <p class="numbered" data-eq="a" id="eq-a">
+                  $ z_1 $ and $ z_2 $ form a
+                  <a
+                    title="Wikipedia.org | Complex conjugate"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Complex_conjugate"
+                  >
+                    complex conjugate
+                  </a>
+                  pair.
+                  <br/>
+                  (Which means: they have equal real parts and opposite imaginary parts.)
+                  <br/>
+                  So any real sinusoid (equation
+                  <wc-popup>
+                    [3]
+                    <q class="actual-popup">
+                      $$
+                        \cos (x) \ = \ \frac{ \exp (j x) + \exp (-j x) }{2}
+                      $$
+                    </q>
+                  </wc-popup>)
+                  can be expressed as the sum of two complex conjugates.
+                </p>
+                <wc-comment class="N">
+                  <p>
+                    Complex conjugates are usually denoted by a horizontal bar
+                    over the number's symbol:
+                    $ \ {z_2 \ = \ \overline{z_1}} \ $ means that
+                    $ z_2 $ and $ z_1 $ are conjugates.
+                    <br/>
+                    Sometimes also with an asterisk: $ \ {z_2 \ = \ z_1^*} $.
+                    <br/>
+                    First option is really not convenient because
+                    <wc-popup>
+                      monospace
+                      <q class="actual-popup">
+                        (... GitHub's the original
+                        <br/>
+                        — you're reading the derivative...)
+                      </q>
+                    </wc-popup>.
+                    <br/>
+                    Second option looks like multiplication
+                    in most programming languages.
+                    <br/>
+                    So I'll use $ \ {z_2 \ = \ \conj ( z_1 )} \ $
+                    — the Desmos way, for practical reasons.
+                    <br/>
+                    But know that this is not standard
+                    and be ready to encounter other conventions.
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <h4>Euler's formula and the polar form</h4>
+                <p class="S">
+                  Let's consider a complex number $ z $ with argument $ \arg (z) $
+                  and absolute value $ \lvert z \rvert $.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>According to Euler's formula:</p>
+                <wc-math class="Z">
+                  $$
+                    \exp \bigl( j \arg (z) \bigr) \ = \
+                    \cos \bigl( \arg (z) \bigr)  +  j \sin \bigl( \arg (z) \bigr)
+                  $$
+                </wc-math>
+                <p>Recalling the polar form expression:</p>
+                <wc-math class="Z">
+                  $$
+                    z \ = \ \lvert z \rvert \cdot \Bigl( \ \cos \bigl( \arg (z) \bigr)  +
+                    j \sin \bigl( \arg (z) \bigr) \ \Bigr)
+                  $$
+                </wc-math>
+                <p>Combining these two expressions leads to:</p>
+                <wc-math class="ZZ">
+                  $$
+                    z \ = \ \lvert z \rvert \exp \bigl( j \arg (z) \bigr)
+                  $$
+                </wc-math>
+                <p>
+                  I haven't found any documentation on this form
+                  (perhaps from not digging deep enough...)
+                  so let's call it the exponential form of the complex number $ z $.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>This means that any complex number in the form:</p>
+                <wc-math class="N x">
+                  $$
+                    \zeta \ = \ \alpha \exp ( j \theta )
+                  $$
+                </wc-math>
+                <wc-split class="grid-b">
+                  <p>has an absolute value:</p>
+                  <wc-math class="Z">
+                    $$
+                      \lvert \zeta \rvert \ = \ \alpha
+                    $$
+                  </wc-math>
+                  <p>and an argument:</p>
+                  <wc-math class="Z">
+                    $$
+                      \arg ( \zeta ) \ = \ \theta
+                    $$
+                  </wc-math>
+                </wc-split>
+                <wc-split class="grid-b">
+                  <p>Then:</p>
+                  <wc-math class="Z">
+                    $$
+                      \Re ( \zeta ) \ = \ \alpha \cos ( \theta )
+                    $$
+                  </wc-math>
+                  <p>and:</p>
+                  <wc-math class="Z">
+                    $$
+                      \Im ( \zeta ) \ = \ \alpha \sin ( \theta )
+                    $$
+                  </wc-math>
+                </wc-split>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <wc-split class="grid-b">
+                  <p>Now in the special case:</p>
+                  <wc-math class="x S">
+                    $$
+                      \theta \ = \ \omega t
+                    $$
+                  </wc-math>
+                </wc-split>
+                <p>
+                  where $ t $ is the time (in seconds)
+                  and $ \omega $ is an angular frequency
+                  (in radians per second),
+                  the exponential form:
+                </p>
+                <wc-math class="numbered Z" data-eq="4" id="eq-04">
+                  $$
+                    \zeta \ = \ \alpha \exp ( j \omega t )
+                  $$
+                </wc-math>
+                <p>
+                  is what is called a <span class="small-caps">complex sinusoid</span>
+                  — sometimes a phasor.
+                  <br/>
+                  It is also called an analytic signal as it has optimal qualities
+                  in order to study a system's response to pure sinusoids.
+                  <br/>
+                  Indeed comparing equations
+                  <wc-popup>
+                    [3]
+                    <q class="actual-popup">
+                      $$
+                        \cos (x) \ = \ \frac{ \exp (j x) + \exp (-j x) }{2}
+                      $$
+                    </q>
+                  </wc-popup>
+                  and
+                  <wc-popup>
+                    [4]
+                    <q class="actual-popup">
+                      $$
+                        \zeta \ = \ \alpha \exp ( j \omega t )
+                      $$
+                    </q>
+                  </wc-popup>
+                  reveals that if we express a real sinusoid
+                  in terms of complex exponentials,
+                  we end up with two complex sinusoids,
+                  one of which has a negative frequency;
+                  while a pure complex sinusoid has its amplitude and phase
+                  embedded in its constant factor
+                  and only involves positive frequencies.
+                  <br/>
+                  More on that right away.
+                </p>
+                <wc-comment class="y">
+                  <h4 class="edit">Edit</h4>
+                  <wc-nested-p>
+                    <p>
+                      It's the chapter's title... better be slightly more precise.
+                      <br/>
+                      A complex sinusoid is an analytic signal only if
+                      $ \omega $ is positive.
+                      <br/>
+                      That's the complete definition:
+                      complex-valued function <span class="small-caps">and</span>
+                      no negative-frequency components.
+                      <br/>
+                      Starting with a real cosine, it can be thought of in two ways:
+                    </p>
+                    <ul>
+                      <li>
+                        add a $ \pi / 2 $ shifted copy of the signal to itself
+                        on the imaginary axis;
+                      </li>
+                      <li>
+                        double the positive-frequency component,
+                        remove the negative frequency one.
+                      </li>
+                    </ul>
+                    <p>Both operations result in the substitution:</p>
+                    <wc-math class="Z">
+                      $$
+                        \cos (\omega t)  \qquad  \longleftarrow  \qquad
+                        \cos (\omega t) + j \sin (\omega t) \ = \ \exp (j \omega t)
+                      $$
+                    </wc-math>
+                    <p>
+                      More details
+                      <a
+                        href="https://en.wikipedia.org/wiki/Analytic_signal#Examples"
+                        target="_blank"
+                        rel="external"
+                        type="text/html"
+                        hreflang="en"
+                        charset="UTF-8"
+                        title="Wikipedia.org | Analytic signal — Examples"
+                      >
+                        here</a>.
+                    </p>
+                  </wc-nested-p>
+                  <wc-nested-p>
+                    <p>
+                      It's also pretty convenient when testing trigonometric identities,
+                      because it embeds the three types of sinusoids.
+                      <br/>
+                      E.g.:
+                    </p>
+                    <wc-math class="x N s">
+                      $$
+                        \exp \bigl( j (x + n \pi) \bigr) \ = \ \exp (jx) \exp (j \pi)^n \
+                        = \ (-1)^n \exp (jx) \ = \ (-1)^n \bigl( \cos (x) + j \sin (x) \bigr)
+                        \\ \\
+                        = \ (-1)^n \cos (x) + j (-1)^n \sin (x)
+                        \\ \\
+                        \implies \quad \cos (x + n \pi) \ = \ (-1)^n \cos (x)
+                        \quad \AND \quad \sin (x + n \pi) \ = \ (-1)^n \sin (x)
+                      $$
+                    </wc-math>
+                  </wc-nested-p>
+                </wc-comment>
+                <p>
+                  Before we move on: what happens to $ \zeta $
+                  if $ \alpha $ has an imaginary part?
+                </p>
+                <wc-math class="Z">
+                  $$
+                    \alpha \ = \ \lvert \alpha \rvert \exp \bigl( j \arg (\alpha) \bigr)
+                  $$
+                </wc-math>
+                <p>then:</p>
+                <wc-math class="numbered Z" data-eq="4-bis" id="eq-4-bis">
+                  $$
+                    \zeta \ = \ \lvert \alpha \rvert \exp \bigl( j \arg (\alpha) \bigr)
+                    \exp (j \omega t) \ = \ \lvert \alpha \rvert
+                    \exp \Bigl( \ j \bigl( \omega t  +  \arg (\alpha) \bigr) \ \Bigr)
+                  $$
+                </wc-math>
+              </wc-paragraph>
+
+            </section><!-- end #02 -->
+
+
+            <!-- section #03 -->
+            <section id="03">
+              <!-- section title -->
+              <h3>03 — Amplitude, frequency & phase</h3>
+
+              <!-- Desmos: Amplitude, frequency & phase -->
+              <iframe
+                class="desmos"
+                id="Amplitude_frequency_phase"
+                src="https://www.desmos.com/calculator/hwpazzploq?embed"
+              ></iframe>
+
+              <wc-paragraph>
+                <p>
+                  If $ t $ is the time (in seconds),
+                  $ \ f (t) \ = \ \cos (t) \ $ is a sinusoid of:
+                </p>
+                <dl class="y">
+                  <dt><b>Amplitude</b>:</dt>
+                  <dd>
+                    <wc-math>$$ \alpha \ = \ 1 $$</wc-math>
+                  </dd>
+                  <dt><b>Period</b>:</dt>
+                  <dd>
+                    <wc-math class="hybrid">
+                      $$ T \ = \ 2 \pi \ \text{ seconds} $$
+                    </wc-math>
+                  </dd>
+                  <dt><b>Frequency</b>:</dt>
+                  <dd>
+                    <wc-math class="hybrid">
+                      $$ \f \ = \ 1 / 2 \pi \ \text{ Hertz (Hz)} $$
+                    </wc-math>
+                  </dd>
+                  <dt><b>Phase</b>:</dt>
+                  <dd>
+                    <wc-math class="hybrid">
+                      $$ \varphi \ = \ 0 \ \text{ radian (rad)} $$
+                    </wc-math>
+                  </dd>
+                </dl>
+                <p class="S">
+                  That is, $ \ f (t) \ $ oscillates from $ -1 $ to $ +1 $
+                  through a repetitive pattern of length $ = \ 2 \pi \ $
+                  with an offset $ = \ 0 $.
+                </p>
+                <p>
+                  Notice that $ \ f (t) \ = \ \alpha \cos (2 \pi \f t + \varphi) $
+                  <br/>
+                  Or, after defining the
+                  <a
+                    title="Wikipedia.org | Angular frequency"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Angular_frequency"
+                  >
+                    angular frequency
+                  </a>
+                  $ \ \omega \ = \ 2 \pi \f \ $ (rad/s):
+                </p>
+                <wc-math class="numbered Z" data-eq="5" id="eq-05">
+                  $$
+                    f (t) \ = \ \alpha \cos (\omega t + \varphi)
+                  $$
+                </wc-math>
+                <p class="S">
+                  That is, $ \ f (t) \ $ oscillates from $ -\alpha $ to $ +\alpha $
+                  through a repetitive pattern of length $ = 1 / \omega \ $
+                  with an offset $ = \varphi $.
+                </p>
+                <p>
+                  Note that for $ \varphi $ to be expressed in radians
+                  (that is as a portion of the modulus $ 2 \pi $),
+                  the offset $ t_0 $ (seconds) must be defined.
+                  <br/>
+                  $ t_0 $ is the time $ \ f (t) \ $ takes
+                  to reach the beginning of an oscillation cycle
+                  ($ \ f (t) \ = \ {\alpha \cos (0)} \ = \ \alpha \ $)
+                  for the first time.
+                  <br/>
+                  (This implies $ \ \lvert t_0 \rvert \ \lt T \ $.)
+                </p>
+                <wc-math class="hybrid y E">
+                  $$
+                    \begin{align}
+                      \text{Then: } && \ f (t) \
+                      = \ & \alpha \cos \bigl( \omega (t - t_0) \bigr) &
+                      \\
+                      \text{And: } && \ \varphi \ = \ & \omega \ \cdot \ - t_0 &
+                    \end{align}
+                  $$
+                </wc-math>
+                <wc-comment class="N">
+                  <p class="S">
+                    Remember that $ \ \cos (\theta) \ = \ \sin (\theta + \pi / 2) \ $.
+                    <br/>
+                    Which means that the relationship between sine and cosine
+                    is simply a constant horizontal offset.
+                    <br/>
+                    I chose $ \ f (t) \ = \ \cos (t) \ $ as the base sinusoid,
+                    but $ \ f (t) \ = \ \sin (t) \ $ would be just as valid.
+                    <br/>
+                    In such a case $ \ f (t) \ = \ \cos (t + \varphi) \ $
+                    would have a phase
+                    $ \ \varphi \ = \ \pi / 2 \ $ rad.
+                  </p>
+                  <p class="S">
+                    This is a pure matter of convention.
+                    <br/>
+                    Since converting one convention into the other
+                    is as trivial as an addition,
+                    which one we choose has few consequences.
+                    <br/>
+                    So if one convention simplifies the maths,
+                    why choose the other? Right?
+                  </p>
+                  <p class="S">
+                    We're just about to call back Euler's formula.
+                    Choosing cosine avoids having j in the denominator.
+                    <br/>
+                    I hope now it doesn't feel arbitrary anymore.
+                  </p>
+                  <p>
+                    Also: because $ \ sin (0) \ = \ 0 \ $,
+                    sine is inherently unable to express constants
+                    (with null frequencies);
+                    <br/>
+                    cosine, on the other hand, outputs 1 at 0
+                    — which is quite convenient.
+                  </p>
+                  <wc-comment class="N">
+                    Theoretically, sine would only need a quarter-circle of phase
+                    to match cosine,
+                    <br/>
+                    but this kind of collides with the expression of $ \varphi $:
+                    <wc-math class="Z">
+                      $$
+                        -t_0 \cdot 0 \ = \ \pi/2 \quad \iff \quad t_0 \
+                        = \ - \frac{\pi}{0 \cdot 2}
+                      $$
+                    </wc-math>
+                    ... not super legal.
+                    <br/>
+                    Yet this undefined result is a useful information:
+                    the phase of a constant is an irrelevant concept.
+                  </wc-comment>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  Using equation
+                  <wc-popup>
+                    [3]
+                    <q class="actual-popup">
+                      $$
+                        \cos (x) \ = \ \frac{ \exp (j x) + \exp (-j x) }{2}
+                      $$
+                    </q>
+                  </wc-popup>
+                  to express $ \ f (t) \ $ in terms of complex exponentials
+                  instead of raw trigonometry:
+                </p>
+                <wc-math class="ZZ">
+                  $$
+                    f (t) \ = \ \frac{\alpha}{2} \exp \bigl( j (\omega t
+                    + \varphi) \bigr)
+                    + \frac{\alpha}{2} \exp \bigl( -j (\omega t + \varphi) \bigr)
+                  $$
+                </wc-math>
+                <wc-math class="numbered ZZ" data-eq="6" id="eq-06">
+                  $$
+                    f (t) \ = \ \frac{\alpha \exp (j \varphi)}{2} \exp (j \omega)
+                    + \frac {\alpha \exp (j \ \cdot \
+                      - \varphi)}{2} \exp (j \ \cdot \ - \omega t)
+                  $$
+                </wc-math>
+                <p>
+                  Comparing this expression of $ \ f (t) \ $ to equation
+                  <wc-popup>
+                    [4]
+                    <q class="actual-popup">
+                      $$
+                        \zeta \ = \ \alpha \exp (j \omega t)
+                      $$
+                    </q>
+                  </wc-popup>
+                  shows that a real sinusoid is the sum of two complex sinusoids,
+                  one of which has a negative frequency.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>Let's define:</p>
+                <wc-split class="grid-b">
+                  <wc-math class="x S">
+                    $$
+                      s \ = \ j \omega
+                    $$
+                  </wc-math>
+                  <p>and</p>
+                  <wc-math class="x S">
+                    $$
+                      X (s) \ = \ \frac{\alpha \exp (j \phi)}{2}
+                    $$
+                  </wc-math>
+                </wc-split>
+                <p>
+                  $ X (s) \ $ is a complex number in exponential form
+                  with absolute value (magnitude)
+                  $ \ \lvert X (s) \rvert \ = \ \alpha / 2 \ $
+                  and argument $ \ \arg \bigl( X (s) \bigr) \ = \ \varphi \ $.
+                  Then any complex sinusoid in the form:
+                </p>
+                <wc-split class="y">
+                  <wc-math class="Z">
+                    $$
+                      f (t) \ = \ X (s) \exp (st)
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    <p>
+                      where $ s $ is a <b>pure imaginary</b> number! ( $ \Re (s) = 0 $ )
+                    </p>
+                  </wc-comment>
+                </wc-split>
+                <p class="numbered" data-eq="b" id="eq-b">
+                  can be considered the positive-frequency-component
+                  of a real sinusoid with:
+                </p>
+                <dl class="y">
+                  <dt><b>Amplitude</b>:</dt>
+                  <dd>
+                    <wc-math">$$ \alpha \ = \ 2 \ \lvert X (s) \rvert $$</wc-math>
+                  </dd>
+                  <dt><b>Phase</b>:</dt>
+                  <dd>
+                    <wc-math>$$ \varphi \ = \ \arg \bigl( X (s) \bigr) $$</wc-math>
+                  </dd>
+                  <dt><b>Frequency</b>:</dt>
+                  <dd>
+                    <wc-math class="hybrid">
+                      $$
+                        \omega \ = \ s / j \ \text{rad/s}
+                        \qquad \text{or} \qquad
+                        \f \ = \ s / 2 \pi j \quad \text{Hz}
+                      $$
+                    </wc-math>
+                  </dd>
+                </dl>
+                <wc-comment class="N">
+                  <p>
+                    $ X (s) \ $ is called the complex amplitude of $ \ f (t) \ $.
+                    It embeds the real amplitude and the phase.
+                    <br/>
+                    $ X (s) \ $ is just a symbol.
+                    The complex sinusoid $ \ A \exp (z t) \ $
+                    has a complex amplitude $ = A $
+                    as long as $ \ \Re (z) \ = \ 0 \ $.
+                    <br/>
+                    (If $ A $ is purely real, then the phase is zero,
+                    and complex amplitude $ = $ real amplitude.)
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  And thus the two (positive and negative) complex sinusoids
+                  that form a real sinusoid have equal amplitude and opposite phase.
+                  <br/>
+                  (Opposite phase because we measure it in radians,
+                  in fact they have the same $ t_0 $.)
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <wc-comment>
+                  <h4>Infinite feedback loop:</h4>
+                  <ul>
+                    <li>A real sinusoid is a sum of complex sinusoids.</li>
+                    <li>A complex sinusoid is the sum of a real
+                      and an imaginary sinusoid.</li>
+                  </ul>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p class="S">
+                  There is a process called
+                  <a
+                    title="Wikipedia.org | Hilbert transform"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Hilbert_transform"
+                  >Hilbert transform</a>
+                  which applies a different phase shift ($ \pm \pi / 2 $)
+                  depending on whether the frequency
+                  is positive or negative.
+                  This ends up in doubling the amplitude of positive frequencies
+                  and cancelling out negative frequencies.
+                  <br/>
+                  Then real sinusoids have become complex sinusoids.
+                  <br/>
+                  (Not that simple if you stop sticking to
+                  $ \cos $, $ \sin $ and $ \exp $.)
+                </p>
+                <p>
+                  A very convenient tool indeed.
+                  But I'd rather find a way to study signals without transforming them
+                  (even though it's easily reversible).
+                  <br/>
+                  So I'll take a different route.
+                </p>
+                <wc-comment class="N">
+                  <h4 class="edit">Edit</h4>
+                  <wc-nested-p>
+                    <p>
+                      The Hilbert transform turns real signals into analytic signals.
+                      Considering the chapter's title, it had to be mentioned.
+                      <br/>
+                      But the central question of this chapter is not
+                      <mark>how to build analytic signals</mark>
+                      — rather:
+                      <mark>are they valid, and how are they useful</mark>.
+                      <br/>
+                      So if you're really interested in it, follow the Wikipedia link.
+                      We won't be addressing it any further here.
+                    </p>
+                  </wc-nested-p>
+                </wc-comment>
+              </wc-paragraph>
+
+            </section><!-- end #03 -->
+
+
+            <!-- section #04 -->
+            <section id="04">
+              <!-- section title -->
+              <h3>04 — Fourier's integral</h3>
+
+              <wc-paragraph>
+                <p>
+                  <a
+                    title="Wikipedia.org | Joseph Fourier [fr]"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://fr.wikipedia.org/wiki/Joseph_Fourier"
+                  >
+                    Joseph Fourier
+                  </a>
+                  basically demonstrated that any signal can be decomposed
+                  into a sum of sinusoids
+                  of various amplitudes, frequencies and phases.
+                </p>
+                <wc-comment class="N">
+                  <p>
+                    <span class="small-caps">Edit</span> — source:
+                    <br/>
+                    <a
+                      title="Archive.org | Théorie analytique de la chaleur"
+                      target="_blank"
+                      type="text/html"
+                      charset="UTF-8"
+                      rel="external"
+                      href="https://archive.org/details/thorieanalytiq00four/page/n7/mode/2up"
+                    >
+                      Jean-Baptiste Joseph Fourier —
+                      <cite>Théorie analytique de la chaleur</cite>, 1822 (Chapter
+                      <span class="small-caps">iii</span>, mostly)
+                    </a>
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  These sinusoids are called partials and their sum is called spectrum.
+                </p>
+                <wc-comment class="y">
+                  <h4><span class="small-caps">Edit</span> — woops:</h4>
+                  <wc-nested-p>
+                    <p class="S">
+                      That's not what a spectrum is (forgive me, I thought so for years).
+                      <br/>
+                      Sinusoids are the time-domain representation of the signal.
+                      <br/>
+                      <a
+                        title="Wiktionary.org | Spectrum — English"
+                        target="_blank"
+                        type="text/html"
+                        charset="UTF-8"
+                        rel="external"
+                        href="https://en.wiktionary.org/wiki/spectrum#English"
+                      >
+                        Spectrum
+                      </a>
+                      is a frequency-domain concept:
+                      it's the amplitude and phase per frequency of a signal.
+                      <br/>
+                      I'm not sure that what I've erroneously called a spectrum thus far
+                      has any other name than just
+                      <mark>signal</mark>...
+                      <br/>
+                      Except: representing it as a sum of sinusoids is in fact
+                      making use of its spectral data.
+                      <br/>
+                      Pardon the long interruption but I struggle at seeing
+                      frequency and time domains as separate hermetic entities
+                      — theoretically, Bartók's
+                      <cite>Concerto for orchestra</cite>
+                      is one single waveform
+                      — I guess my ears suck at maths then.
+                    </p>
+                    <p>
+                      Frequency without time is a division by zero.
+                      <br/>
+                      If you sort your underwear by colour,
+                      the colours don't start having a separate
+                      autonomous existence.
+                      <br/>
+                      The equal signs in the
+                      <wc-spoiler>
+                        Laplace and Fourier transforms
+                      </wc-spoiler>
+                      are not figures of speech.
+                    </p>
+                  </wc-nested-p>
+                </wc-comment>
+                <p>
+                  If all partials have their frequencies related
+                  by an integer factor,
+                  they are called harmonics.
+                  Then the one with the lowest frequency is called fundamental
+                  and all the other ones are called overtones.
+                  <br/>
+                  In such a case, the composite signal is periodic
+                  and its frequency is the fundamental's frequency
+                  thus called fundamental frequency.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <wc-split>
+                  <p>
+                    In case of a periodic signal, the sum is discrete:
+                    <br/>
+                    $ \ \omega_2 = {2 \cdot \omega} \ , \ \omega_3
+                    = {3 \cdot \omega} \ , \
+                    \dots \ , \ \omega_n = {n \cdot \omega} $
+                  </p>
+                  <wc-comment>
+                    <p>where $ \ \omega \ $ is the fundamental frequency</p>
+                  </wc-comment>
+                </wc-split>
+                <p class="zz">
+                  and can therefore be effectively expressed as a literal sum:
+                </p>
+                <wc-math class="numbered Z" data-eq="7" id="eq-07">
+                  $$
+                    f (t) \ = \
+                    \sum_{n=0}^{\infty} \alpha [n] \cos (n \omega t + \varphi [n])
+                  $$
+                </wc-math>
+              </wc-paragraph>
+
+              <!-- Desmos: Partials-split VCO -->
+              <iframe
+                class="desmos"
+                id="Partials-split_VCO"
+                src="https://www.desmos.com/calculator/seevdzs1xi?embed"
+              ></iframe>
+
+              <wc-paragraph>
+                <p>
+                  Notice that $ \omega $ is a constant.
+                  <br/>
+                  $ \alpha [ n ] \ $ means that each partial has its own amplitude
+                  without necessarily being mathematically related to n.
+                  <br>
+                  (It's an index, not necessarily a function — although it could be.
+                  It could also be $ = 0 $.)
+                  <br/>
+                  Same goes for $ \varphi [ n ] $.
+                  The partials don't have to be in phase for the signal to be periodic.
+                  (I thought so. I checked, I was wrong.
+                  If the partials are not in phase,
+                  the period will have a random shape but it will be repeated
+                  at the fundamental frequency
+                  which is pretty obvious once you start thinking about it...
+                  but first you have to start thinking about it!)
+                </p>
+              </wc-paragraph>
+
+              <!-- Desmos: Pseudo-noise -->
+              <iframe
+                class="desmos"
+                id="Pseudo-noise"
+                src="https://www.desmos.com/calculator/w0dxrgh6kj?embed"
+              ></iframe>
+
+              <wc-paragraph>
+                <wc-comment>
+                  <h4>Digression: what happens when $ \ n = 0 \ $ ?</h4>
+                  <h5>DC offset</h5>
+                  <p>
+                    In an analogue circuit, the fact that
+                    $ \ \alpha \cos ( \omega t + \varphi ) \ $
+                    changes sign each half-period corresponds
+                    to the current changing direction,
+                    as is normal with AC
+                    (<a
+                      title="Wikipedia.org | Alternating current"
+                      target="_blank"
+                      type="text/html"
+                      charset="UTF-8"
+                      rel="external"
+                      href="https://en.wikipedia.org/wiki/Alternating_current"
+                    >alternating current</a>).
+                    <br/>
+                    A
+                    <a
+                      title="Wikipedia.org | Direct current"
+                      target="_blank"
+                      type="text/html"
+                      charset="UTF-8"
+                      rel="external"
+                      href="https://en.wikipedia.org/wiki/Direct_current"
+                    >
+                      direct current
+                    </a>
+                    (DC) can be either positive or negative
+                    but its sign (polarity) doesn't change.
+                  </p>
+                  <p class="y">
+                    When $ \ n = 0 \ \ \
+                    \alpha [ n ] \cos \bigl( n \omega t  +  \varphi [ n ] \bigr) \ = \
+                    \alpha [ 0 ] \cos \bigl( \varphi [0] \bigl) $
+                  </p>
+                  <p>
+                    Which is a constant. It's called a
+                    <a
+                      title="Wikipedia.org | DC bias"
+                      target="_blank"
+                      type="text/html"
+                      charset="UTF-8"
+                      rel="external"
+                      href="https://en.wikipedia.org/wiki/DC_bias"
+                    >DC offset</a>.
+                    <br/>
+                    DC because it doesn't alternate. Offset because if you plot
+                    $ \ f (t) \ $ it will shift the curve of the whole signal
+                    up or down by its value.
+                    <br/>
+                    In this regard it could be extracted from the sum:
+                  </p>
+                  <wc-split class="grid-c zz">
+                    <wc-math class="Z">
+                      $$
+                        f (t) \ = \ \alpha [0] + \sum_{n = 1}^{\infty}
+                        \alpha [n] \cos \bigl( n \omega t + \varphi [ n ] \bigr)
+                      $$
+                    </wc-math>
+                    <wc-comment>
+                      <p>
+                        Why $ \ \cos \bigl( \varphi [0] \bigr) \ $ disappeared
+                        gets answered right away.
+                      </p>
+                    </wc-comment>
+                  </wc-split>
+                  <p class="numbered" data-eq="c" id="eq-c">
+                    I find this concept quite intuitive:
+                    the frequency is the speed of the oscillations.
+                    When the speed is zero, there are no oscillations.
+                    <br/>
+                    If there are no oscillations, there is no period.
+                    If there is no period there is no phase.
+                  </p>
+                  <p class="N zz">
+                    A mathematical proof could be:
+                    $ \ \omega [n] \ = \ n \omega \quad $ then:
+                  </p>
+                  <wc-split class="grid-b S zz">
+                    <wc-math class="Z">
+                      $$
+                        f [n] (t) \ = \ \alpha [n] \cos \bigl( \omega [n] t
+                        + \varphi [n] \bigr)
+                      $$
+                    </wc-math>
+                    <wc-comment>
+                      <p>
+                        (equation
+                        <wc-popup>
+                          [5]
+                          <q class="actual-popup">
+                            $$
+                              f (t) \ = \ \alpha \cos (\omega t + \varphi)
+                            $$
+                          </q>
+                        </wc-popup>)
+                      </p>
+                    </wc-comment>
+                  </wc-split>
+                  <wc-math class="hybrid y E zz">
+                    $$
+                      \begin{alignat}{3}
+                        \text{Then since: } && \quad \varphi [n] \ = \ & \omega [n] \ \cdot \ -t_0 [n]
+                        \\
+                        \text{if: } && \quad \omega [n] \ = \ & 0
+                        \\
+                        \text{then: } && \quad \varphi [n] \ = \ & 0
+                        \\
+                        \text{and since: } && \quad \omega [n] \ = \ & 0 \qquad \text{when} \qquad n = 0
+                        \\
+                        \text{then: } && \quad \varphi [0] \ = \ & 0
+                        \\
+                        \text{therefore: } && \quad \cos \bigl( \varphi [0] \bigr) \ = \ & 1
+                      \end{alignat}
+                    $$
+                  </wc-math>
+                  <p>Then:</p>
+                  <wc-split class="grid-c zz">
+                    <wc-math class="Z">
+                      $$
+                        f [0] (t) \ = \ \alpha [0]
+                      $$
+                    </wc-math>
+                    <wc-comment>
+                      <p>(The actual DC offset.)</p>
+                    </wc-comment>
+                  </wc-split>
+                  <p>
+                    In practice, a pure DC signal, when played on a monitoring system,
+                    has the membrane stuck in a non-zero fixed position.
+                    <br/>
+                    This can kill the monitoring system.
+                    <br/>
+                    My personal advice is to use visual tools and disable monitoring
+                    while testing DSP code (first at least).
+                    <br/>
+                    One of my personal rules in life is to never follow anyone's advice.
+                    If you don't play with fire
+                    how will you ever know for sure that it burns?
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  Now let's assume $ \ f (t) \ $ is not a periodic signal
+                  (e.g. white noise, a rocket launch or Beethoven's
+                  <a
+                    title="Youtube.com | Beethoven 9 (Masaaki Suzuki / Bach Collegium Japan)"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://www.youtube.com/watch?v=OmdWo0IwMq0&list=PLIiEeQQoPDHLa9KmXnM7m7WANgCin5VOJ&index=4"
+                  >ninth symphony</a>).
+                  <br/>
+                  Any frequency at any phase and with any amplitude
+                  can be present in the spectrum.
+                </p>
+              </wc-paragraph>
+
+              <!-- Desmos: Discrete (actual) noise -->
+              <iframe
+                class="desmos"
+                id="Discrete_(actual)_noise"
+                src="https://www.desmos.com/calculator/i4irwiua4p?embed"
+              ></iframe>
+
+              <wc-paragraph>
+                <p>
+                  In other words: $ \omega $ has become a variable
+                  which can take any real positive value
+                  ($ n $ has become meaningless).
+                  <br/>
+                  In other words: the spectrum is no longer discrete, it's continuous.
+                  Which means that even if defined on a finite interval
+                  it will have infinite partials.
+                  <br/>
+                  Well that's pretty much the definition of
+                  <a
+                    title="Wikipedia.org | DC bias"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Integral"
+                  >integration</a>!
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  One last thing: the angular frequency $ \ \omega \ = \ 2 \pi \f \ $
+                  is essentially a mathematical tool
+                  used to embed the natural period of sine and cosine
+                  functions and the frequency in a single factor,
+                  a way to shorten expressions.
+                  In real life the time ($ t $) is expressed in seconds
+                  and frequencies ($ \f $) are expressed in Hertz
+                  ($ = \ \text{seconds}^{-1} $).
+                  <br/>
+                  The factor $ 2 \pi $ can be regarded as inherent
+                  to trigonometric functions,
+                  then the variable with respect to which we integrate
+                  is actually $ \f $.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>Then:</p>
+                <wc-math class="Z">
+                  $$
+                    f (t) \ = \ \int\limits_{0}^{\infty}
+                    \alpha [\omega] \cos \bigl( \omega t + \varphi [\omega] \bigr) \ d\f
+                  $$
+                </wc-math>
+              </wc-paragraph>
+
+              [...]
+
+              <wc-paragraph>
+                <code>
+<pre>
+if ( A (-ω)  ==  A (ω)    &&    φ (-ω)  ==  -φ (ω) )
+{
+                   +∞
+              1   ⌠  A (ω) exp (j φ (ω))
+  ƒ (t)  =  ----- | --------------------- exp (j ω t) dω ;
+             2 π  ⌡           2
+                   -∞
+}   //  endif
+</pre>
+                </code>
+                <p>Let's define:</p>
+                <wc-math class="Z">
+                  $$
+                    X ( \omega ) \ = \
+                     \frac{ A ( \omega ) \exp (j \varphi ( \omega )) }{2}
+                  $$
+                </wc-math>
+                <p>Then:</p>
+                <wc-split>
+                  <code>
+<pre>
+if ( A (-ω)  ==  A (ω)    &&    φ (-ω)  ==  -φ (ω) )
+{
+                   +∞
+              1   ⌠
+  ƒ (t)  =  ----- | X (ω) exp (j ω t) dω ;
+             2 π  ⌡
+                   -∞
+
+}   //  endif
+</pre>
+                    </code>
+                  <wc-comment>
+                    <p class="S zz">And that's one of the academic expressions of:</p>
+                    <wc-nested-p>
+                      <p class="N zz">
+                        the
+                        <a
+                          title="Wikipedia.org | Fourier transform — Definition"
+                          target="_blank"
+                          type="text/html"
+                          charset="UTF-8"
+                          rel="external"
+                          href="https://en.wikipedia.org/wiki/Fourier_transform#Definition"
+                        >
+                          inverse Fourier transform
+                        </a>.
+                      </p>
+                    </wc-nested-p>
+                  </wc-comment>
+                </wc-split>
+              </wc-paragraph>
+
+            </section><!-- end #04 -->
+
+
+            <!-- Section #05 -->
+            <section id="05">
+              <!-- section title -->
+              <h3>05 — Conclusion</h3>
+
+              <wc-paragraph>
+                <p>
+                  This'll be quick.
+                  <br/>
+                  We've noticed that an analytical signal is a useful theoretical object
+                  for it simplifies maths.
+                  <br/>
+                  We've proven that it can be used to represent real-life signals.
+                </p>
+              </wc-paragraph>
+
+            </section><!-- end #05 -->
+
+
+            <!-- Section #06 -->
+            <section id="06">
+              <!-- section title -->
+              <h3>06 — Not so fast...</h3>
+
+              <wc-paragraph>
+                <p>Integral transforms are rather fun. How about another one?</p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  First let's assume we don't care
+                  whether the sinusoids in our spectrum are purely real.
+                  <br/>
+                  Then we can get rid of the <wc-ascii>if</wc-ascii> statement, and:
+                </p>
+                <wc-math class="ZZ">
+                  $$
+                    f(t) \ = \ \frac{1}{2 \pi} \int\limits_{- \infty}^{+ \infty}
+                    X ( \omega ) \exp (j \omega t) d \omega
+                  $$
+                </wc-math>
+                <p>
+                  Ok, neat.
+                  <br/>
+                  Now: the angular frequency $ \omega $ is always multiplied by $ j $.
+                  So varying the frequency (angular or not) is equivalent
+                  to travelling along the imaginary axis.
+                  <br/>
+                  We could decide to make it obvious by embedding $ j $
+                  in the variable with respect to which we integrate.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  Then the range of integration becomes
+                  $ \ [ - j \infty \ , \ + j \infty ] \ $ and the differential becomes
+                  $ \ d j \omega / j \ $.
+                  <br/>
+                  The rules of factorisation allow to extract
+                  $ \ 1 / j \ $ from the integral,
+                  which is then divided by $ \ 2 \pi j \ $ instead of $ \ 2 \pi $.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  Fourier now has a more straightforward meaning,
+                  but it's a bit messy:
+                  we still haven't defined the new variable
+                  (the one that embeds $ j $).
+                  <br/>
+                  This variable needs a name.
+                  If I don't call it $ \ s \ $,
+                  I'm exposing you to permanent confusion
+                  (assuming the transform we're building is new to you).
+                  <br/>
+                  Social constructs can feel arbitrary: why the letter s?
+                  — <cite>Spectrum</cite>?
+                  <cite>Sinusoid</cite>?
+                  <cite>Schwingung</cite>?
+                  <cite>Satan</cite>?
+                  <cite>So what</cite>?
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>Anyway: $ \ \ s = j \omega $.</p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  It's a complex number.
+                  So by definition it's the sum of a real part and an imaginary part.
+                  <br/>
+                  $ \implies \ { \Re (s) = 0 }
+                  \qquad \AND \qquad
+                  { \Im (s) = j \omega } $.
+                  <br/>
+                  For the sake of nit-picking, let's make it explicit and re-define:
+                </p>
+              </wc-paragraph>
+
+            </section><!-- end #06 -->
+
+
+            <!-- Section #07 -->
+            <section id="07">
+              <!-- section title -->
+              <h3>07 — Ewige Wiederkunft</h3>
+
+              <wc-paragraph>
+                <p>
+                  I had to heavily edit this section because I had the
+                  (regular — not inverse)
+                  Fourier transform wrong.
+                  <br/>
+                  Mainly because I erroneously thought that integration
+                  (a pseudo-constant sum) could output an average value.
+                  <br/>
+                  I've searched the internet about Fourier,
+                  and it looks like a common confusion.
+                  <br/>
+                  Let's fix that.
+                </p>
+                <wc-split class="grid-b">
+                  <p>
+                    What does:
+                  </p>
+                  <wc-math class="Z">
+                    $$
+                      \INT \ = \ \int\limits_a^b f (x) \ dx
+                    $$
+                  </wc-math>
+                  <p>
+                    actually mean?
+                  </p>
+                </wc-split>
+                <p>
+                  Let's say we're in a Cartesian plane,
+                  with $ x $ on the horizontal axis
+                  and $ \ f (x) \ $ on the vertical one.
+                  <br/>
+                  The range is $ \ ] \ a \ , \ b \ ] \ $
+                  — $ a $ and $ b $ are values of $ x $:
+                  the first and the last values $ x $ will take during the integration.
+                  <br/>
+                  So the integration horizontally spans from $ a $ to $ b $.
+                  <br/>
+                  So:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    \SPAN \ = \ b - a
+                  $$
+                </wc-math>
+                <p>
+                  Now what is the differential ($ dx $)?
+                  <br/>
+                  It's also a value of $ x $:
+                  the constant increment in $ x $,
+                  a horizontal segment stacked by the integration
+                  over all it previous selves up to $ \ {x = b} \ $.
+                  <br/>
+                  So $ \ f (x) \ dx \ $ is the area of a rectangle
+                  with two horizontal sides $ dx $
+                  and two vertical sides $ \ f (x) \ $.
+                  <br/>
+                  (Which is why integration is used
+                  to compute the area under curves
+                  — special areas that can be negative.)
+                  <br/>
+                  $ f (x) \ dx \ $ is also stacked like $ dx $, except in 2-D.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  How many slices do we stack?
+                  It depends on how many times you can fit $ dx $ inside $ \SPAN $.
+                  Let's call this number of slices $ \NB $.
+                  <br/>
+                  Then:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    \NB \ = \ \SPAN / dx \ = \ \frac{b - a}{dx}
+                    \quad \iff \quad
+                    dx \ = \ \SPAN / \NB
+                    \quad \iff \quad
+                    \SPAN \ = \ \NB \ dx
+                  $$
+                </wc-math>
+                <p>
+                  ($ \NB $ must remain an integer,
+                  so even though it never appears in integral notation,
+                  it's defining $ dx $, not the other way around.)
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  Then, what's an average value?
+                  <br/>
+                  Usually: an arithmetic mean.
+                  E.g.: &nbsp; 2, 3, 5 and 7 &nbsp; — four values
+                  (that's our $ \NB $).
+                  <br/>
+                  Add all values together and divide by $ \NB $:
+                </p>
+                <wc-math class="ZZ">
+                  $$
+                    \begin{align}
+                    \SUM \ &= \ 2 + 3 + 5 + 7
+                    \\[1.4142ex]
+                    \AVG \ &= \ \SUM / \NB \ = \ \frac{2 + 3 + 5 + 7}{4}
+                    \ = \ 17 / 4 \ = \ 16 / 4 \ + \ 1 / 4 \ = \ 4.25
+                    \end{align}
+                  $$
+                </wc-math>
+                <p>Now what would $ \SUM $ be in our integral?</p>
+                <wc-math class="x zz">
+                  $$
+                    \SUM \ = \ f (a + dx) \ + \ f (a + 2 dx) \
+                    + \ \ldots \ + \ f (b - dx) \ + \ f (b)
+                  $$
+                </wc-math>
+                <p class="n">
+                  The only difference compared to the integral
+                  is that we don't multiply each term by $ dx $.
+                  <br/>
+                  Instead of stacking rectangles, we're stacking vertical segments.
+                  <br/>
+                  So:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    \INT \ = \ \SUM \ dx \quad \iff \quad \SUM \
+                    = \ \INT / dx
+                  $$
+                </wc-math>
+                <p>Then:</p>
+                <wc-math class="Z">
+                  $$
+                    \AVG \ = \ \SUM / \NB \quad \implies \quad
+                    \AVG \ = \ \frac{ \INT / dx }{ \SPAN / dx } \
+                    = \ \INT / \SPAN
+                  $$
+                </wc-math>
+                <p>
+                  So an integral is not averaging,
+                  but it provides all the terms required to average:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    \AVG \ = \ \frac{1}{b - a} \int\limits_a^b f (x) \ dx
+                  $$
+                </wc-math>
+                <p>
+                  Now what if $ \ f (x) \ $ is a constant?
+                  Let's say $ \ f (x) \  = \ 1 \ $,
+                  $ \ a = 0 \ $, and $ \ b = 5 \ $.
+                </p>
+                <p>Then:</p>
+                <wc-split class="zz">
+                  <wc-math class="Z">
+                    $$
+                      \INT \ = \ \int\limits_0^5 dx
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    <wc-math class="x S">
+                      $$
+                        \NB \ = \ \SPAN / dx \ = \ \frac{5 - 0}{dx}
+                        \ \ \iff \ \ \NB \ dx \ = \ 5
+                      $$
+                    </wc-math>
+                    <p>
+                      So, no matter the values of $ \NB $ and $ dx $,
+                      their product is always 5.
+                    </p>
+                  </wc-comment>
+                </wc-split>
+                <p class="N">
+                  If $ \ dx = 0.01 \ $, then $ \ \NB \ = \ 5 / 0.01 \
+                  = \ 5 \times 100 \ = \ 500 \ $.
+                  <br/>
+                  Then we'll add $ dx $ 500 times to itself and get:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    \INT \ = \ 500 \ dx \ = \ 500 \times 0.01 \
+                    = \ 5 \ = \ \SPAN
+                  $$
+                </wc-math>
+                <p>
+                  (In fact, if you don't mind heresy, $ dx $ being constant,
+                  it could be factored out of the integral.)
+                  <br/>
+                  Now let's say $ \ f (x) \ = \ k \ $ where $ k $ is some constant.
+                </p>
+                <wc-split class="zz">
+                  <wc-math class="Z">
+                    $$
+                      \INT \ = \ \int\limits_a^b k \ dx \ = \
+                      k \int\limits_a^b dx \ = \
+                      k \ \SPAN \ = \ k (b - a)
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    <p class="S">
+                      This is <b>important</b>.
+                      <br/>
+                      It's what I got wrong and why I re-wrote this section.
+                    </p>
+                    <p>
+                      Integrating a constant doesn't output the constant,
+                      it multiplies it by the integration span.
+                    </p>
+                  </wc-comment>
+                </wc-split>
+                <wc-split class="grid-c zz">
+                  <p class="nowrap">If we want $ k $:</p>
+                    <wc-math class="x zz">
+                      $$
+                        \INT \ = \ k \ \SPAN
+                        \quad \iff \quad
+                        k \ = \ \INT / \SPAN
+                      $$
+                    </wc-math>
+                  <wc-comment>
+                    <p>in our example: $ \quad k \ = \ \INT / {(b - a)} $</p>
+                  </wc-comment>
+                </wc-split>
+                <wc-comment class="N">
+                  <h4>Geometrical approach:</h4>
+                  <p class="s">
+                    Remember how each step of the integral is the area
+                    of an infinitesimal rectangle of area $ \ f (x) \ dx \ $.
+                  </p>
+                  <p class="s">
+                    If we remove $ \ f (x) \ $ and only keep $ dx $,
+                    then the rectangles loose their vertical sides
+                    and become horizontal segments.
+                  </p>
+                    Then the whole integral becomes a segment of length
+                    $ \ \SPAN \ = \ b - a \ $.
+                    <br/>
+                    We add $ dx $ to itself $ ( \NB - 1 ) $ times:
+                  </p>
+                  <wc-math class="x N zz">
+                    $$
+                      \INT \ = \ \sum_{n=1}^{\NB} dx \ = \ dx \ \NB
+                      \ = \ dx \ \SPAN / dx \ = \ \SPAN \ = \ b - a
+                    $$
+                  </wc-math>
+                </wc-comment>
+              </wc-paragraph>
+
+              <!-- Desmos: Calculus 101 -->
+              <iframe
+                class="desmos"
+                id="Calculus_101"
+                src="https://www.desmos.com/calculator/8cnsrnpc7i?embed"
+              ></iframe>
+
+              <wc-paragraph>
+                <h4>Sinusoids</h4>
+                <p class="S n">
+                  Sinusoids have a modulus (period) of $ 2 \pi $
+                  — their curve is a unique motif repeated identically ad infinitum.
+                </p>
+                <p class="S">
+                  Sine starts at zero; it rises up to 1 between zero and $ \pi / 2 $;
+                  then it falls down to zero between $ \pi / 2 $ and $ \pi $.
+                  <br/>
+                  This is the first half-period,
+                  it has a vertical axis of symmetry at$ \pi / 2 $.
+                  <br/>
+                  So the area under the curve, during this half-period,
+                  is split in two equal halves by this axis.
+                  <br/>
+                  So the areas under the curve of the two first quarter-periods
+                  are equal to each other.
+                </p>
+                <p class="s">
+                  Then the second half-period is identical to the first one,
+                  except mirrored across the abscissa (horizontal) axis.
+                  <br/>
+                  So the two last quarter-periods are also symmetrical,
+                  and also have equal area under the curve;
+                  <br/>
+                  and the full period has a
+                  <wc-popup>
+                    centre of symmetry
+                    <q class="actual-popup">
+                      That's <b>point-symmetry</b> in proper English.
+                      <br/>
+                      Pardon my French.
+                      <br/>
+                      Also: get used to it.
+                    </q>
+                  </wc-popup>
+                  at $ (0 \ , \ \pi) $
+                  — and the two half-periods have complementary areas under the curve.
+                </p>
+                <p class="S">
+                  So the area under the curve of each full period cancels to zero.
+                  <br/>
+                  Which means that integrating sine over a full period outputs zero.
+                </p>
+                <p class="s">
+                  Cosine starts at one, falls down to to zero ($ \pi / 2 $),
+                  then to minus one ($ \pi $),
+                  then rises up to zero ($ 3 \pi / 2 $),
+                  then back to one ($ 2 \pi $).
+                  <br/>
+                  So it has an axis of symmetry at the middle of its full period
+                  and a
+                  <wc-popup>
+                    centre of symmetry
+                    <q class="actual-popup">
+                      (told ya)
+                    </q>
+                  </wc-popup>
+                  at the middle of each half-period.
+                </p>
+                <p class="S">
+                  So the areas under the curve of the two first quarter-periods
+                  cancel to zero
+                  — idem for the two last quarter-periods.
+                  <br/>
+                  So the area under the curve of a full period adds zero to zero.
+                  <br/>
+                  Which means that integrating cosine over a full period outputs zero.
+                </p>
+                <p class="s">
+                  Complex sinusoids in the form: $ \ \exp (j x) \ $
+                  have a magnitude (absolute value) of 1 and an argument of $ x $.
+                  <br/>
+                  So, in the complex plane, they run along the unit-circle
+                  at a constant angular speed.
+                </p>
+                <p class="s">
+                  When $ \ x = \pi \ $ the argument is half a circle.
+                  <br/>
+                  The half-circle is above the real axis.
+                  <br/>
+                  Each quarter is on one side of the imaginary axis,
+                  so the real area cancels out,
+                  and the imaginary area is strictly positive.
+                </p>
+                <p class="s">
+                  When $ \ x = 2 \pi \ $ the argument is a full circle.
+                  <br/>
+                  The second half-circle is below the real axis
+                  and also split in the middle by the imaginary axis.
+                  <br/>
+                  So the last two quarter-circles also cancel the real area.
+                </p>
+                <p class="S">
+                  The two half-circles have the same absolute imaginary area,
+                  but the first one is positive and the second one is negative;
+                  so integrating the full circle outputs zero.
+                  <br/>
+                  Complex sinusoids reset at $ 2 \pi $
+                  — they have the same modulus (period) as real sinusoids.
+                </p>
+                <p>
+                  Sine has a specificity: between zero and $ \pi $, it's positive;
+                  between zero and $ - \pi $, it's negative.
+                  <br/>
+                  So its full infinite curve has a centre of symmetry
+                  at the origin of the Cartesian plane.
+                  <br/>
+                  Which means that its right semi-plane
+                  and its left semi-plane are complementary.
+                </p>
+                <p class="S">
+                  So integrating sine from $ \ - k \ $ to $ \ + k \ $
+                  (where $ k $ is any real positive number) will always output zero.
+                  <br/>
+                  Therefore, integrating a complex sinusoid from
+                  $ \ - k \ $  to $ \ + k \ $
+                  (i.e. in both directions) will always output a real number.
+                </p>
+              </wc-paragraph>
+
+              [...]
+
+              <!-- Desmos: Integrating sinusoids -->
+              <iframe
+                class="desmos"
+                id="Integrating_sinusoids"
+                src="https://www.desmos.com/calculator/d48phf8pfv?embed"
+              ></iframe>
+
+              <wc-paragraph>
+                <wc-comment>
+                  <p>
+                    In fact, cosine also has a symmetry — except axial:
+                    the ordinate (vertical) axis
+                    cuts its bi-directional infinite range in half.
+                    <br/>
+                    Cosine's and sine's respective symmetries
+                    can be expressed as such:
+                  </p>
+                  <wc-math class="Z">
+                    $$
+                      \cos (-x) \ = \ \cos (x)
+                      \qquad \AND \qquad
+                      \sin (-x) \ = \ - \sin (x)
+                    $$
+                  </wc-math>
+                  <p>
+                    or: cosine is an
+                    <a
+                      href="https://en.wikipedia.org/wiki/Even_and_odd_functions"
+                      target="_blank"
+                      rel="external"
+                      type="text/html"
+                      hreflang="en"
+                      charset="UTF-8"
+                      title="Wikipedia.org | Even and odd functions"
+                    ><b>even</b> function</a>;
+                    sine is an
+                    <a
+                      href="https://en.wikipedia.org/wiki/Even_and_odd_functions"
+                      target="_blank"
+                      rel="external"
+                      type="text/html"
+                      hreflang="en"
+                      charset="UTF-8"
+                      title="Wikipedia.org | Even and odd functions"
+                    ><b>odd</b> function</a>.
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <h4>Back to Fourier!</h4>
+                <p class="zz">
+                  What if we want to retrieve the complex amplitude of a partial?
+                </p>
+                <p>
+                  Let's start with a simple case:
+                  the signal is only one complex sinusoid,
+                  and its amplitude and phase are constant:
+                </p>
+                <wc-math class="Z s">
+                  $$
+                    f (t) \ = \ X (\omega) \exp (j \omega t)
+                    \quad \iff \quad
+                    X (\omega) \ = \ f (t) / \exp (j \omega t) \
+                    = \ f (t) \exp (-j \omega t)
+                  $$
+                </wc-math>
+                <p>
+                  Let's expand Euler's formula and see what it means
+                  in terms of cosine and sine:
+                </p>
+                <wc-math class="Z s">
+                  $$
+                    \begin{align}
+                      \exp (j \omega t) \exp (-j \omega t) \ = \ &
+                      \bigl( \cos (\omega t) + j \sin (\omega t) \bigr)
+                      \bigl( \cos (\omega t) - j \sin (\omega t) \bigr)
+                      \\[1.4142ex] = \ &
+                      \cos^2 (\omega t) - j \cos (\omega t) \sin (\omega t)
+                      + j \cos (\omega t) \sin (\omega t) - j^2 \sin^2 (\omega t)
+                      \\[1.4142ex] = \ &
+                      \cos^2 (\omega t) + \sin^2 (\omega t)
+                    \end{align}
+                  $$
+                </wc-math>
+                <p>
+                  (Remember Pythagoras:
+                  $ \ {\opp^2 + \adj^2} \ = \ \hyp^2
+                  \quad \iff \quad
+                  {\cos^2 + \sin^2} \ = \ 1 \ $)
+                </p>
+                <wc-split class="grid-b zz">
+                  <wc-math class="Z">
+                    $$
+                      \exp (j \omega t) \exp (-j \omega t) \ = \ 1
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    ok.
+                  </wc-comment>
+                </wc-split>
+                <wc-comment class="N">
+                  <p>This, by the way, is a special case of:</p>
+                  <wc-math class="Z">
+                    $$
+                      \begin{align}
+                        z \ \conj (z) \ = \ &
+                        \bigl(
+                          \Re (z) + j \Im (z)
+                          \bigr)
+                          \bigl(
+                            \Re (z) - j \Im (z)
+                          \bigr) \ = \
+                        \Re (z)^2 - j \Re (z) \Im (z) + j \Re (z) \Im (z)
+                        + \Im (z)^2
+                        \\[1.1ex] = \ &
+                        \Re (z)^2 + \Im (z)^2 \ = \ \lvert z \rvert^2
+                      \end{align}
+                    $$
+                  </wc-math>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  Now let's assume that our spectrum contains several partials
+                  in a harmonic relationship, all constant over time in amplitude and phase.
+                  <br/>
+                  <cite>Harmonic</cite> means that their frequencies are related by integer factors:
+                </p>
+                <wc-split class="y zz">
+                  <wc-math class="Z">
+                    $$
+                      f(t) \ = \ \sum_{n=1}^{N}
+                      \alpha [n] \cos \bigl( n \omega_0 t + \varphi [n] \bigr)
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    <p>
+                      where $ \omega_0 $ is the fundamental frequency in rad./s,
+                      <br/>
+                      $ N $ is the number of harmonics,
+                      $ N - 1 $ is the number of overtones,
+                      <br/>
+                      $ \alpha [n] $ are the real amplitudes,
+                      $ \varphi [n] $ are the phases.
+                    </p>
+                  </wc-comment>
+                </wc-split>
+                <p class="s">
+                  $ \omega_0 $ is an angular frequency in radians per second.
+                  Its value in Hertz is $ \ \f_0 \ = \ {\omega_0 / 2 \pi} \ $.
+                  <br/>
+                  Its corresponding period is
+                  $ \ T_0 \ = \ {1 / \f_0} \ = \ {2 \pi / \omega_0} \ $.
+                </p>
+                <p class="s">
+                  Each partial has an angular frequency $ \ {n \omega_0} \ $,
+                  which, in Hertz gives: $ \ \f_n \ = \ {n \omega_0 / 2 \pi} \ $
+                  and a period: $ \ T_n \ = \ {2 \pi / (n \omega_0)} \ $.
+                </p>
+                <p class="s">
+                  If we integrate $ \ f (t) \ $ with respect to $ t $
+                  over the range $ [0 \ , \ T_0] $,
+                  the fundamental will have reached a full cycle
+                  and its positive and negative half will cancel out.
+                </p>
+                <p class="s">
+                  If we integrate over a time window
+                  that is an integer multiple of $ T_0 $
+                  (say $ \mu T_0 $, where $ \mu $ is a strictly positive integer),
+                  the fundamental will have reached
+                  $ \mu $ full cycles and cancel out as well.
+                </p>
+                <p class="S">
+                  Since $ T_0 $ is an integer multiple of $ T_n $,
+                  all overtones will also cancel out.
+                </p>
+                <wc-comment class="y">
+                  <p>Let's check:</p>
+                  <wc-math class="Z s">
+                    $$
+                      \alpha [n] \cos \bigl( n \omega_0 t  +  \varphi [n] \bigr) \
+                      = \ \alpha [n] \cos \bigl( n \omega_0 (t - t_0 [n]) \bigr)
+                    $$
+                  </wc-math>
+                  <p>at $ \ t = \mu T_0 \ $:</p>
+                  <wc-math class="Z s">
+                    $$
+                      \alpha [n] \cos \bigl( n \omega_0 (\mu T_0 - t_0 [n]) \bigr) \
+                      = \ \alpha [n] \cos
+                      \left(
+                        n \omega_0
+                        \left(
+                          \mu \frac{2 \pi}{\omega_0} - t_0 [n]
+                        \right)
+                      \right) \
+                      = \ \alpha [n] \cos
+                      \bigl(
+                        n \mu 2 \pi - n \omega_0 t_0 [n]
+                      \bigr)
+                    $$
+                  </wc-math>
+                  <p>$ n $ and $ \mu $ are integers, so:</p>
+                  <wc-math class="Z s">
+                    $$
+                    n \mu 2 \pi  \mod 2 \pi \ = \ 0
+                    \qquad \iff \qquad
+                    n \mu 2 \pi  -  n \omega_0 t_0 [n]  \mod 2 \pi \
+                    = \ - n \omega_0 t_0 [n]
+                    $$
+                  </wc-math>
+                  <p>so:</p>
+                  <wc-math class="Z s">
+                    $$
+                      \alpha [n] \cos \bigl( n \omega_0 t  +  \varphi [n] \bigr) \
+                      = \ \alpha [n] \cos \bigl( - n \omega_0 t_0 [n] \bigr) \
+                      = \ \alpha [n] \cos \bigl( \varphi [n] \bigr)
+                    $$
+                  </wc-math>
+                  <p>Now, at $ \ t = 0 \ $:</p>
+                  <wc-math class="x N">
+                    $$
+                      \begin{align}
+                        \alpha [n] \cos \bigl( n \omega_0 (0 - t_0 [n]) \bigr) \
+                        = \ & \alpha [n] \cos \bigl( 0  -  n \omega_0 t_0 [n] \bigr) \
+                        = \ \alpha [n] \cos \bigl( - n \omega_0 t_0 [n] \bigr) \
+                        \\ \\
+                        = \ & \alpha [n] \cos \bigl( \varphi [n] \bigr)
+                      \end{align}
+                    $$
+                  </wc-math>
+                  <p>Ok.</p>
+                </wc-comment>
+                <p class="N">
+                  So integrating $ \ f (t) \ $
+                  during an integer multiple of $ T_0 $
+                  will always output zero
+                  — even when $ N $ tends to infinity:
+                </p>
+                <wc-math class="ZZ">
+                  $$
+                    \INT \ = \ \int\limits_{0}^{\mu T_0} f (t) \ dt \
+                    = \ \int\limits_{0}^{\mu T_0}
+                    \sum_{n=1}^{N} \alpha [n] \cos
+                    \bigl(
+                      n \omega_0 t + \varphi [n]
+                    \bigr) \ dt \
+                    = \ 0
+                  $$
+                </wc-math>
+                <p class="S">
+                  Now let's say we want to find $ \alpha [\kappa] $
+                  (where $ \ 1 \leq \kappa \leq N \ $ is a strictly positive integer).
+                </p>
+                <p>
+                  We can seek inspiration in what we did
+                  a few lines ago for $ \ X (\omega) \ $:
+                  multiply $ \ \INT \ $ with
+                  $ \ {\exp \bigl( -j \kappa \omega_0 t \bigr)} \ $.
+                  <br/>
+                  We've just found that every other partial will cancel out,
+                  so let's isolate
+                  $ \ {\alpha [\kappa]
+                  \cos \bigl( \kappa \omega_0 t + \varphi [\kappa] \bigr)} \ $:
+                </p>
+
+                [...]
+
+                <wc-split class="y zz">
+                  <div>
+                    <p>If we define:</p>
+                    <wc-math class="x zz S">
+                      $$
+                        \vphantom{ \int\limits_{0}^{\mu T_0} }
+                        X (\kappa) \ = \ \frac{\alpha [\kappa]}{2}
+                        \exp \bigl( j \varphi [\kappa] \bigr)
+                      $$
+                    </wc-math>
+                  </div><!-- end left -->
+                  <hr/>
+                  <div>
+                    Then:
+                    <wc-math class="x zz S">
+                      $$
+                        X (\kappa) \ = \ \frac{1}{\mu T_0}
+                        \int\limits_{0}^{\mu T_0}
+                        \sum_{n=1}^{N} \alpha [n] \cos
+                        \bigl(
+                          n \omega_0 t + \varphi [n]
+                        \bigr)
+                        \exp \bigl( -j \kappa \omega_0 t \bigr) \ dt
+                      $$
+                    </wc-math>
+                  </div><!-- end right -->
+                </wc-split>
+              </wc-paragraph>
+
+              [...]
+
+              <wc-paragraph>
+                <p class="s">
+                  What else?
+                  <br/>
+                  Our spectrum could very well have infinite harmonics.
+                  So $ N $ doesn't have to be undefined.
+                </p>
+                <p>Let: $ \quad N \ = \ \infty \ $, then:</p>
+              </wc-paragraph>
+
+              [...]
+
+              <!-- Desmos: Fourier series -->
+              <iframe
+                class="desmos"
+                id="Fourier_series"
+                src="https://www.desmos.com/calculator/zhamhdokfl?embed"
+              ></iframe>
+
+              <wc-paragraph>
+                <p>Wow! It actually does work, like, for real!</p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p class="s">How much further can we push?</p>
+                <p>
+                  Really, we have two parameters left:
+                  $ \ \omega_0 \ $ and $ \ T_0 \ $
+                  — whose relationship is:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    \left.
+                      \begin{aligned}
+                        \f_0 \ = \ & 1 / T_0 \
+                        \\
+                        \omega_0 \ = \ & 2 \pi \f_0 \
+                      \end{aligned}
+                    \right\}
+                    \quad \implies \quad
+                    \omega_0 \ = \ \frac{2 \pi}{T_0}
+                    \quad \iff \quad
+                    T_0 \ = \ \frac{2 \pi}{\omega_0}
+                    \quad \iff \quad
+                    \frac{1}{T_0} \ = \ \frac{\omega_0}{2 \pi}
+                    \quad \iff \quad
+                    \frac{T_0}{2} \ = \ \frac{2 \pi}{2 \omega_0} \
+                    = \ \pi / \omega_0
+                  $$
+                </wc-math>
+                <p class="s">
+                  So, really, we have one parameter: $ \ \omega_0 $
+                  — the fundamental frequency
+                  — or the lowest frequency in the spectrum.
+                </p>
+                <p class="s">
+                  Or: since each partial's frequency
+                  is an integer multiple of $ \omega_0 $,
+                  add it to one partial's frequency,
+                  you get the next partial's frequency;
+                  <br/>
+                  so, in the frequency domain,
+                  $ \omega_0 $ is the distance between any two partials:
+                </p>
+                <p class="s">
+                  let $ \ p_{n} \ $ and $ \ p_{n+1} \ $
+                  be two consecutive partials in our spectrum,
+                  and let $ \ \omega_{n} \ $ and $ \ \omega_{n+1} \ $
+                  be their respective frequencies.
+                </p>
+                <p>Then:</p>
+                <ul>
+                  <li>
+                    $
+                      p_n \ = \ \cos ( \omega_n t + \varphi_n ) \
+                      = \ \cos ( n \omega_0 t  +  \varphi_n )
+                    $
+                  </li>
+                  <li>
+                    $
+                      p_{n+1} \ = \ \cos ( \omega_{n+1} t + \varphi_{n+1} ) \
+                      = \ \cos \bigl( (n + 1) \omega_0 t + \varphi_{n+1} \bigr)
+                    $
+                  </li>
+                </ul>
+                <wc-math class="x S zz">
+                  $$
+                    \implies \quad
+                    \omega_{n+1} - \omega_n \
+                    = \ (n + 1) \omega_0 - n \omega_0 \
+                    = \ n \omega_0 + \omega_0 - n \omega_0 \
+                    = \ \omega_0
+                  $$
+                </wc-math>
+                <p>
+                  So it's the difference between consecutive frequencies
+                  — so, basically a non-infinitesimal differential.
+                </p>
+                <p>Its limit values are:</p>
+                <ol class="s">
+                  <li>
+                    $ \infty \ \longrightarrow \ $ our spectrum is infinitely ultrasonic
+                    and its partials are infinitely apart;
+                  </li>
+                  <li>
+                    $ 0 \ $ (DC) $ \ \longrightarrow \ $  our spectrum's fundamental is a constant
+                    and its partials are infinitely close to each other.
+                  </li>
+                </ol>
+                <p>
+                  Case
+                  <wc-popup>
+                    (1)
+                    <q class="actual-popup">
+                      $$
+                        \omega_0 \ = \ + \infty
+                      $$
+                    </q>
+                  </wc-popup>
+                  is pretty much the answer to
+                  <mark>what's the most useless mathematical model
+                    of which an engineer can think?</mark>...
+                  <br/>
+                  Case
+                  <wc-popup>
+                    (2)
+                    <q class="actual-popup">
+                      $$
+                        \omega_0 \ = \ 0
+                      $$
+                    </q>
+                  </wc-popup>
+                  is a non-harmonic signal with a continuous spectrum. That's interesting.
+                </p>
+                <p>
+                  Discrete vs. continuous doesn't have to be a dichotomy:
+                  continuous is a limit-case of discrete.
+                </p>
+                <p>
+                  Then, instead of non-infinitesimal differential, $ \omega_0 $ is a
+                  non-necessarily-infinitesimal differential.
+                </p>
+                <p>
+                  In syllogistic, when reversing propositions, necessity becomes contingency,
+                  which, in a deterministic universe, is indistinguishable from potentiality.
+                </p>
+                <p>So $ \omega_0 $ is a potentially infinitesimal differential.</p>
+                <p>
+                  Choose your favourite adverb (your favourite accident),
+                  it's <b>essentially</b> (in the most rigorously literal meaning)
+                  — a differential.
+                </p>
+                <p>Let's rename stuff:</p>
+                <wc-split>
+                  <wc-math class="Z TOP">
+                    $$
+                      \omega_0 \quad \longleftarrow \quad d\omega
+                    $$
+                  </wc-math>
+                  <hr/>
+                  <wc-math class="Z TOP">
+                    $$
+                      \begin{alignat}{2}
+                        n \omega_0 \quad \longleftarrow \quad & n \ d\omega \ = \ \omega
+                        \\
+                        \alpha_n \quad \longleftarrow \quad & \alpha (\omega)
+                        \\
+                        \varphi_n \quad \longleftarrow \quad & \varphi (\omega)
+                      \end{alignat}
+                    $$
+                  </wc-math>
+                  <hr/>
+                  <wc-math class="Z TOP">
+                    $$
+                      \begin{alignat}{2}
+                        \kappa \omega_0 \quad \longleftarrow \quad & \kappa \ d\omega \ = \ \omega_p
+                        \\
+                        \alpha_\kappa \quad \longleftarrow \quad & \alpha (\omega_p)
+                        \\
+                        \varphi_\kappa \quad \longleftarrow \quad & \varphi (\omega_p)
+                        \\
+                        X (\kappa) \quad \longleftarrow \quad & X (\omega_p)
+                      \end{alignat}
+                    $$
+                  </wc-math>
+                </wc-split>
+                <p>Then:</p>
+                <wc-math class="Z">
+                  $$
+                    \pm T_0 / 2 \ = \ \pm \pi / d\omega \qquad \AND \qquad
+                    \frac{1}{T_0} \ = \ \frac{d\omega}{2 \pi}
+                  $$
+                </wc-math>
+                <p>So:</p>
+                <wc-split>
+                  <wc-math class="Z">
+                    $$
+                      X (\omega_p) \ = \ \int\limits_{- \pi / d\omega}^{+ \pi / d\omega}
+                      \left(
+                        \int\limits_{d\omega}^{+ \infty} \alpha (\omega)
+                        \cos \bigl( \omega t + \varphi (\omega) \bigr) \
+                        \frac{d\omega}{2 \pi}
+                      \right)
+                      \exp (- j \omega_p t) \ dt
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    <p class="S">
+                      Ok, this can look vertiginous.
+                      <br/>
+                      But we haven't modified anything except for the variables' names.
+                    </p>
+                    <p>
+                      The terms inside parenthesis are the updated expression of
+                      $ \ f (t) \ $, the full signal.
+                    </p>
+                  </wc-comment>
+                </wc-split>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>Can our spectrum have a constant partial?</p>
+                <p>Let's define:</p>
+                <wc-split class="grid-c">
+                  <wc-math class="Z">
+                    $$
+                      \omega_{dc} \ = \ 0 \quad
+                    $$
+                  </wc-math>
+                  <p>and:</p>
+                  <wc-math class="Z">
+                    $$
+                      \quad p_{dc} \ = \ \alpha (0) \cos \bigl( \omega_{dc} (t - t_0) \bigr)
+                    $$
+                  </wc-math>
+                  <p>(the constant partial)</p>
+                </wc-split>
+                <p>We get:</p>
+                <wc-math class="Z">
+                  $$
+                    p_{dc} \ = \ \alpha (0) \cos (0) \ = \ \alpha (0)
+                  $$
+                </wc-math>
+                <p>Then:</p>
+                <wc-math class="Z">
+                  $$
+                    p_{dc} \exp (-j \omega_p t) \ = \ \alpha (0) \exp (-j \omega_p t) \
+                    = \ \alpha (0) \cos (- \omega_p t) + j \alpha (0) \sin (-\omega_p t) \
+                    = \ \alpha (0) \cos (\omega_p t) - j \alpha (0) \sin (\omega_p t)
+                  $$
+                </wc-math>
+                <p>
+                  Since $ \omega_p $ is an integer multiple of $ d\omega $,
+                  this will cancel to zero when we integrate over time.
+                </p>
+                <p>Now can we use the formula to get $ \ \alpha (0) \ $ ?</p>
+                <wc-math class="Z">
+                  $$
+                    p_{dc} \exp (-j \omega_{dc} t) \ = \ p_{dc} \exp (0) \
+                    = \ p_{dc}  =  \alpha (0)
+                  $$
+                </wc-math>
+                <wc-split class="grid-c">
+                  <p>
+                    Then if we integrate from $ \ - \pi / d\omega \ $
+                    to $ \ + \pi / d\omega \ $ , the span is:
+                  </p>
+                  <wc-math class="Z">
+                    $$
+                      \frac{\pi \ - \ - \pi}{d\omega} \ = \ \frac{2 \pi}{d\omega}
+                    $$
+                  </wc-math>
+                </wc-split>
+                <p>So:</p>
+                <wc-split class="grid-b">
+                  <wc-math class="Z">
+                    $$
+                      \int\limits_{- \pi / d\omega}^{+ \pi / d\omega}
+                      \alpha (0) \cos \bigl( \omega_{dc} (t - t_0) \bigr)
+                      \frac{d\omega}{2 \pi} \exp (-j \omega_{dc} t) \
+                      = \ \frac{d\omega}{2 \pi} \alpha (0) \frac{2 \pi}{d\omega} \ = \ \alpha (0) \
+                      = \ X (\omega_{dc})
+                    $$
+                  </wc-math>
+                  <p>
+                    or
+                  </p>
+                  <wc-math class="Z">
+                    $$
+                      X (0)
+                    $$
+                  </wc-math>
+                </wc-split>
+                <p>
+                  If it's constant over time, we get the exact value,
+                  if not we get the average value over the window of temporal integration.
+                  <br/>
+                  Perfect: we can start the frequency integration at zero.
+                  <br/>
+                  The uncertainty about the DC partial is what prevented us
+                  from using a bilateral complex integral.
+                </p>
+                <p>
+                  Now, we just have to check what happens to negative-frequency partials
+                  once multiplied with our normalising sinusoid:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    \begin{align}
+                      & \alpha (\omega)
+                      \cos \bigl(
+                        \omega t  +  \varphi (\omega)
+                      \bigr)
+                      \exp (-j \omega_p t) \
+                      = \ \alpha (\omega)
+                      \frac
+                      {
+                        \exp \bigl(
+                          j \omega t  +  j \varphi (\omega)
+                        \bigr)
+                        +  \exp \bigl(
+                          -j \omega t  -  j \varphi (\omega)
+                        \bigr)
+                      }{2}
+                      \exp (-j \omega_p t)
+                      \\ \\
+                      & = \ \frac{\alpha (\omega)}{2}
+                      \exp \bigl(
+                        j \omega t + j \varphi (\omega) - j \omega_p t
+                      \bigr) \
+                      + \ \frac{\alpha (\omega)}{2}
+                      \exp \bigl(
+                        -j \omega t - j \varphi (\omega) - j \omega_p t
+                      \bigr)
+                      \\ \\
+                      & = \ \frac{\alpha (\omega)}{2} \exp \bigl( j \varphi (\omega) \bigr)
+                      \exp \bigl( j (\omega - \omega_p) t \bigr) \
+                      + \ \frac{\alpha (\omega)}{2} \exp \bigl( -j \varphi (\omega) \bigr)
+                      \exp \bigl( -j (\omega - \omega_p) t \bigr)
+                    \end{align}
+                  $$
+                </wc-math>
+                <p>
+                  The frequencies become:
+                  $ \ \omega - \omega_p \ $ and $ \ - \omega - \omega_p \ $.
+                </p>
+                <p>
+                  All these terms are integer multiples of $ d\omega $,
+                  so their partials will all cancel to zero once we integrate over time
+                  — except if $ \ \omega = \omega_p \ $ — then the negative frequency doubles
+                  (still integer multiple, alles gut); and the positive one becomes zero.
+                </p>
+                <p>Only $ \ X (\omega_p) \ $ is left.</p>
+                <wc-comment class="y">
+                  <p>
+                    Notice (or remember) that the negative-frequency part of cosine
+                    has an opposite phase
+                    — cosine is the sum of a complex conjugate pair.
+                    <br/>
+                    This explains why it's real:
+                  </p>
+                  <wc-math class="Z">
+                    $$
+                      z  +  \conj (z) \
+                      = \ \Re (z)  +  j  \Im (z)  +  \Re (z)  -  j \Im (z) \
+                      = \ 2 \Re (z)
+                    $$
+                  </wc-math>
+                  <p>
+                    So if we want to split our cosine and go bilateral,
+                    we need to address this matter.
+                  </p>
+                  <p>
+                    We'll need the
+                    <a
+                      title="Wikipedia.org | Sign function"
+                      target="_blank"
+                      type="text/html"
+                      charset="UTF-8"
+                      rel="external"
+                      href="https://en.wikipedia.org/wiki/Sign_function"
+                    >
+                      signum
+                    </a>
+                    (or sign or sgn) function:
+                  </p>
+                  <code class="y">
+<pre>
+    sign (x)  =  (x == 0.0)  ?  0  :  x / abs (x);
+</pre>
+                  </code>
+                  <p class="s">
+                    that is:&nbsp;
+                    zero if $ x $ is null, $ - 1 $ if it's negative,
+                    $ + 1 $ if it's positive
+                    <br/>
+                    (assuming $ x $ is real,
+                    otherwise it normalises its magnitude to 1
+                    and places it on the unit-circle).
+                  </p>
+                  <p>Then, since:</p>
+                  <wc-math class="Z">
+                    $$
+                      x \ \geq \ 0 \quad \iff \quad \ \lvert x \rvert \ = \ x
+                      \qquad \AND \qquad
+                      x \ \lt \ 0 \quad \iff \quad \lvert x \rvert \ = \ - x
+                    $$
+                  </wc-math>
+                  <p>if we substitute:</p>
+                  <wc-math class="Z">
+                    $$
+                      \varphi (\omega)
+                      \quad \longleftarrow \quad
+                      \varphi ( \lvert \omega \rvert ) \sgn (\omega)
+                    $$
+                  </wc-math>
+                  <p>we get:</p>
+                  <wc-math class="Z">
+                    $$
+                      \omega \ \gt \ 0 \quad \implies \quad j \omega t
+                      +  \varphi ( \lvert \omega \rvert ) \sgn (\omega) \
+                      = \ j \omega t  +  \varphi (\omega)
+                    $$
+                  </wc-math>
+                  <p>and:</p>
+                  <wc-math class="Z">
+                    $$
+                      \omega \ \lt \ 0 \quad \implies \quad j \omega t
+                      +  \varphi ( \lvert \omega \rvert ) \sgn (\omega) \
+                      = \ j \ t  -  \varphi (- \omega)
+                    $$
+                  </wc-math>
+                  <p>and:</p>
+                  <wc-math class="Z">
+                    $$
+                      \omega \ = \ 0 \quad \implies \quad j \omega t
+                      +  \varphi ( \lvert \omega \rvert ) \sgn (\omega) \
+                      = \ 0
+                    $$
+                  </wc-math>
+                  <p>
+                    Finally: $ \ \alpha (- \omega)  =  \alpha (\omega) \ $,
+                    so we can use $ \ \alpha ( \lvert \omega \rvert ) \ $
+                    for both the positive and negative component.
+                    <br/>
+                    Perfect.
+                  </p>
+                </wc-comment>
+                <p>Go.</p>
+                <wc-math class="Z">
+                  $$
+                    X (\omega_p) \
+                    = \ \int\limits_{- \pi / d\omega}^{+ \pi / d\omega}
+                    \left(
+                      \int\limits_{- \infty}^{+ \infty}
+                      \frac{\alpha ( \lvert \omega \rvert )}{2}
+                      \exp \bigl(
+                        \ j \varphi ( \lvert \omega \rvert ) \sgn (\omega)
+                      \bigr)
+                      \exp \bigl(
+                        \ j (\omega - \omega_p) t
+                      \bigr)
+                      \frac{d\omega}{2 \pi}
+                    \right)
+                    \ dt
+                  $$
+                </wc-math>
+                <p>
+                  Meet the
+                  <a
+                    title="Wikipedia.org | Fourier transform"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Fourier_transform"
+                  >
+                    Fourier transform
+                  </a>
+                  (not inverse this time).
+                </p>
+                <p>
+                  You probably won't encounter this way of expressing it elsewhere,
+                  but we've built it together: you know it's valid.
+                </p>
+                <p>(Shall I dare call it the Working-class Fourier transform?)</p>
+                <p>
+                  It doesn't have one single consensual expression
+                  because the division by $ 2 \pi $ (being a constant)
+                  can be placed anywhere.
+                </p>
+                <p>
+                  We've left it inside the inverse transform
+                  (&nbsp;$ f (t) \ $, everything inside parenthesis&nbsp;),
+                  that's one possibility;
+                  we'll leave it exactly that way
+                  to keep a trace of the original $ T_0 $ visible.
+                </p>
+                <p>
+                  It's often left with the inverse transform
+                  but moved outside of its integral.
+                </p>
+                <p>
+                  It can be transferred to the (not inverse) transform,
+                  or split in half:
+                </p>
+                <wc-split class="grid-c">
+                  <wc-math class="Z">
+                    $$
+                      \frac{1}{2 \pi} \
+                      = \ \frac{1}{\sqrt{2 \pi}} \cdot \frac{1}{\sqrt{2 \pi}}
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    <p>and equally shared by each transform (inverse and not inverse)</p>
+                  </wc-comment>
+                </wc-split>
+                <p class="s">for the sake of symmetry.</p>
+                <p>
+                  (I get the appeal:
+                  if your whole ecosystem is symmetrical,
+                  you only have to process half of it.
+                  <br/>
+                  Obsessing over palindromes can nourish art
+                  — ask Anton Webern; or even sociology — ask Guy Debord.)
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p class="s">
+                  Of course, no one bothers with absolute values
+                  and the $ \sgn $ function:
+                  the phase is quietly assumed automatically reversed.
+                </p>
+                <p>
+                  In fact, you rarely encounter both integrals together like this:
+                  $ \ X (\omega_p) \ $ integrates
+                  $ \ f (t) \exp (-j \omega_p t) \ $ over time,
+                  and $ \ f (t) \ $ integrates
+                  $ \ X (\omega_p) \ $ over frequency
+                  — $ \ \alpha (\omega) \ $ and $ \ \varphi (\omega) \ $
+                  being embedded in $ \ X (\omega_p) \ $.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  Finally, since $ \ \pi / d\omega \ $ tends to infinity
+                  when $ d\omega $ tends to zero
+                  (which it should, by definition of <cite>infinitesimal</cite>),
+                  the range of the temporal integration
+                  is classically simplified as
+                  $ \ [ \ - \infty \ , \ + \infty \ ] \ $
+                  — which gives a beautiful symmetry to the nested integrals,
+                  but erases the record of how we got there
+                  (by stretching the Fourier series).
+                  Plus, free usage of the differential as a regular number
+                  is highly non-conventional
+                  — that's where we diverge the most.
+                </p>
+              </wc-paragraph>
+
+            </section><!-- end #07 -->
+
+
+            <!-- Section #08 -->
+            <section id="08">
+              <!-- section title -->
+              <h3>08 — ἀρχαί</h3>
+
+              <wc-paragraph>
+                <p>Let's go full on first principles.</p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <h4>Change</h4>
+                <p class="n">
+                  Let $ \  f (x) \ $ be some function of some variable $ x $;
+                  and $ a $ and $ b $ be any values of $ x $
+                  (they can be equal if they will).
+                  <br/>
+                  Let's agree to stick to the largest set of numbers we need:
+                  complex numbers
+                  (which include real numbers, positive integers, etc.).
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  When $ x $ evolves from $ a $ to $ b $
+                  (I didn't write
+                  <mark>increase</mark>
+                  because it could very well be a decrease or a stagnation)
+                  — it goes from $ \ x = a \ $ to $ \ x = b \ $.
+                </p>
+                <p>
+                  Since:
+                  $ \quad b \ = \ b + a - a \ = \ a + (b - a) \ $,
+                  <br/>
+                  going from $ a $ to $ b $ is adding $ \ (b - a) \ $ to $ a $.
+                </p>
+                <p class="zz">
+                  Then $ \ (b - a) \ $
+                  is the change of $ x $ between $ a $ and $ b $.
+                  Let's call it $ dx $.
+                </p>
+                <p>Then:</p>
+                <wc-math class="Z s">
+                  $$
+                    b \ = \ a + dx
+                  $$
+                </wc-math>
+                <p>So: $ \quad f (b) \ = \ f (a + dx) $</p>
+                <p class="zz">
+                  Which means that, when $ x $ changes from $ a $ to $ b $,
+                  $ \ f (x) \ $ changes
+                  from $ \ f (a) \ $
+                  to $ \ f (b) \ = \ f (a + dx) \ $.
+                </p>
+                <p>
+                  The difference between
+                  $ \ f (b) \ $ and $ \ f (a) \ $
+                  is:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    f (b)  -  f (a) \ = \ f (a + dx)  -  f (a)
+                  $$
+                </wc-math>
+                <p>
+                  That's the change of $ \ f (x) \ $
+                  when $ x $ goes from $ a $ to $ b $.
+                  Let's call it $ df $.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p class="s">
+                  Since $ a $ and $ b $ can be anything,
+                  we could decide that: $ \quad a = x \ $.
+                </p>
+                <p>
+                  Then $ dx $ would express the change of $ x $
+                  from any value;
+                  <br/>
+                  and $ \ f (x + dx) - f (x) \ $
+                  would be the corresponding change of $ \ f (x) \ $.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <h4>Rate</h4>
+                <p class="n">
+                  The Latin verb
+                  <mark>reor, reri</mark>
+                  whose past participle is
+                  <mark>ratus, -a, -um</mark>,
+                  means
+                  <mark>to reckon, to compute, to think, to judge, ...</mark>
+                  — basically:
+                  <mark>to use a brain</mark>.
+                </p>
+                <p>
+                  It gave
+                  <mark>ratio</mark>:
+                  <mark>reason</mark>
+                  (sometimes loosely confused with
+                  <mark>cause</mark>),
+                  which passed to English and German with the meaning of
+                  <mark>arithmetical division</mark>.
+                  <br/>
+                  Reor (or rather its participle ratus, -a, -um)
+                  also gave
+                  <mark>rate</mark>
+                  which describes a proportional relationship between two things.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>
+                  E.g.:&nbsp;&nbsp;
+                  if there are 1,000,000 flat-earthers
+                  amongst 8,000,000,000 Earthers:
+                </p>
+                <wc-split class="grid-c">
+                  <wc-math class="Z">
+                    $$
+                      \frac{1,000,000}{8,000,000,000} \
+                      = \ \frac{1}{8,000} \
+                      = \ 1/8 \ \E -3 \
+                      = \ 0.125 \times 0.001 \
+                      = \ 0.000125
+                    $$
+                  </wc-math>
+                  <p>
+                    is the rate of flat-earthers.
+                  </p>
+                </wc-split>
+                <p>
+                  Times 100 gives you a percentage:
+                  $ \quad 0.0125 \ \% \ $.
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>Or, if you've walked 1 km in ten minutes:</p>
+                <wc-split class="grid-c">
+                  <wc-math class="Z">
+                    $$
+                      \frac{1,000}{600} \ = \
+                      \frac{10}{6} \ = \ 1 + 2/3 \ \metre / \second
+                    $$
+                  </wc-math>
+                  <p>
+                    is your average walking rate.
+                  </p>
+                </wc-split>
+                <p>
+                  (A frequency — cycles or radians per second
+                  — is therefore a rate.
+                  Just like any speed.)
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <h4>Rate of change</h4>
+                <p class="n">
+                  If we want to know how much $ \ f (x) \ $ changes
+                  in proportion of a corresponding change in $ x $,
+                  <br/>
+                  we'll get:
+                </p>
+                <wc-split>
+                  <wc-math class="Z">
+                    $$
+                      \frac{df}{dx} \ = \ 
+                      \frac{ f (x + dx) - f (x) }{dx}
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    The ratio of changes, commonly referred to as rate of change
+                    or first derivative.
+                  </wc-comment>
+                </wc-split>
+                <p class="n">
+                  Except that this formula implies that
+                  $ \ df / dx \ $ is constant:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    \frac{df}{dx} \ = \ k \ \ \iff \ \
+                    \frac{f (x + dx) - f (x)}{dx} \ = \ k \ \ \iff \ \ f (x + dx) \ = \
+                    k \cdot dx + f (x)
+                  $$
+                </wc-math>
+                <p>If we know the initial value:</p>
+                <wc-math class="Z">
+                  $$
+                    f (0) \ = \ c \ \ \implies \ \ f (0 + dx) \ = \ k \cdot dx + f (0) \ = \
+                    k \cdot dx + c
+                  $$
+                </wc-math>
+                <p class="n">
+                  Since $ dx $ can be anything,
+                  we've just found the generic expression of functions
+                  with a constant rate of change:
+                </p>
+                <wc-split class="grid-c">
+                  <wc-math class="Z">
+                    $$
+                      f (x) \ = \ k x + f (0)
+                    $$
+                  </wc-math>
+                  <p>
+                    where $ k $ is constant
+                    (notice that nothing prevents any one of the terms
+                    from being zero).
+                  </p>
+                </wc-split>
+                <p>
+                  These functions are called linear
+                  because they're the equations of straight lines.
+                </p>
+                <p class="zz">
+                  If $ k $ is non-zero, a linear function is called affine.
+                  Both terms are very frequently used interchangeably.
+                </p>
+                <p>
+                  Although, if $ k $ and $ c $ are null,
+                  $ \ f ( x ) \ = \ 0 \ $ is a straight line (the abscissa axis),
+                  yet the function is not affine per se.
+                  <br/>
+                  (We'll properly deal with this terminology when discussing polynomials in
+                  <a
+                    href="./05-poles_and_zeroes.html"
+                    target="_blank"
+                    rel="help"
+                    type="text/html"
+                    hreflang="en"
+                    charset="UTF-8"
+                    title="Don't worry: new tab by default."
+                  >
+                    Chapter <span class="small-caps">v</span>:
+                        <cite>Poles and zeroes</cite>
+                  </a>.)
+                </p>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <h4>Calculus</h4>
+                <p class="zz">
+                  The big idea of Calculus is to pick two points
+                  on a non-linear function,
+                  assume it's linear between these two points,
+                  repeat at fixed horizontal intervals to get an approximation;
+                  then reduce the interval as much as possible
+                  to get a more precise approximation;
+                  the ultimate limit being zero.
+                </p>
+                <p>
+                  But dividing by $ dx $ when $ dx $ equals zero won't help,
+                  so we explicitly express it as a limit.
+                </p>
+                <p class="y">
+                  (We're sticking to
+                  <a
+                    title="Wikipedia.org | Bernhard Riemann"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Bernhard_Riemann"
+                  >
+                    Riemann
+                  </a>
+                  <a
+                    title="Wikipedia.org | Riemann integral"
+                    target="_blank"
+                    type="text/html"
+                    charset="UTF-8"
+                    rel="external"
+                    href="https://en.wikipedia.org/wiki/Riemann_integral"
+                  >
+                    integrals
+                  </a>
+                  for now, so continuity is a requirement of integration until further notice
+                  — real numbers as well.)
+                </p>
+                <p>
+                  When I write
+                  <mark>assume it's linear between these two points</mark>,
+                  <mark>linear</mark>
+                  could have two meanings: constant or affine.
+                  <br/>
+                  Affine leads to trapezoidal integration
+                  (which will have to wait for
+                  <a
+                    href="./07-ones_and_zeroes.html"
+                    target="_blank"
+                    rel="help"
+                    type="text/html"
+                    hreflang="en"
+                    charset="UTF-8"
+                    title="Don't worry: new tab by default."
+                  >
+                    Chapter <span class="small-caps">vii</span>:
+                        <cite>Ones and zeroes</cite>
+                  </a>.)
+                  <br/>
+                  Constant means we build our functions with successive flat steps
+                  in a staircase fashion (which is the Leibnizian standard).
+                </p>
+                <p class="n">E.g.:</p>
+                <wc-math class="Z">
+                  $$
+                    f (x) \ = \ \frac{1}{x} \ \ \implies \ \
+                    \frac{df}{dx} \ = \ \lim_{dx \to 0}
+                    \frac{ \dfrac{1}{x + dx} - \dfrac{1}{x} }{ dx }
+                    \ = \ \lim_{dx \to 0}
+                    \frac{ \dfrac{x - x - dx}{x^2 + x \cdot dx} }{ dx }
+                    \ = \ \lim_{dx \to 0}
+                    \frac{ - \dfrac{dx}{dx} }{x^2 + x \cdot dx}
+                    \ = \ \lim_{dx \to 0}
+                    \frac{- 1}{x^2 + x \cdot dx}
+                  $$
+                </wc-math>
+                <p class="n S">
+                  As $ dx $ tends to zero, so does
+                  $ \ x \cdot dx \ $, so $ \ x^2 + x \cdot dx \ $
+                  tends to $ x^2 $,
+                  so: $ \quad df / dx \ = \ -1 / x^2 \ $.
+                  <br/>
+                  This rate of change is always negative
+                  (if $ x $ is real) so the function is always decaying.
+                </p>
+                <wc-comment>
+                  <p class="S">
+                    Look at that: the function is undefined at zero,
+                    its rate of change is symmetrical around it...
+                  </p>
+                  <p>
+                    If the curve is your referential
+                    (meaning you travel on it and see everything else moving) —
+                    you'll jump from minus infinity to plus infinity without noticing:
+                    your acceleration will remain smoothly continuous.
+                  </p>
+                  <p class="n S">
+                    (You may experience an infinitesimal blackout...
+                    but maybe it just happened, how would you know?)
+                  </p>
+                  <p class="s">
+                    As if real numbers were on a circumference where minus infinity
+                    and plus infinity were the same point.
+                  </p>
+                  <p>
+                    Pretty much like if you're
+                    on a moon of a moon of a moon of a moon
+                    of a planet of a star, and look at the sky,
+                    everything revolves around you —
+                    short-sighted frames of reference make the marvellous trivial.
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <p>Now what if:</p>
+                <wc-split class="S">
+                  <wc-math class="Z hybrid">
+                    $$
+                      X \ = \ \int\limits_{a}^{b}
+                      f (x) \ dx
+                      \quad \text{?}
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    <h5>4 cases:</h5>
+                    <ol>
+                      <li>
+                        $ a $ and $ b $ are constant:
+                        $ X $ is constant and its rate of change is null;
+                      </li>
+                      <li>
+                        $ a $ is constant, $ b $ is not:
+                        $ X $ is a function of $ b $ and should be written
+                        $ \ X (b) \ $;
+                      </li>
+                      <li>
+                        $ b $ is constant, $ a $ is not:
+                        $ X $ is a function of $ a $ and should be written
+                        $ \ X (a) \ $;
+                      </li>
+                      <li>
+                        $ a $ and $ b $ are varying:
+                        $ X $ is a function of both and should be written
+                        $ \ X (a , b) \ $.
+                      </li>
+                    </ol>
+                  </wc-comment>
+                </wc-split>
+                <p>
+                  Let's go with case
+                  <wc-popup>
+                    (2)
+                    <q class="actual-popup">
+                      $ a $ constant; $ b $ variable;
+                      $ \ X \ = \ X (b) \ $.
+                    </q>
+                  </wc-popup>:
+                </p>
+                <wc-math class="Z s">
+                  $$
+                    X (b) \ = \ \int\limits_{a}^{b}
+                    f (x) \ dx
+                    \quad \implies \quad
+                    \frac{dX}{db} \
+                    = \ \lim_{db \to 0}
+                    \pfrac{
+                      \displaystyle\int\limits_{a}^{a + db} f (x) \ dx \
+                      - \
+                      \displaystyle\int\limits_{a}^{b} f (x) \ dx
+                    }{
+                      db
+                    } \
+                    = \ \lim_{db \to 0} \left(
+                      \int\limits_{b}^{b + db} f (x) \ \dfrac{dx}{db} \
+                      + \ \int\limits_{a}^{b} f (x) \ \dfrac{dx}{db} \
+                      - \ \int\limits_{a}^{b} f (x) \ \dfrac{dx}{db}
+                    \right)
+                  $$
+                </wc-math>
+                <wc-split>
+                  <wc-math class="Z">
+                    $$
+                      \dfrac{dX}{db} \ = \lim_{db \to 0}
+                      \int\limits_{b}^{b + db}
+                      f (x) \ \dfrac{dx}{db}
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    <p class="S">I can think of three paths by which we can go from here.</p>
+                    <p>Let's try all three.</p>
+                  </wc-comment>
+                </wc-split>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <h4>First path (the Clean):</h4>
+                <p class="n">
+                  We're dividing the integral by:
+                  $ \ db \ = \ b + db - b \ =  \SPAN \ $.
+                  <br/>
+                  So we're computing the average
+                  of all the values between
+                  $ \ f (b) \ $ and $ \ f (b + db) \ $.
+                </p>
+                <p class="zz">
+                  As $ db $ tends to zero,
+                  $ \ b + db \ $ tends to  $ b $,
+                  and $ \ f (b + db) \ $ tends to $ \ f (b) \ $.
+                </p>
+                <p>
+                  So the limit case is the average value of a constant,
+                  ergo:
+                </p>
+                <wc-math class="Z">
+                  $$
+                    dX/db \ = \ f (b)
+                  $$
+                </wc-math>
+              </wc-paragraph>
+
+              <wc-paragraph>
+                <h4>Second path (the Unorthodox):</h4>
+                <wc-split>
+                  <wc-math class="Z">
+                    $$
+                      \dfrac{dX}{db} \ = \lim_{db \to 0}
+                      \int\limits_{b}^{b + db}
+                      f (x) \ \dfrac{dx}{db}
+                    $$
+                  </wc-math>
+                  <wc-comment>
+                    <h5>Induction time!</h5>
+                    <p>
+                      3 possibilities:
+                    </p>
+                    <ol>
+                      <li>$ db \lt dx $</li>
+                      <li>$ db \gt dx $</li>
+                      <li>$ db = dx $</li>
+                    </ol>
+                  </wc-comment>
+                </wc-split>
+                <p class="y">
+                  Possibility (1): $ \ db \lt dx $
+                  <br/>
+                  Then: $ \ b + dx \ \gt \ b + db \ $.
+                  <br/>
+                  The integral exceeds its prescribed range.
+                  Possibility (1) wasn't a possibility.
+                </p>
+                <p class="y">
+                  Possibility (2): $ \ db \gt dx $
+                  <br/>
+                  Then $ db $ could be smaller.
+                  <br/>
+                  The limit is not a limit.
+                  Possibility (2) wasn't a possibility.
+                </p>
+                <p class="y">
+                  Possibility (3): $ \ db = dx $
+                  Then: $ \ b + dx \ = \ b + db \ $.
+                  The integral has only one step:
+                </p>
+                <wc-math class="Z s">
+                  $$
+                    \dfrac{dX}{db} \ = \ \lim_{db \to 0}
+                    \int\limits{b}{b + db} f (x) \ \dfrac{dx}{db} \
+                    = \ \lim_{db \to 0 \\ db = dx}
+                    f (b + db) \ \dfrac{dx}{db} \
+                    = \ \lim_{db \to 0} f (b + db) \
+                    = \ f (b)
+                  $$
+                </wc-math>
+                <wc-comment>
+                  <p>
+                    Why this is unorthodox:
+                    seeking two limits at once
+                    could be thought of as equivalent to implying that:
+                    $ \  0/0 = 1 \ $.
+                  </p>
+                  <p>
+                    Which tends to hold for odd functions in Calculus,
+                    where limits and rates of change
+                    and limits of rates of change
+                    work around the aporia.
+                    <br/>
+                    (Take $ \ x/x \ $ or $ \ \sin (x) / \sin (x) \ $
+                    or whatever over the same whatever
+                    — the curve is 1 everywhere
+                    and undefined when
+                    <mark>whatever</mark>
+                    is zero.
+                    <br/>
+                    But since it's 1 before and after,
+                    the rate of change is zero everywhere,
+                    and as you tend to 0/0,
+                    no rate of change can make the ratio escape 1.
+                  </p>
+                  <p>
+                    This, though, relies on a rather bold petitio principii:
+                    constant rational functions
+                    have no domain discontinuity...
+                  </p>
+                  <p>A principle every one is free to reject or admit.</p>
+                  <p>
+                    Even functions, like $ \ x/x^2 \ $
+                    break this tendency
+                    — as well as some asymmetrical functions like
+                    $ \ \bigl( \exp (x) - 1 \bigr) / 4 x^2 \ $.)
+                  </p>
+                  <p>
+                    Whereas, in algebra, $ 0/0 $ is always multi-valued
+                    (and therefore undefined):
+                    $ \quad x \cdot 0 \ = \ 0 \quad \iff \quad 0 / 0 \ = \ x $
+                    i.e. literally anything
+                    — pretty similarly to infinity.
+                  </p>
+                </wc-comment>
+              </wc-paragraph>
+
+              [...]
+
+            </section><!-- end #08 -->
+
+
+            <!-- = Section #09 = -->
+            <section id="09">
+              <!-- top quote -->
+              <header>
+                <blockquote>
+                  <q>Does this guy know how to party or what?</q>
+                  <footer>— Mike Myers (<cite>Wayne's World</cite>)</footer>
+                </blockquote>
+              </header>
+              <!-- section title -->
+              <h3>09 — Swiß connection</h3>
+
+              <wc-paragraph>
+                <span class="small-caps">Original in progress.</span>
+              </wc-paragraph>
+
+            </section><!-- end #09 -->
+
+
+            <!-- = Section #10 = -->
+            <section id="10">
+              <!-- section title -->
+              <h3>10 — Cardinal sine</h3>
+
+              <wc-paragraph>
+                <span class="small-caps">Original n progress.</span>
+              </wc-paragraph>
+
+            </section><!-- end #10 -->
+
+
+            <!-- = APPENDIX = -->
+            <section id="APPENDIX">
+              <!-- top quote -->
+              <header>
+                <blockquote>
+                  <q>Speak in secret alphabets.</q>
+                  <footer>— Jim Morrison (<cite>Soul Kitchen</cite>)</footer>
+                </blockquote>
+              </header>
+              <!-- section title -->
+              <h3><span class="small-caps">Appendix</span> —
+                <a
+                  title="Wikipedia.org | Greek alphabet"
+                  target="_blank"
+                  type="text/html"
+                  charset="UTF-8"
+                  rel="external"
+                  href="https://en.wikipedia.org/wiki/Greek_alphabet"
+                >
+                  Greek alphabet
+                </a>
+              </h3>
+
+              <wc-paragraph>
+                <div class="greek">
+                  <table>
+                    <tr>
+                      <th><h5>upper<br/>case</h5></th>
+                      <th><h5>lower<br/>case</h5></th>
+                      <th><h5>name<br/>(Latin alphabet)</h5></th>
+                      <th><h5>name<br/>(Greek alphabet)</h5></th>
+                    </tr>
+                    <tr>
+                      <td>Α</td>
+                      <td>α</td>
+                      <td>alpha</td>
+                      <td>άλφα</td>
+                    </tr>
+                    <tr>
+                      <td>Β</td>
+                      <td>β</td>
+                      <td>beta</td>
+                      <td>βήτα</td>
+                    </tr>
+                    <tr>
+                      <td>Γ</td>
+                      <td>γ</td>
+                      <td>gamma</td>
+                      <td>γάμμα</td>
+                    </tr>
+                    <tr>
+                      <td>Δ</td>
+                      <td>δ</td>
+                      <td>delta</td>
+                      <td>δέλτα</td>
+                    </tr>
+                    <tr>
+                      <td>Ε</td>
+                      <td>ε</td>
+                      <td>epsilon</td>
+                      <td>έψιλον</td>
+                    </tr>
+                    <tr>
+                      <td>Ζ</td>
+                      <td>ζ</td>
+                      <td>zeta</td>
+                      <td>ζήτα</td>
+                    </tr>
+                    <tr>
+                      <td>Η</td>
+                      <td>η</td>
+                      <td>eta</td>
+                      <td>ήτα</td>
+                    </tr>
+                    <tr>
+                      <td>Θ</td>
+                      <td>
+                        <wc-popup>
+                          θ
+                          <q class="actual-popup">
+                            looks like zero,
+                            <br/>
+                            beware of context
+                          </q>
+                        </wc-popup>
+                      </td>
+                      <td>theta</td>
+                      <td>θήτα</td>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Ι</td>
+                      <td>ι</td>
+                      <td>iota</td>
+                      <td>ιώτα</td>
+                    </tr>
+                    <tr>
+                      <td>Κ</td>
+                      <td>κ</td>
+                      <td>kappa</td>
+                      <td>κάππα</td>
+                    </tr>
+                    <tr>
+                      <td>Λ</td>
+                      <td>λ</td>
+                      <td>lambda</td>
+                      <td>λάμβδα</td>
+                    </tr>
+                    <tr>
+                      <td>Μ</td>
+                      <td>μ</td>
+                      <td>mu</td>
+                      <td>μυ</td>
+                    </tr>
+                    <tr>
+                      <td>Ν</td>
+                      <td>ν</td>
+                      <td>nu</td>
+                      <td>νυ</td>
+                    </tr>
+                    <tr>
+                      <td>Ξ</td>
+                      <td>ξ</td>
+                      <td>xi</td>
+                      <td>ξι</td>
+                    </tr>
+                    <tr>
+                      <td>Ο</td>
+                      <td>ο</td>
+                      <td>omicron</td>
+                      <td>όμικρον</td>
+                    </tr>
+                    <tr>
+                      <td>Π</td>
+                      <td>π</td>
+                      <td>pi</td>
+                      <td>πι</td>
+                    </tr>
+                    <tr>
+                      <td>Ρ</td>
+                      <td>ρ</td>
+                      <td>rho</td>
+                      <td>ρο</td>
+                    </tr>
+                    <tr>
+                      <td>Σ</td>
+                      <td>
+                        <wc-popup>
+                          σ
+                          <q class="actual-popup">
+                            alternative (lower case):
+                            <br/>
+                            ς
+                          </q>
+                        </wc-popup>
+                      </td>
+                      <td>sigma</td>
+                      <td>σίγμα</td>
+                    </tr>
+                    <tr>
+                      <td>Τ</td>
+                      <td>τ</td>
+                      <td>tau</td>
+                      <td>ταυ</td>
+                    </tr>
+                    <tr>
+                      <td>Υ</td>
+                      <td>υ</td>
+                      <td>upsilon</td>
+                      <td>ύψιλον</td>
+                    </tr>
+                    <tr>
+                      <td>Φ</td>
+                      <td>φ</td>
+                      <td>phi</td>
+                      <td>φι</td>
+                    </tr>
+                    <tr>
+                      <td>Χ</td>
+                      <td>χ</td>
+                      <td>chi</td>
+                      <td>χι</td>
+                    </tr>
+                    <tr>
+                      <td>Ψ</td>
+                      <td>ψ</td>
+                      <td>psi</td>
+                      <td>ψι</td>
+                    </tr>
+                    <tr>
+                      <td>Ω</td>
+                      <td>ω</td>
+                      <td>omega</td>
+                      <td>ωμέγα</td>
+                    </tr>
+                  </table>
+                </div><!-- end Greek -->
+              </wc-paragraph>
+
+            </section><!-- end APPENDIX -->
+
+
+            <!-- = BONUS = -->
+            <section id="BONUS">
+              <!-- section title -->
+              <h3>
+                <span class="small-caps">Bonus</span> — Complex arithmetic
+              </h3>
+
+              <wc-paragraph>
+                <p>Let $ z_1 $ and $ z_2 $ be complex numbers such that:</p>
+                <wc-math class="Z">
+                  $$
+                    z_1 \ = \ a + j b
+                    \\
+                    z_2 \ = \ c + j d
+                  $$
+                </wc-math>
+                or:
+                <wc-split class="grid-c">
+                  <wc-math class="Z">
+                    $$
+                      z_1 \ = \ \lvert z_1 \rvert \bigl( \cos ( \theta_1 ) + j \sin ( \theta_1 ) \bigr)
+                    $$
+                  </wc-math>
+                  <div>
+                    <p>with $ \ \theta_1 \ = \ \arg ( z_1 ) \ $</p>
+                  </div>
+                  <wc-comment>
+                    <p>θ ("theta"), not 0 ("zero")...</p>
+                  </wc-comment>
+                </wc-split>
+                <wc-split class="grid-c">
+                  <wc-math class="Z">
+                    $$
+                      z_2 \ = \ \lvert z_2 \rvert \bigl( \cos ( \theta_2 ) + j \sin ( \theta_2 ) \bigr)
+                    $$
+                  </wc-math>
+                  <p>
+                    with $ \ \theta_2 \ = \ \arg ( z_2 ) \ $
+                  </p>
+                  <wc-comment>
+                    <p>(idem)</p>
+                  </wc-comment>
+                </wc-split>
+                <h4>Product & ratio</h4>
+                <wc-math class="Z">
+                  $$
+                    \begin{align}
+                      z_1 \cdot z_2 \ =& \ (a + j b) \cdot (c + j d) \ = \ ac + j a d + j b c + j^2 b d
+                      \ = \ (a c - b d) + j (a d + b c)
+                      \\ \\
+                      \lvert z_1 \cdot z_2 \rvert \ =& \ \sqrt{ (a c - b d)^2 + (a d + b c)^2 } \ = \
+                      \sqrt{ a^2 c^2 - 2 a b c d + b^2 d^2 + a^2 d^2 + 2 a b c d + b^2 c^2 }
+                      \\
+                      =& \ \sqrt{ a^2 c^2 + b^2 d^2 + a^2 d^2 + b^2 c^2 }
+                      \\ \\
+                      \lvert z_1 \rvert \cdot | z_2 | \ =& \ \sqrt{ a^2 + b2 } \cdot \sqrt{ c^2 + d^2 } \ = \
+                      \sqrt{ (a^2 + b^2) \cdot (c^2 + d^2) } \ = \
+                      \sqrt{ a^2 c^2 + a^2 d^2 + b^2 + d^2 }
+                    \end{align}
+                  $$
+                </wc-math>
+                <wc-nested-p>
+                  <wc-split class="grid-b">
+                    <p>
+                      ergo:
+                    </p>
+                    <wc-math class="Z">
+                      $$
+                        \lvert z_1 \cdot z_2 \rvert \ = \ \lvert z_1 \rvert \cdot \lvert z_2 \rvert
+                      $$
+                    </wc-math>
+                  </wc-split>
+                  If $ \ {z_1 = z_2} \ $ then $ \ {z_1 \cdot z_2 \ = \ z_1^2} \ $
+                  then $ \ {\lvert z_1^2 \rvert \ = \ \lvert z_1 \rvert^2} \ $.
+                  <br/>
+                  Now let's assume there is one integer $ k $ such that:
+                  $ \ \ {\lvert z^k \rvert \ = \ \lvert z \rvert^k} $
+                  <br/>
+                  Then: $ \ \
+                  { \lvert z^{k+1} \rvert \ = \ \lvert z^k \cdot z \rvert }
+                  \ = \
+                  { \lvert z^k \rvert \cdot \lvert z \rvert}
+                  \ = \
+                  { \lvert z \rvert^k \cdot \lvert z \rvert }
+                  \ = \
+                  { \lvert z \rvert^{k+1} } $
+                  <br/>
+                  The hypothesis that makes $ k $ possible is satisfied by the number 2.
+                  <br/>
+                  So for every integer $ \ {n \geq 2} \ \ \longrightarrow \ \
+                  { \lvert z^n \rvert \ = \ \lvert z \rvert^n } $
+                  <br/>
+                  The case $ \ {n = 1} \ $ leads to a tautology $( {A = A} )$.
+                  Whereas $ \ {n = 0} \ $ leads to a tautology $( {1 = 1} )$.
+                  $$
+                    \left| \frac{1}{z} \right|
+                  $$
+                </wc-nested-p>
+              </wc-paragraph>
+
+            </section><!-- end BONUS -->
+
+
+          </wc-chapter>
+
+
+          <footer>
+            &COPY; &nbsp; No, thanks.
+          </footer>
+
+
+        </main>
+
+
+      </wc-cosmic-wrap>
+
+
+    </body>
+
+
+</html>

@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html>
+
+
+    <head>
+        <title>Working-class filter design | TEMPLATE</title>
+        <meta charset='UTF-8'/>
+        <meta name="viewport" content='width=device-width, initial-scale=1'/>
+        <meta name='author' content='Antoine Portes'/>
+        <link rel="canonical" href="https://www.antoineportes.com/working-class_filter_design/">
+        <!-- Style -->
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauInfant[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauInfant-Italic[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauSC[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Unifont/unifont-17.0.05.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+        <link rel='stylesheet'  type='text/css'  href='../assets/css/main.css'/>
+        <!-- Manifest -->
+        <link rel="manifest" href="../site.webmanifest">
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+        <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+        <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png">
+        <!-- ======== SCRIPTS ======== -->
+        <!-- #### Layout #### -->
+        <script
+          defer
+          src="../assets/javascript/layout.js"
+        >
+        </script>
+        <!-- #### MathJax #### -->
+        <script
+          async
+          src="../assets/javascript/mathjax/config.js"
+        >
+        </script>
+    </head>
+
+
+
+    <body>
+
+
+      <nav>
+
+        <a
+          title="Home"
+          target="_self"
+          type="text/html"
+          charset="UTF-8"
+          rel="home"
+          href="../"
+        >
+          <h1>
+            Working-class filter design
+          </h1>
+        </a>
+
+        <div class="dropdown">
+          <button
+            onclick="toggleDropdown(event)"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <svg
+              viewBox="0 0 120 120"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,20 h 80"
+                />
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,60 h 80"
+                />
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,100 h 80"
+                />
+              </g>
+            </svg>
+            chapters
+          </button>
+          <menu>
+            <!-- I. Analytic saignals -->
+            <li>
+              <a
+                href="./01-analytic-signals.html"
+                rel="prev"
+              >
+                Chapter <span class="small-caps">i</span>: Analytic signals
+              </a>
+            </li>
+            <!-- II. RC -->
+            <li>
+              <a
+                href="./02-rc.html"
+                rel="prev"
+              >
+                Chapter <span class="small-caps">ii</span>: $ RC $
+              </a>
+            </li>
+            <!-- III. = I + II -->
+            <li>
+              <a
+                href="./03-equals-one-plus-two.html"
+                rel="prev"
+              >
+                Chapter <span class="small-caps">iii</span>:
+                $ \ = \ $ <span class="small-caps">i</span>
+                $ + $ <span class="small-caps">ii</span>
+              </a>
+            </li>
+            <!-- IV. Jargon -->
+            <li>
+              <a
+                href="./04-jargon.html"
+                rel="prev"
+              >
+                Chapter <span class="small-caps">iv</span>: Jargon
+              </a>
+            </li>
+            <!-- V. Poles and zeroes -->
+            <li>
+              <a
+                href="./05-poles-and-zeroes"
+                rel="prev"
+              >
+                Chapter <span class="small-caps">v</span>: Poles and zeroes
+              </a>
+            </li>
+            <!-- VI. More jargon -->
+            <li>
+              <a
+                href="./06-more-jargon.html"
+                rel="prev"
+              >
+                Chapter <span class="small-caps">vi</span>: More jargon
+              </a>
+            </li>
+            <!-- VII. Ones and zeroes -->
+            <li>
+              <a
+                href="#top"
+                class="current"
+              >
+                Chapter <span class="small-caps">vii</span>: Ones and zeroes
+              </a>
+            </li>
+            <!-- Stephen Butterworth -->
+            <li>
+              <a
+                href="./08-stephen-butterworth.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">viii</span>: Stephen Butterworth
+              </a>
+            </li>
+          </menu>
+        </div>
+
+        <button class="gitHub">
+          <a
+            href="https://github.com/antoineportes/Working-class-filter-design"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="original (GitHub repository)"
+            title="original (GitHub repository)"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 512 512"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g transform="scale(4)">
+                <path
+                  class="octoCat"
+                  d="M 82.374999,128 C 90.249999,128 120,97.285025 120,70.18496 120,35.946913 94.843771,8.0000003 63.890627,8 32.937485,7.9999997 8.0000002,35.946913 8,70.18496 7.9999998,97.043069 37.75,128 45.625,128 Z"
+                />
+                <path
+                  d="M 54.125061,93.559792 C 37.624947,91.494958 25.999934,79.235401 25.999934,63.362485 c 0,-6.452321 2.250058,-13.420951 6.000066,-18.066659 -1.624947,-4.258577 -1.374955,-13.291907 0.499984,-17.034309 4.999967,-0.645219 11.750008,2.064699 15.750008,5.807102 4.749975,-1.548525 9.749942,-2.322787 15.875005,-2.322787 6.125061,0 11.125028,0.774262 15.625011,2.193743 3.875004,-3.613359 10.750041,-6.323277 15.750008,-5.678058 1.749943,3.484315 1.999935,12.517644 0.374987,16.905265 4,4.903796 6.124927,11.485295 6.124927,18.195703 0,15.872916 -11.624877,27.874385 -28.374983,30.068263 4.249992,2.838962 7.125028,9.033332 7.125028,16.131002 v 13.42095 c 0,3.87145 3.125028,6.06519 6.875037,4.51667 C 110.25006,118.59508 128,95.23736 128,66.330625 128,29.810041 99.250025,3.2178539e-7 63.875003,0 28.499984,-3.2178539e-7 2.6122451e-7,29.810041 0,66.330625 -2.4816324e-7,94.979273 17.624947,118.72412 41.374955,127.62841 44.749975,128.91885 48,126.59606 48,123.11175 v -10.32391 c -1.749942,0.7744 -4,1.29058 -6.000066,1.29058 -8.249992,0 -13.124962,-4.64571 -16.624979,-13.29205 C 24,97.302194 22.500049,95.23736 19.625012,94.850229 c -1.499951,-0.129044 -2.000065,-0.774262 -2.000065,-1.548524 0,-1.54866 2.50005,-2.710053 5.000098,-2.710053 3.625013,0 6.74991,2.322921 9.999935,7.097674 2.500048,3.742404 5.124962,5.419974 8.249992,5.419974 3.125028,0 5.124962,-1.1614 8,-4.129537 2.125061,-2.193878 3.750008,-4.129534 5.250089,-5.419971 z"
+                />
+              </g>
+            </svg>
+          </a>
+        </button>
+
+      </nav>
+
+
+
+      <!--  ======  ..C..O..S..M..I..C.. ..W..R..A..P..  ======  -->
+      <div class="cosmic-wrap">
+
+
+        <!-- ==== .L.E.F.T. .P.A.N.E.L. ==== -->
+        <aside>
+          <!-- Side-bar header -->
+          <header>
+            <!-- chapter title -->
+            <h2><u>Chapter VII</u><br/>Ones and zeroes</h2>
+            <!-- arrow -->
+            <button onclick="toggleSidebar()">
+              <span>&xlarr;</span>
+            </button>
+          </header>
+          <!-- Sections list -->
+          <nav>
+            <ul>
+              <!-- top -->
+              <li>
+                <a href="#top">
+                  &uparrow; (Top)
+                </a>
+              </li>
+              <!-- #01 Machina ex deus -->
+              <li>
+                <a
+                  href="#01"
+                  data-target="01"
+                  title="Machina ex deus"
+                >
+                  01 — Machina ex deus
+                </a>
+              </li>
+              <!-- #02 Inphamous time -->
+              <li>
+                <a
+                  href="#02"
+                  data-target="02"
+                  title="Inphamous time"
+                >
+                  02 — Inphamous time
+                </a>
+              </li>
+              <!-- #03 Half-life-->
+              <li>
+                <a
+                  href="#03"
+                  data-target="03"
+                  title="Half-life"
+                >
+                  03 — Half-life
+                </a>
+              </li>
+              <!-- #04 Yet another integral transform -->
+              <li>
+                <a
+                  href="#04"
+                  data-target="04"
+                  title="Yet another integral transform"
+                >
+                  04 — Yet another integral transform
+                </a>
+              </li>
+              <!-- #05 One pill makes you larger -->
+              <li>
+                <a
+                  href="#05"
+                  data-target="05"
+                  title="One pill makes you larger"
+                >
+                  05 — One pill makes you larger
+                </a>
+              </li>
+              <!-- #06 But wait! That's a problem... -->
+              <li>
+                <a
+                  href="#06"
+                  data-target="06"
+                  title="But wait! That's a problem..."
+                >
+                  06 — But wait! That's a problem...
+                </a>
+              </li>
+              <!-- #07 Method 1: Trapezoidal differentiation -->
+              <li>
+                <a
+                  href="#07"
+                  data-target="07"
+                  title="Method 1: Trapezoidal differentiation"
+                >
+                  07 — Method 1: Trapezoidal differentiation
+                </a>
+              </li>
+              <!-- #08 Method 2: Trapezoidal integration -->
+              <li>
+                <a
+                  href="#08"
+                  data-target="08"
+                  title="Method 2: Trapezoidal integration"
+                >
+                  08 — Method 2: Trapezoidal integration
+                </a>
+              </li>
+              <!-- #09 Is the bilinear transform stable? -->
+              <li>
+                <a
+                  href="#09"
+                  data-target="09"
+                  title="Is the bilinear transform stable?"
+                >
+                  09 — Is the bilinear transform stable?
+                </a>
+              </li>
+              <!-- #10  Generalisation: Method 1 + Transposed Direct Form II (TDF2) -->
+              <li>
+                <a
+                  href="#10"
+                  data-target="10"
+                  title=" Generalisation: Method 1 + Transposed Direct Form II (TDF2)"
+                >
+                  10 —  Generalisation: Method 1 + Transposed Direct Form II (TDF2)
+                </a>
+              </li>
+              <!-- #11 Alternative pre-warping -->
+              <li>
+                <a
+                  href="#11"
+                  data-target="11"
+                  title="Alternative pre-warping"
+                >
+                  11 — Alternative pre-warping
+                </a>
+              </li>
+              <!-- #12 Direct Form II, Direct Form I & Transposed Direct Form I -->
+              <li>
+                <a
+                  href="#12"
+                  data-target="12"
+                  title="Direct Form II, Direct Form I & Transposed Direct Form I"
+                >
+                  12 — Direct Form II, Direct Form I & Transposed Direct Form I
+                </a>
+              </li>
+              <!-- #13  All shall pass -->
+              <li>
+                <a
+                  href="#13"
+                  data-target="13"
+                  title=" All shall pass"
+                >
+                  13 —  All shall pass
+                </a>
+              </li>
+              <!-- APPENDIX: 1-pole RBJ -->
+              <li>
+                <a
+                  href="#APPENDIX"
+                  data-target="APPENDIX"
+                  title="1-pole RBJ"
+                >
+                  <span class="small-caps">Appendix:</span> 1-pole RBJ
+                </a>
+              </li>
+              <!-- BONUS: 1 + 1 = 1 -->
+              <li>
+                <a
+                  href="#BONUS"
+                  data-target="BONUS"
+                  title="1 + 1 = 1"
+                >
+                  <span class="small-caps">Appendix:</span> &nbsp; $ 1 + 1 \ = \ 1 $
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="handle"></div>
+        </aside>
+
+
+        <!-- ==== .M.A.I.N. .W.I.N.D.O.W. ==== -->
+        <main>
+
+
+          <!-- == CHAPTER == -->
+          <div class="chapter" id="top">
+            <!-- = Chapter title = -->
+            <h2><u>Chapter VII</u>: Ones and zeroes</h2>
+
+
+            <!-- = Section #01 = -->
+            <section id="01">
+              <!-- top quote -->
+              <header>
+                <blockquote>
+                  No 9000 computer has ever made a mistake or distorted information.
+                </blockquote>
+                <footer>— HAL 9000 (<cite>2001: A Space Odyssey</cite>)</footer>
+              </header>
+              <!-- section title -->
+              <h3>01 — Machina ex deus</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #01 -->
+
+
+            <!-- = Section #02 = -->
+            <section id="02">
+              <!-- top quote -->
+              <header>
+                <blockquote>
+                  Purple phaze all around,
+                  <br/>
+                  don't know if I'm coming up or down.
+                </blockquote>
+                <footer>— Jimi Phendrix (<cite>multiverse 42-zeta-027</cite>)</footer>
+              </header>
+              <!-- section title -->
+              <h3>02 — Inphamous time</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #02 -->
+
+
+            <!-- section #03 -->
+            <section id="03">
+              <!-- section title -->
+              <h3>03 — Half-life</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #03 -->
+
+
+            <!-- section #04 -->
+            <section id="04">
+              <!-- section title -->
+              <h3>04 — Yet another integral transform</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #04 -->
+
+
+            <!-- section #05 -->
+            <section id="05">
+              <!-- section title -->
+              <h3>05 — One pill makes you larger</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #05 -->
+
+
+            <!-- section #06 -->
+            <section id="06">
+              <!-- section title -->
+              <h3>06 — But wait! That's a problem...</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #06 -->
+
+
+            <!-- section #07 -->
+            <section id="07">
+              <!-- section title -->
+              <h3>07 — Method 1: Trapezoidal differentiation</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #07 -->
+
+
+            <!-- section #08 -->
+            <section id="08">
+              <!-- section title -->
+              <h3>08 — Method 2: Trapezoidal integration</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #08 -->
+
+
+            <!-- section #09 -->
+            <section id="09">
+              <!-- section title -->
+              <h3>09 — Is the bilinear transform stable?</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #09 -->
+
+
+            <!-- section #10 -->
+            <section id="10">
+              <!-- section title -->
+              <h3>10 — Generalisation: Method 1 + Transposed Direct Form II (TDF2)</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #10 -->
+
+
+            <!-- section #11 -->
+            <section id="11">
+              <!-- top quote -->
+              <header>
+                <blockquote>
+                  Not all cookbooks are anarchist.
+                  <br/>
+                  Not all anarchists are cookbook.
+                </blockquote>
+                <footer>— Anonymous graffiti (<cite>some public toilets</cite>)</footer>
+              </header>
+              <!-- section title -->
+              <h3>11 — Alternative pre-warping</h3>
+
+              <div role="paragraph">
+                <u>Disclaimer</u>: I didn't come up with the following idea.
+                <br/>
+                It's Robert Bristow-Johnson's technique
+                — and it's exposed at the end of his famous
+                <a
+                  href="https://www.musicdsp.org/en/latest/_downloads/3e1dc886e7849251d6747b194d482272/Audio-EQ-Cookbook.txt"
+                  target="_blank"
+                  rel="external"
+                  type="text/html"
+                  hreflang="en"
+                  charset="UTF-8"
+                  title="Musicdsp.org | Audio-EQ-Cookbook.txt"
+                >
+                  cookbook</a>.
+                  <br/>
+                  That is: <b>after</b> the copy/paste-ready closed formulae,
+                  RBJ shows us where they come from: not black magic,
+                  only Calculus and trigonometry
+                  — ok, maybe that's what <cite>black magic</cite> refers to.
+                  <br/>
+                  This means: his cookbook didn't have to be one
+                  — had people read it in full.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                (As you can see, I didn't come up with the
+                <span class="eq-popup-trig">
+                  pseudo-code monospace aesthetic
+                  <span class="eq-popup-actual">
+                    (... GitHub's the original
+                    <br/>
+                    — you're reading the derivative...)
+                  </span>
+                </span>
+                either — <cite>opposite of a cookbook</cite>...
+                more like <cite>Through the Looking-Glass</cite>.)
+                <br/>
+                $ \bigl( $(<span class="eq-popup-trig">
+                  Monospace block diagrams
+                  <span class="eq-popup-actual">
+                    Is this field mandatory?
+                  </span>
+                </span>
+                are 100% Working-class block diagrams though.)$ \bigr) $
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Robert injects BLT into the transfer function in unit-cutoff normalisation.
+                <br/>
+                So the substitution is not operated on $ s $,
+                but rather on $ \ s' \ = \ s / \omega_c \ $.
+                <br/>
+                For it to work properly, we need $ s $ and $ \omega_c $ to be commensurable.
+                <br/>
+                We need to rescale
+                $ \ 0 \ \lt \ {\omega_c T} \ \lt \ \Nyquist \ $ as
+                $ \ 0 \ \lt \ \omega_c \ \lt \ + \infty \ $.
+                <br/>
+                So:
+                <div class="math-block-wrap">
+                  $$
+                    \lim_{\omega_c \ \to \ \pi / T}
+                    \ \longleftarrow \
+                    \lim_{\omega_c \ \to \ + \infty}
+                  $$
+                </div>
+                <div class="split pseudo-grid">
+                  <div>
+                    We've already found the formula
+                    (<a
+                      href="#05"
+                      target="_self"
+                      rel="help"
+                      type="text/html"
+                      hreflang="en"
+                      charset="UTF-8"
+                      title="05 — One pill makes you larger"
+                    >#05</a>
+                    and
+                    (<a
+                      href="#06"
+                      target="_self"
+                      rel="help"
+                      type="text/html"
+                      hreflang="en"
+                      charset="UTF-8"
+                      title="06 — But wait! That's a problem..."
+                    >#06</a>):
+                  </div>
+                  <div class="math-split-wrap">
+                    $$
+                      \omega_c \ \longleftarrow \
+                      2 \tan ( \omega_c T / 2 ) / T
+                    $$
+                  </div>
+                </div><!-- end split -->
+                In case you're reading RBJ's cookbook in parallel
+                and wonder why there is no $ T $ in his formula:
+                <br/>
+                we're using $ \omega_c $,
+                he's using <span class="ASCII">w0</span>
+                — which is defined around the beginning
+                (<span class="ASCII">Then compute a few intermediate variables</span>),
+                as:
+                <span class="ASCII nowrap"> w0 = 2*pi*f0/Fs </span>
+                which here corresponds to:
+                <div class="split pseudo-grid">
+                  <div class="math-split-wrap">
+                    $$
+                      2 \pi \f_c / \fs \ = \ \omega_c / \fs \ = \ \omega_c T
+                    $$
+                  </div>
+                  <div>
+                    then <span class="ASCII nowrap"> w0/2 </span>
+                    corresponds to:
+                  </div>
+                  <div class="math-split-wrap">
+                    $$
+                      \omega_c T/2
+                    $$
+                  </div>
+                  <div>
+                    alles gut.
+                  </div>
+                </div><!--  end split -->
+                The substitution:
+                <div class="math-block-wrap">
+                  $$
+                    s' \quad \longleftarrow \quad
+                    \pfrac{
+                      \dfrac{2}{T}
+                      \cdot
+                      \dfrac{1 - z^{-1}}{1 + z^{-1}}
+                      \rule[-2.5ex]{0pt}{0pt}
+                    }{
+                      \rule[4ex]{0pt}{0pt}
+                      \dfrac{2}{T} \tan (\omega_c T/2)
+                    } \ = \
+                    \frac{1}{\tan (\omega_c T/2)}
+                    \cdot
+                    \frac{1 - z^{-1}}{1 + z^{-1}}
+                  $$
+                </div>
+                Ok, clean.
+                Except the function $ \ \tan (x) \ $ tends to infinity
+                when $ x $ tends to $ \pi / 2 $,
+                <br/>
+                so $ \ 1 / \tan (\omega_c T/2) \ $ will give very bad approximations
+                when the frequency tends to $ \Nyquist $.
+                <br/>
+                Luckily there are legions of trigonometric identities.
+                So we can likely re-express $ \ 1 / \tan (x/2) \ $
+                in terms of cosine and sine.
+                <br/>
+                Except...
+                <div class="split pseudo-grid">
+                  <div class="math-split-wrap">
+                    $$
+                      \tan (x) \ = \ \pfrac{\sin (x)}{\cos (x)}
+                    $$
+                  </div>
+                  <div>
+                    so
+                  </div>
+                  <div class="math-split-wrap">
+                    $$
+                      \frac{1}{\tan (x)} \ = \ \frac{\cos (x)}{\sin (x)}
+                    $$
+                  </div>
+                </div><!-- end split -->
+                and $ \ \sin (x) \ = \ 0 \ $ means also very bad approximations
+                when the frequency tends to DC.
+                <br/>
+                So the ideal solution should only rely on cosine.
+                <br/>
+                Easy: $ \ \sin (x) \ = \ \cos (x - \pi / 2) \ $ ...&nbsp;
+                which doesn't fix the DC issue.
+                <br/>
+                Looking back at RBJ's solution, he didn't bother with the sine issue.
+                <br/>
+                I guess when people accuse traditional BLT of quantisation noise at DC,
+                they do in fact know their shit...
+                <br/>
+                Or at least they trust people who do.
+                <br/>
+                <span class="small-caps"><u>Edit</u></span>:&nbsp;
+                As we're about to find out, it's more complicated than that
+                (spoiler: denominators can cancel out...).
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Never mind.
+                <div class="math-block-wrap">
+                  $$
+                    \frac{1}{\tan (x/2)} \ = \ \frac{\cos (x/2)}{\sin (x/2)}
+                  $$
+                </div>
+                Euler to the rescue.
+                <br/>
+                Let's define $ \ \xi = x/2 \ \iff \ x = 2 \xi \ $.
+                <br/>
+                Let's be bold and try solving both equations at once,
+                using: $ \ \exp (j x) \ = \ \cos (x) + j \sin (x) \ = \ \zeta \ $.
+                <br/>
+                So:
+                <div class="math-block-wrap">
+                  $$
+                    \zeta \ = \ \exp (j 2 \xi) \ = \ \exp (j \xi)^2 \quad
+                    \iff \quad
+                    \cos (2 \xi) + j \sin (2 \xi) \
+                    = \ \bigl( \cos (\xi) + j \sin (\xi) \bigr)^2
+                    \\ \\
+                    \iff \quad
+                    \cos (2 \xi) + j \sin (2 \xi) \
+                    = \ \cos^2 (\xi) + j 2 \cos (\xi) \sin (\xi) - \sin^2 (\xi)
+                  $$
+                </div>
+                so:
+                <div class="math-block-wrap">
+                  $$
+                    \begin{alignat}{3}
+                      \Re (\zeta) \ = \ &\cos (2 \xi) \ &= \ &\cos^2 (\xi) - \sin^2 (\xi)
+                      \\
+                      \Im (\zeta) \ = \ &\sin (2 \xi) \ &= \ &2 \cos (\xi) \sin (\xi)
+                    \end{alignat}
+                  $$
+                </div>
+                Then:
+                <div class="math-block-wrap">
+                  $$
+                  - \sin^2 (x/2) \ = \ \cos (x) - \cos^2 (x/2)
+                  \quad \iff \quad
+                  \sin^2 (x/2) \ = \ \cos^2 (x/2) - \cos (x)
+                  \\ \\
+                  \iff \quad
+                  1 - \cos^2 (x/2) \ = \ \cos^2 (x/2) - \cos (x)
+                  \quad \iff \quad
+                  1 - 2 \cos^2 (x/2) \ = \ - \cos (x)
+                  \\ \\
+                  \iff \quad
+                  2 \cos^2 (x/2) \ = \ \cos (x) + 1
+                  \quad \iff \quad
+                  \cos (x/2) \ = \ \pm
+                  \sqrt{
+                    \frac{\cos (x) + 1}{2}
+                  }
+                  $$
+                </div>
+                and:
+                <div class="math-block-wrap">
+                  $$
+                    \cos^2 (x/2) \ = \ \cos (x) + \sin^2 (x/2)
+                    \quad \iff \quad
+                    1 - \sin^2 (x/2) \ = \ \cos (x) + \sin^2 (x/2)
+                    \\ \\
+                    \iff \quad
+                    2 \sin^2 (x/2) \ = \ 1 - \cos (x)
+                    \quad \iff \quad
+                    \sin (x/2) \ = \
+                    \pm \sqrt{ \frac{1 - \cos (x)}{2} }
+                  $$
+                </div>
+                We know that $ \ \tan (x) \ $ is positive when
+                $ \ 0 \ \lt \ x \ \lt \pi / 2 \ $ and:
+                <div class="split pseudo-grid">
+                  <div class="math-split-wrap">
+                    $$
+                      \omega_c T/2 \ = \ \pi \f_c / \fs
+                    $$
+                  </div>
+                  <div>and</div>
+                  <div class="math-split-wrap">
+                    $$
+                      \f_c \ \lt \ \Nyquist \ = \ \fs / 2
+                    $$
+                  </div>
+                  <div>so</div>
+                  <div class="math-split-wrap">
+                    $$
+                      \f_c / \fs \ lt \ 1/2
+                      \quad \iff \quad
+                      \pi \f_c / \fs \ lt \ \pi / 2
+                    $$
+                  </div>
+                </div><!-- end split -->
+                so we can drop the $ +/- $ sign.
+                <br/>
+                Then:
+                <div class="split">
+                  <div class="math-split-wrap">
+                    $$
+                      \frac{1}{\tan (x/2)} \ = \
+                      \sqrt{
+                        \pfrac{
+                          \dfrac{1 + \cos (x)}{2}
+                        }{
+                          \dfrac{1 - \cos (x)}{2}
+                        }
+                      }
+                    $$
+                  </div>
+                </div>
+                [...]
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                [...]<br/>
+                Things are getting out of sight.
+                <br/>
+                Let's define:
+                <div class="split pseudo-grid">
+                  <div class="math-split-wrap">
+                    $$
+                      \Gamma \ = \ \cos (\omega_c T)
+                    $$
+                  </div>
+                  <div class="split-comment">
+                    <div>
+                      (capital γ — Gamma)
+                    </div>
+                  </div><!-- end comment -->
+                </div><!-- end split -->
+                <div class="split pseudo-grid">
+                  <div class="math-split-wrap">
+                    $$
+                      \Lambda \ = \ \sin (\omega_c T)
+                    $$
+                  </div>
+                  <div class="split-comment">
+                    <div>
+                      (capital λ — Lambda)
+                    </div>
+                  </div><!-- end comment -->
+                </div><!-- end split -->
+                <div class="math-block-wrap">
+                  $$
+                    % _F_I_R_S_T_ _L_I_N_E_
+                    H_d (z) \ = \
+                    \frac{
+                      b_2
+                      \Bigl(
+                        (1 + \Gamma) z^{-2} - (2 + 2 \Gamma) z^{-1} + 1 + \Gamma
+                      \Bigr)
+                      + b_1
+                      \Bigl(
+                        \Lambda + \Lambda z^{-1} - \Lambda z^{-1} - \Lambda z^{-2}
+                      \Bigr)
+                      + b_0
+                      \Bigl(
+                        (1 - \Gamma) (1 + 2 z^{-1} + z^{-2})
+                      \Bigr)
+                    }{
+                      a_2
+                      \Bigl(
+                        (1 + \Gamma) z^{-2} - (2 + 2 \Gamma) z^{-1} + 1 + \Gamma
+                      \Bigr)
+                      + a_1
+                      \Bigl(
+                        \Lambda + \Lambda z^{-1} - \Lambda z^{-1} - \Lambda z^{-1}
+                      \Bigr)
+                      + a_0
+                      \Bigl(
+                        (1 - \Gamma) (1 + 2 z^{-1} + z^{-2})
+                      \Bigr)
+                    }
+                    \\
+                    % _S_E_C_O_N_D_ _L_I_N_E_
+                    \\
+                    = \
+                    \frac{
+                      b_2 (1 + \Gamma) z^{-2} - b_2 (2 + 2 \Gamma) z^{-1} + b_2 (1 + \Gamma)
+                      + b_1 \Lambda - b_1 \Lambda z^{-1}
+                      + b_0
+                      \bigl(
+                        1 + 2 z^{-1} + z^{-2} - \Gamma - 2 \Gamma z^{-1} - \Gamma z^{-2}
+                      \bigr)
+                    }{
+                      a_2 (1 + \Gamma) z^{-2} - a_2 (2 + 2 \Gamma) z^{-1} + a_2 (1 + \Gamma)
+                      + a_1 \Lambda - a_1 \Lambda z^{-2}
+                      + a_0
+                      \bigl(
+                        1 + 2 z^{-1} + z^{-2} - \Gamma - 2 \Gamma z^{-1} - \Gamma z^{-2}
+                      \bigr)
+                    }
+                    \\
+                    % _T_H_I_R_D_ _L_I_N_E_
+                    \\
+                    = \
+                    \frac{
+                      \bigl(
+                        b_2 (1 + \Gamma) - b_1 \Lambda
+                      \bigr) z^{-2}
+                      - b_2 (2 + 2 \Gamma) z^{-1} + b_2 (1 + \Gamma)
+                      + b_1 \Lambda
+                      + b_0 + b_0 2 z^{-1} + b_0 z^{-2} - b_0 \Gamma
+                      - b_0 2 \Gamma z^{-1} - b_0 \Gamma z^{-2}
+                    }{
+                      \bigl(
+                        a_2 (1 + \Gamma) - a_1 \Lambda
+                      \bigr) z^{-2}
+                      - a_2 (2 + 2 \Gamma) z^{-1} + a_2 (1 + \Gamma)
+                      + a_1 \Lambda + a_0 + a_0 2 z^{-1} + a_0 z^{-2}
+                      - a_0 \Gamma - a_0 2 \Gamma z^{-1} - a_0 \Gamma z^{-2}
+                    }
+                    \\
+                    % _F_O_U_R_T_H_ _L_I_N_E_
+                    \\
+                    = \
+                    \frac{
+                      \Bigl(
+                        b_2 (1 + \Gamma) - b_1 \Lambda + b_0 - b_0 \Gamma
+                      \Bigr) z^{-2}
+                      +
+                      \Bigl(
+                        2 b_0 - 2 b_0 \Gamma - b_2 (2 + 2 \Gamma)
+                      \Bigr) z^{-1}
+                      +
+                      \Bigl(
+                        b_2 (1 + \Gamma) + b_1 \Lambda + b_0 - b_0 \Gamma
+                      \Bigr)
+                    }{
+                      \Bigl(
+                        a_2 (1 + \Gamma) - a_1 \Lambda + a_0 - a_0 \Gamma
+                      \Bigr) z^{-2}
+                      +
+                      \Bigl(
+                        2 a_0 - 2 a_0 \Gamma - a_2 (2 + 2 \Gamma)
+                      \Bigr) z^{-1}
+                      +
+                      \Bigl(
+                        a_2 (1 + \Gamma) + a_1 \Lambda + a_0 - a_0 \Gamma
+                      \Bigr)
+                    }
+                    \\
+                    % _F_I_F_T_H_ _L_I_N_E_
+                    \\
+                    = \
+                    \frac{
+                      \Bigl(
+                        b_2 (1 + \Gamma) - b_1 \Lambda + b_0 (1 - \Gamma)
+                      \Bigr) z^{-2}
+                      +
+                      \Bigl(
+                        2 b_0 (1 - \Gamma) - 2 b_2 (1 + \Gamma)
+                      \Bigr) z^{-1}
+                      +
+                      \Bigl(
+                        b_2 (1 + \Gamma) + b_1 \Lambda + b_0 (1 - \Gamma)
+                      \Bigr)
+                    }{
+                      \Bigl(
+                        a_2 (1 + \Gamma) - a_1 \Lambda + a_0 (1 - \Gamma)
+                      \Bigr) z^{-2}
+                      +
+                      \Bigl(
+                        2 a_0 (1 - \Gamma) - 2 a_2 (1 + \Gamma)
+                      \Bigr) z^{-1}
+                      +
+                      \Bigl(
+                        a_2 (1 + \Gamma) + a_1 \Lambda + a_0 (1 - \Gamma)
+                      \Bigr)
+                    }
+                    \\
+                    % _S_I_X_T_H_ _L_I_N_E_
+                    \\
+                    = \
+                    \frac{
+                      \Bigl(
+                        b_0 (1 - \Gamma) + b_1 \Lambda + b_2 (1 + \Gamma)
+                      \Bigr)
+                      +
+                      \Bigl(
+                        2 b_0 (1 - \Gamma) - 2 b_2 (1 + \Gamma)
+                      \Bigr) z^{-1}
+                      +
+                      \Bigl(
+                        b_0 (1 - \Gamma) - b_1 \Lambda + b_2 (1 + \Gamma)
+                      \Bigr) z^{-2}
+                    }{
+                      \Bigl(
+                        a_0 (1 - \Gamma) + a_1 \Lambda + a_2 (1 + \Gamma)
+                      \Bigr)
+                      +
+                      \Bigl(
+                        2 a_0 (1 - \Gamma) - 2 a_2 (1 + \Gamma)
+                      \Bigr) z^{-1}
+                      +
+                      \Bigl(
+                        a_0 (1 - \Gamma) - a_1 \Lambda + a_2 (1 + \Gamma)
+                      \Bigr) z^{-2}
+                    }
+                    \\
+                    % _S_E_V_E_N_T_H_ _L_I_N_E_
+                    \\
+                    \rule[8ex]{0pt}{0pt}
+                    = \
+                    \pfrac{
+                      \dfrac{
+                        b_0 (1 - \Gamma) + b_1 \Lambda + b_2 (1 + \Gamma)
+                      }{
+                        a_0 (1 - \Gamma) + a_1 \Lambda + a_2 (1 + \Gamma)
+                      }
+                      +
+                      2 \dfrac{
+                        b_0 (1 - \Gamma) - b_2 (1 + \Gamma)
+                      }{
+                        a_0 (1 - \Gamma) + a²_1 \Lambda + a_2 (1 + \Lambda)
+                      } z^{-1}
+                      +
+                      \dfrac{
+                        b_0 (1 - \Gamma) - b_1 \Lambda + b_2 (1 + \Gamma)
+                      }{
+                        a_0 (1 - \Gamma) + a_1 \Lambda + a_2 (1 + \Gamma)
+                      } z^{-2}
+                      \rule[-3ex]{0pt}{0pt}
+                    }{
+                      \rule[4.5ex]{0pt}{0pt}
+                      1
+                      +
+                      2 \dfrac{
+                        a_0 (1 - \Gamma) - a_2 (1 + \Gamma)
+                      }{
+                        a_0 (1 - \Gamma) + a_1 \Lambda + a_2 (1 + \Gamma)
+                      } z^{-1}
+                      +
+                      \dfrac{
+                        a_0 (1 - \Gamma) - a_1 \Lambda + a_2 (1 + \Gamma)
+                      }{
+                        a_0 (1 - \Gamma) + a_1 \Lambda + a_2 (1 + \Gamma)
+                      } z^{-2}
+                    }
+                  $$
+                </div><!-- Gesundheit! -->
+                <p>
+                  I don't see how we could simplify more without committing
+                  to a less generic analog prototype — which Robert Bristow-Johnson did.
+                  <br/>
+                  We might come back at this equation and finish the job
+                  once we have resonating filters and parallel processing.
+                  <br/>
+                  In the mean time, the following cheat sheet extends RBJ's topology
+                  to any 2-pole prototype:
+                </p>
+                <div class="split">
+                  <div>
+                    <div class="fake-mjx-display">
+                      $
+                        \omega_c T \ = \ 2 \pi \f_c / \fs \
+                        = \ \dfrac{\f_c}{\fs / 2 \pi} \
+                        = \ 2 \
+                      $<span class="eq-popup-trig" style="border-bottom: none;">$
+                        \dfrac{\texttt{Hz}}{\texttt{SRATE\_PI}}
+                      $
+                      <span class="eq-popup-actual">(See #07 and #08)</span>
+                      </span>
+                    </div>
+                    <div class="math-split-wrap">
+                      $$
+                        \\
+                        \beta_0 \ = \
+                        \frac{
+                          b_0 \bigl( 1 - \cos (\omega_c T) \bigr)
+                          + b_1 \sin (\omega_c T)
+                          + b_2 \bigl( 1 + \cos (\omega_c T) \bigr)
+                        }{
+                          a_0 \bigl( 1 - \cos (\omega_c T) \bigr)
+                          + a_1 \sin (\omega_c T)
+                          + a_2 \bigl( 1 + \cos (\omega_c T) \bigr)
+                        }
+                        \\ \\ \\
+                        \beta_1 \ = \
+                        2 \frac{
+                          b_0 \bigl( 1 - \cos (\omega_c T) \bigr)
+                          - b_2 \bigl( 1 + \cos (\omega_c T) \bigr)
+                        }{
+                          a_0 \bigl( 1 - cos (\omega_c T) \bigr)
+                          + a_1 \sin (\omega_c T)
+                          + a_2 \bigl( 1 + \cos (\omega_c T) \bigr)
+                        }
+                        \\ \\ \\
+                        \beta_2 \ = \
+                        \frac{
+                          b_0 \bigl( 1 - \cos (\omega_c T) \bigr)
+                          - b_1 \sin (\omega_c T)
+                          + b_2 \bigl( 1 + \cos (\omega_c T) \bigr)
+                        }{
+                          a_0 \bigl( 1 - \cos (\omega_c T) \bigr)
+                          + a_1 \sin (\omega_c T)
+                          + a_2 \bigl( 1 + \cos (\omega_c T) \bigr)
+                        }
+                        \\ \\ \\
+                        \alpha_1 \ = \
+                        2 \frac{
+                          a_0 \bigl( 1 - \cos (\omega_c T) \bigr)
+                          - a_2 \bigl( 1 + \cos (\omega_c T) \bigr)
+                        }{
+                          a_0 \bigl( 1 - \cos (\omega_c T) \bigr)
+                          + a_1 \sin (\omega_c T)
+                          + a_2 \bigl( 1 + \cos (\omega_c T) \bigr)
+                        }
+                        \\ \\ \\
+                        \alpha_2 \ = \
+                        \frac{
+                          a_0 \bigr( 1 - \cos (\omega_c T) \bigr)
+                          - a_1 \sin (\omega_c T)
+                          + a_2 \bigl( 1 + \cos (\omega_c T) \bigr)
+                        }{
+                          a_0 \bigl( 1 - \cos (\omega_c T) \bigr)
+                          + a_1 \sin (\omega_c T)
+                          + a_2 \bigl( 1 + \cos (\omega_c T) \bigr)
+                        }
+                      $$
+                    </div>
+                  </div><!-- end LEFT -->
+                  <div class="separator"></div>
+                  <div>
+                    <div class="sub-p">
+                      This can look messy at first sight.
+                      <br/>
+                      But many recurring terms can be pre-computed.
+                    </div>
+                    <div class="sub-p">
+                      Cosine and sine can be set first.
+                      <br/>
+                      Then $ \ 1 - \cos \ $ and $ \ 1 + \cos \ $.
+                    </div>
+                    <div class="sub-p">
+                      I've normalised $ \alpha_0 $ to $ 1 $,
+                      <br/>
+                      so all coefficients share the same denominator...
+                    </div>
+                    <div class="sub-p">
+                      The analog prototype's transfer function uses
+                      the unit-cutoff normalisation,
+                      <br/>
+                      so there's a strong probability that several analog coefficients
+                      will be equal to $ 1 $.
+                    </div>
+                    <div class="sub-p">
+                      The $ \alpha $ coefficients have common terms in their numerator
+                      and in their denominator — they can be pre-computed
+                      before setting the denominator.
+                    </div>
+                    <div class="sub-p">
+                      For LP filters, you'll likely have
+                      $ \ b_0 = 1 \ $ and $ \ b_1 = b_2 = 0 \ $. Etc.
+                    </div>
+                    <div class="sub-p">
+                      Looking back at RBJ's cookbook,
+                      it seems that he divided the numerator
+                      and the denominator by 2 — probably to get rid
+                      of the factor 2 in $ \beta_1 $ and $ \alpha_1 $,
+                      and to avoid a factor 4 in $ \alpha_1 $,
+                      due to the topology he's implementing.
+                      <br/>
+                      This is pure normalisation: it doesn't break the equality
+                      (perhaps better approximation?).
+                    </div>
+                  </div><!-- end RIGHT -->
+                </div><!-- end SPLIT -->
+              </div><!-- end p -->
+
+            </section><!-- end #11 -->
+
+
+            <!-- section #12 -->
+            <section id="12">
+              <!-- section title -->
+              <h3>12 — Direct Form II, Direct Form I & Transposed Direct Form I</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #10 -->
+
+
+            <!-- section #13 -->
+            <section id="13">
+              <!-- section title -->
+              <h3>13 — All shall pass</h3>
+
+              <div role="paragraph">
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </div><!-- end p -->
+
+            </section><!-- end #10 -->
+
+
+            <!-- = APPENDIX = -->
+            <section id="APPENDIX">
+              <!-- section title -->
+              <h3><span class="small-caps">Appendix</span> — 1-pole RBJ</h3>
+
+              <div role="paragraph">
+                Der Reichthum der Gesellschaften,
+                in welchen kapitalistische Produktionsweise herrscht,
+                erscheint als eine <cite>ungeheure Waarensammlung</cite>,
+                die einzelne Waare als seine <b>Elementarform</b>.
+              </div><!-- end p -->
+
+            </section><!-- end APPENDIX -->
+
+
+            <!-- = BONUS = -->
+            <section id="BONUS">
+              <!-- section title -->
+              <h3><span class="small-caps">Bonus</span> — &nbsp; $ 1 + 1 \ = \ 1 $</h3>
+
+              <div role="paragraph">
+                Toute la vie des sociétés
+                dans lesquelles règnent les conditions modernes de production
+                s'annonce comme une immense accumulation de spectacles.
+              </div><!-- end p -->
+
+            </section><!-- end BONUS -->
+
+
+          </div><!-- end chapter -->
+
+
+          <footer>
+            &COPY; &nbsp; No, thanks.
+          </footer>
+
+
+        </main><!-- End Main -->
+
+
+      </div><!-- END COSMIC-WRAP -->
+
+
+    </body>
+
+
+</html>

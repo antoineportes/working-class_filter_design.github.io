@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html>
+
+
+    <head>
+        <title>Working-class filter design | TEMPLATE</title>
+        <meta charset='UTF-8'/>
+        <meta name="viewport" content='width=device-width, initial-scale=1'/>
+        <meta name='author' content='Antoine Portes'/>
+        <link rel="canonical" href="https://www.antoineportes.com/working-class_filter_design/">
+        <!-- Style -->
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauInfant[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauInfant-Italic[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauSC[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Unifont/unifont-17.0.05.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+        <link rel='stylesheet'  type='text/css'  href='../assets/css/main.css'/>
+        <!-- Manifest -->
+        <link rel="manifest" href="../site.webmanifest">
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+        <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+        <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png">
+        <!-- ======== SCRIPTS ======== -->
+        <!-- #### Layout #### -->
+        <script
+          defer
+          src="../assets/javascript/layout.js"
+        >
+        </script>
+        <!-- #### MathJax #### -->
+        <script
+          async
+          src="../assets/javascript/mathjax/config.js"
+        >
+        </script>
+    </head>
+
+
+
+    <body>
+
+
+      <nav>
+
+        <a
+          title="Home"
+          target="_self"
+          type="text/html"
+          charset="UTF-8"
+          rel="home"
+          href="../"
+        >
+          <h1>
+            Working-class filter design
+          </h1>
+        </a>
+
+        <div class="dropdown">
+          <button
+            onclick="toggleDropdown(event)"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <svg
+              viewBox="0 0 120 120"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,20 h 80"
+                />
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,60 h 80"
+                />
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,100 h 80"
+                />
+              </g>
+            </svg>
+            chapters
+          </button>
+          <menu>
+            <!-- I. Analytic saignals -->
+            <li>
+              <a
+                href="./01-analytic-signals.html"
+                class="current"
+              >
+                Chapter <span class="small-caps">i</span>: Analytic signals
+              </a>
+            </li>
+            <!-- II. RC -->
+            <li>
+              <a
+                href="./02-rc.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">ii</span>: $ RC $
+              </a>
+            </li>
+            <!-- III. = I + II -->
+            <li>
+              <a
+                href="./03-equals-one-plus-two.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">iii</span>:
+                $ \ = \ $ <span class="small-caps">i</span>
+                $ + $ <span class="small-caps">ii</span>
+              </a>
+            </li>
+            <!-- IV. Jargon -->
+            <li>
+              <a
+                href="./04-jargon.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">iv</span>: Jargon
+              </a>
+            </li>
+            <!-- V. Poles and zeroes -->
+            <li>
+              <a
+                href="./05-poles-and-zeroes.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">v</span>: Poles and zeroes
+              </a>
+            </li>
+            <!-- VI. More jargon -->
+            <li>
+              <a
+                href="./06-more-jargon.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">vi</span>: More jargon
+              </a>
+            </li>
+            <!-- VII. Ones and zeroes -->
+            <li>
+              <a
+                href="./07-ones-and-zeroes.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">vii</span>: Ones and zeroes
+              </a>
+            </li>
+            <!-- Stephen Butterworth -->
+            <li>
+              <a
+                href="./08-stephen-butterworth.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">viii</span>: Stephen Butterworth
+              </a>
+            </li>
+          </menu>
+        </div>
+
+        <button class="gitHub">
+          <a
+            href="https://github.com/antoineportes/Working-class-filter-design"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="original (GitHub repository)"
+            title="original (GitHub repository)"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 512 512"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g transform="scale(4)">
+                <path
+                  class="octoCat"
+                  d="M 82.374999,128 C 90.249999,128 120,97.285025 120,70.18496 120,35.946913 94.843771,8.0000003 63.890627,8 32.937485,7.9999997 8.0000002,35.946913 8,70.18496 7.9999998,97.043069 37.75,128 45.625,128 Z"
+                />
+                <path
+                  d="M 54.125061,93.559792 C 37.624947,91.494958 25.999934,79.235401 25.999934,63.362485 c 0,-6.452321 2.250058,-13.420951 6.000066,-18.066659 -1.624947,-4.258577 -1.374955,-13.291907 0.499984,-17.034309 4.999967,-0.645219 11.750008,2.064699 15.750008,5.807102 4.749975,-1.548525 9.749942,-2.322787 15.875005,-2.322787 6.125061,0 11.125028,0.774262 15.625011,2.193743 3.875004,-3.613359 10.750041,-6.323277 15.750008,-5.678058 1.749943,3.484315 1.999935,12.517644 0.374987,16.905265 4,4.903796 6.124927,11.485295 6.124927,18.195703 0,15.872916 -11.624877,27.874385 -28.374983,30.068263 4.249992,2.838962 7.125028,9.033332 7.125028,16.131002 v 13.42095 c 0,3.87145 3.125028,6.06519 6.875037,4.51667 C 110.25006,118.59508 128,95.23736 128,66.330625 128,29.810041 99.250025,3.2178539e-7 63.875003,0 28.499984,-3.2178539e-7 2.6122451e-7,29.810041 0,66.330625 -2.4816324e-7,94.979273 17.624947,118.72412 41.374955,127.62841 44.749975,128.91885 48,126.59606 48,123.11175 v -10.32391 c -1.749942,0.7744 -4,1.29058 -6.000066,1.29058 -8.249992,0 -13.124962,-4.64571 -16.624979,-13.29205 C 24,97.302194 22.500049,95.23736 19.625012,94.850229 c -1.499951,-0.129044 -2.000065,-0.774262 -2.000065,-1.548524 0,-1.54866 2.50005,-2.710053 5.000098,-2.710053 3.625013,0 6.74991,2.322921 9.999935,7.097674 2.500048,3.742404 5.124962,5.419974 8.249992,5.419974 3.125028,0 5.124962,-1.1614 8,-4.129537 2.125061,-2.193878 3.750008,-4.129534 5.250089,-5.419971 z"
+                />
+              </g>
+            </svg>
+          </a>
+        </button>
+
+      </nav>
+
+
+
+      <!--  ======  ..C..O..S..M..I..C.. ..W..R..A..P..  ======  -->
+      <wc-cosmic-wrap>
+
+
+        <!-- ==== .L.E.F.T. .P.A.N.E.L. ==== -->
+        <aside>
+          <!-- Side-bar header -->
+          <header>
+            <!-- chapter title -->
+            <h2><u>dummy</u><br/>Title</h2>
+            <!-- arrow -->
+            <button onclick="toggleSidebar()">
+              <span>&xlarr;</span>
+            </button>
+          </header>
+          <!-- Sections list -->
+          <nav>
+            <ul>
+              <!-- top -->
+              <li>
+                <a href="#top">
+                  &uparrow; (Top)
+                </a>
+              </li>
+              <!-- #01 dummy -->
+              <li>
+                <a
+                  href="#01"
+                  data-target="01"
+                  title="DUMMY"
+                >
+                  01 — dummy
+                </a>
+              </li>
+              <!-- #02 dummy -->
+              <li>
+                <a
+                  href="#02"
+                  data-target="02"
+                  title="DUMMY"
+                >
+                  02 — dummy
+                </a>
+              </li>
+              <!-- #03 dummy-->
+              <li>
+                <a
+                  href="#03"
+                  data-target="03"
+                  title="DUMMY"
+                >
+                  03 — dummy
+                </a>
+              </li>
+              <!-- #04 dummy -->
+              <li>
+                <a
+                  href="#04"
+                  data-target="04"
+                  title="DUMMY"
+                >
+                  04 — dummy
+                </a>
+              </li>
+              <!-- #05 dummy -->
+              <li>
+                <a
+                  href="#05"
+                  data-target="05"
+                  title="DUMMY"
+                >
+                  05 — dummy
+                </a>
+              </li>
+              <!-- #06 dummy -->
+              <li>
+                <a
+                  href="#06"
+                  data-target="06"
+                  title="DUMMY"
+                >
+                  06 — dummy
+                </a>
+              </li>
+              <!-- #07 dummy -->
+              <li>
+                <a
+                  href="#07"
+                  data-target="07"
+                  title="DUMMY"
+                >
+                  07 — dummy
+                </a>
+              </li>
+              <!-- #08 dummy -->
+              <li>
+                <a
+                  href="#08"
+                  data-target="08"
+                  title="DUMMY"
+                >
+                  08 — dummy
+                </a>
+              </li>
+              <!-- #09 dummy -->
+              <li>
+                <a
+                  href="#09"
+                  data-target="09"
+                  title="DUMMY"
+                >
+                  09 — dummy
+                </a>
+              </li>
+              <!-- #10 dummy -->
+              <li>
+                <a
+                  href="#10"
+                  data-target="10"
+                  title="DUMMY"
+                >
+                  10 — dummy
+                </a>
+              </li>
+              <!-- #11 dummy -->
+              <li>
+                <a
+                  href="#11"
+                  data-target="11"
+                  title="DUMMY"
+                >
+                  11 — dummy
+                </a>
+              </li>
+              <!-- #12 dummy -->
+              <li>
+                <a
+                  href="#12"
+                  data-target="12"
+                  title="DUMMY"
+                >
+                  12 — dummy
+                </a>
+              </li>
+              <!-- #13 dummy -->
+              <li>
+                <a
+                  href="#13"
+                  data-target="13"
+                  title="DUMMY"
+                >
+                  13 — dummy
+                </a>
+              </li>
+              <!-- #14 dummy -->
+              <li>
+                <a
+                  href="#14"
+                  data-target="14"
+                  title="DUMMY"
+                >
+                  14 — dummy
+                </a>
+              </li>
+              <!-- #15 dummy -->
+              <li>
+                <a
+                  href="#15"
+                  data-target="15"
+                  title="DUMMY"
+                >
+                  15 — dummy
+                </a>
+              </li>
+              <!-- #16 dummy -->
+              <li>
+                <a
+                  href="#16"
+                  data-target="16"
+                  title="DUMMY"
+                >
+                  16 — dummy
+                </a>
+              </li>
+              <!-- #17 dummy -->
+              <li>
+                <a
+                  href="#17"
+                  data-target="17"
+                  title="DUMMY"
+                >
+                  17 — dummy
+                </a>
+              </li>
+              <!-- #18 dummy -->
+              <li>
+                <a
+                  href="#18"
+                  data-target="18"
+                  title="DUMMY"
+                >
+                  18 — dummy
+                </a>
+              </li>
+              <!-- #19 dummy -->
+              <li>
+                <a
+                  href="#19"
+                  data-target="19"
+                  title="DUMMY"
+                >
+                  19 — dummy
+                </a>
+              </li>
+              <!-- #20 dummy -->
+              <li>
+                <a
+                  href="#20"
+                  data-target="20"
+                  title="DUMMY"
+                >
+                  20 — dummy
+                </a>
+              </li>
+              <!-- APPENDIX: [...] -->
+              <li>
+                <a
+                  href="#APPENDIX"
+                  data-target="APPENDIX"
+                  title="FOO"
+                >
+                  <span class="small-caps">Appendix:</span> foo
+                </a>
+              </li>
+              <!-- BONUS: [...] -->
+              <li>
+                <a
+                  href="#BONUS"
+                  data-target="BONUS"
+                  title="BAR"
+                >
+                  <span class="small-caps">Bonus:</span> bar
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="handle"></div>
+        </aside>
+
+
+        <!-- ==== .M.A.I.N. .W.I.N.D.O.W. ==== -->
+        <main>
+
+
+          <!-- == CHAPTER == -->
+          <wc-chapter>
+            <!-- = Chapter title = -->
+            <h2><u>dummy</u>: Title</h2>
+
+
+            <!-- = Section #01 = -->
+            <section id="01">
+              <!-- top quote -->
+              <header>
+                <blockquote>
+                  <q>ἐπιθεῖναι βουληθείς,
+                  ἵνα γένοιντο ἐμμελέστεροι σωφρονισθέντες,
+                  <br>
+                  συνήγειρεν θεοὺς πάντας εἰς τὴν τιμιωτάτην αὐτῶν οἴκησιν,
+                  <br/>
+                  ἣ δὴ κατὰ μέσον παντὸς τοῦ κόσμου βεβηκυῖα καθορᾷ πάντα
+                  ὅσα γενέσεως μετείληφεν,
+                  <br/>
+                  καὶ συναγείρας εἶπεν — ...</q>
+                  <footer>
+                    — Πλάτων (<cite>Κριτίας</cite>)
+                  </footer>
+                </blockquote>
+                <blockquote>
+                  <q>Lasciate ogne speranza, voi ch'intrate.</q>
+                  <footer>
+                    — Dante Alighieri
+                    (<cite>Inferno, Canto
+                    <span class="small-caps">iii</span></cite>)
+                  </footer>
+                </blockquote>
+              </header>
+              <!-- section title -->
+              <h3>01 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #01 -->
+
+
+            <!-- = Section #02 = -->
+            <section id="02">
+              <!-- section title -->
+              <h3>02 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #02 -->
+
+
+            <!-- section #03 -->
+            <section id="03">
+              <!-- section title -->
+              <h3>03 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #03 -->
+
+
+            <!-- section #04 -->
+            <section id="04">
+              <!-- section title -->
+              <h3>04 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #04 -->
+
+
+            <!-- section #05 -->
+            <section id="05">
+              <!-- section title -->
+              <h3>05 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #05 -->
+
+
+            <!-- section #06 -->
+            <section id="06">
+              <!-- section title -->
+              <h3>06 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #06 -->
+
+
+            <!-- section #07 -->
+            <section id="07">
+              <!-- section title -->
+              <h3>07 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #07 -->
+
+
+            <!-- section #08 -->
+            <section id="08">
+              <!-- section title -->
+              <h3>08 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #08 -->
+
+
+            <!-- section #09 -->
+            <section id="09">
+              <!-- section title -->
+              <h3>09 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #09 -->
+
+
+            <!-- section #10 -->
+            <section id="10">
+              <!-- section title -->
+              <h3>10 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #10 -->
+
+
+            <!-- section #11 -->
+            <section id="11">
+              <!-- section title -->
+              <h3>11 — dummy</h3>
+
+              <wc-paragraph>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+                <br/>
+                All work and no play makes Jack a dull boy.
+              </wc-paragraph>
+
+            </section><!-- end #11 -->
+
+
+            <!-- = APPENDIX = -->
+            <section id="APPENDIX">
+              <!-- section title -->
+              <h3><span class="small-caps">Appendix</span> — foo</h3>
+
+              <wc-paragraph>
+                Der Reichthum der Gesellschaften,
+                in welchen kapitalistische Produktionsweise herrscht,
+                erscheint als eine <cite>ungeheure Waarensammlung</cite>,
+                die einzelne Waare als seine <b>Elementarform</b>.
+              </wc-paragraph>
+
+            </section><!-- end APPENDIX -->
+
+
+            <!-- = BONUS = -->
+            <section id="BONUS">
+              <!-- section title -->
+              <h3><span class="small-caps">Bonus</span> — bar</h3>
+
+              <wc-paragraph>
+                Toute la vie des sociétés
+                dans lesquelles règnent les conditions modernes de production
+                s'annonce comme une immense accumulation de spectacles.
+              </wc-paragraph>
+
+            </section><!-- end BONUS -->
+
+
+          </wc-chapter>
+
+
+          <footer>
+            &COPY; &nbsp; No, thanks.
+          </footer>
+
+
+        </main><!-- End Main -->
+
+
+      </wc-cosmic-wrap>
+
+
+    </body>
+
+
+</html>

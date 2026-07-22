@@ -1,0 +1,56 @@
+
+
+
+
+
+/* #region SPLIT */
+/* ___________________________________________________________________________ */
+/*  SPLIT                                                                      */
+
+/* All viewports */
+.split
+{
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Desktop */
+@media screen and (min-width: 851px)
+{
+  .split
+  {
+    display: flex;
+    flex-flow: row nowrap;
+    overflow-x: auto;
+    overflow-y: clip;
+  }
+  .split.grid
+  {
+    align-items: baseline;
+  }
+  .split .comment {
+    width: max(15vw, fit-content);
+    flex-shrink: 0;
+  }
+}
+
+/* Bloody phones */
+@media screen and (max-width: 850px)
+{
+  .split
+  {
+    display: block;
+  }
+}
+
+/* #endregion */
+
+
+
+/* C++: double commentWidth = max(contentWidth, minWidth); */
+.split .comment {
+  width: max(12vh, fit-content);
+  flex-shrink: 0; /* Prevents the flex engine from ever squeezing it below this */
+}

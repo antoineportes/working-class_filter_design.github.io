@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html>
+
+
+    <head>
+        <title>Working-class filter design | Chapter II: RC</title>
+        <meta charset='UTF-8'/>
+        <meta name="viewport" content='width=device-width, initial-scale=1'/>
+        <meta name='author' content='Antoine Portes'/>
+        <link rel="canonical" href="https://www.antoineportes.com/working-class_filter_design/">
+        <!-- Style -->
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauInfant[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauInfant-Italic[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Ysabeau/YsabeauSC[wght].woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+         <link
+          rel="preload"
+          href="../assets/fonts/Unifont/unifont-17.0.05.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        >
+        <link rel='stylesheet'  type='text/css'  href='../assets/css/main.css'/>
+        <!-- Manifest -->
+        <link rel="manifest" href="../site.webmanifest">
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+        <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+        <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png">
+        <!-- ======== SCRIPTS ======== -->
+        <!-- #### Layout #### -->
+        <script
+          defer
+          src="../assets/javascript/layout.js"
+        >
+        </script>
+        <!-- #### MathJax #### -->
+        <script
+          async
+          src="../assets/javascript/mathjax/config.js"
+        >
+        </script>
+    </head>
+
+
+
+    <body>
+
+
+      <nav>
+
+        <a
+          title="Home"
+          target="_self"
+          type="text/html"
+          charset="UTF-8"
+          rel="home"
+          href="../"
+        >
+          <h1>
+            Working-class filter design
+          </h1>
+        </a>
+
+        <div class="dropdown">
+          <button
+            onclick="toggleDropdown(event)"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <svg
+              viewBox="0 0 120 120"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,20 h 80"
+                />
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,60 h 80"
+                />
+                <path
+                  style="stroke-width:12;stroke-linecap:round;stroke-linejoin:round;"
+                  d="m 20,100 h 80"
+                />
+              </g>
+            </svg>
+            chapters
+          </button>
+          <menu>
+            <!-- I. Analytic saignals -->
+            <li>
+              <a
+                href="./01-analytic-signals.html"
+                rel="prev"
+              >
+                Chapter <span class="small-caps">i</span>: Analytic signals
+              </a>
+            </li>
+            <!-- II. RC -->
+            <li>
+              <a
+                href="#top"
+                class="current"
+              >
+                Chapter <span class="small-caps">ii</span>: $ RC $
+              </a>
+            </li>
+            <!-- III. = I + II -->
+            <li>
+              <a
+                href="./03-equals-one-plus-two.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">iii</span>:
+                $ \ = \ $ <span class="small-caps">i</span>
+                $ + $ <span class="small-caps">ii</span>
+              </a>
+            </li>
+            <!-- IV. Jargon -->
+            <li>
+              <a
+                href="./04-jargon.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">iv</span>: Jargon
+              </a>
+            </li>
+            <!-- V. Poles and zeroes -->
+            <li>
+              <a
+                href="./05-poles-and-zeroes"
+                rel="next"
+              >
+                Chapter <span class="small-caps">v</span>: Poles and zeroes
+              </a>
+            </li>
+            <!-- VI. More jargon -->
+            <li>
+              <a
+                href="./06-more-jargon.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">vi</span>: More jargon
+              </a>
+            </li>
+            <!-- VII. Ones and zeroes -->
+            <li>
+              <a
+                href="./07-ones-and-zeroes.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">vii</span>: Ones and zeroes
+              </a>
+            </li>
+            <!-- Stephen Butterworth -->
+            <li>
+              <a
+                href="./08-stephen-butterworth.html"
+                rel="next"
+              >
+                Chapter <span class="small-caps">viii</span>: Stephen Butterworth
+              </a>
+            </li>
+          </menu>
+        </div>
+
+        <button class="gitHub">
+          <a
+            href="https://github.com/antoineportes/Working-class-filter-design"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="original (GitHub repository)"
+            title="original (GitHub repository)"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 512 512"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g transform="scale(4)">
+                <path
+                  class="octoCat"
+                  d="M 82.374999,128 C 90.249999,128 120,97.285025 120,70.18496 120,35.946913 94.843771,8.0000003 63.890627,8 32.937485,7.9999997 8.0000002,35.946913 8,70.18496 7.9999998,97.043069 37.75,128 45.625,128 Z"
+                />
+                <path
+                  d="M 54.125061,93.559792 C 37.624947,91.494958 25.999934,79.235401 25.999934,63.362485 c 0,-6.452321 2.250058,-13.420951 6.000066,-18.066659 -1.624947,-4.258577 -1.374955,-13.291907 0.499984,-17.034309 4.999967,-0.645219 11.750008,2.064699 15.750008,5.807102 4.749975,-1.548525 9.749942,-2.322787 15.875005,-2.322787 6.125061,0 11.125028,0.774262 15.625011,2.193743 3.875004,-3.613359 10.750041,-6.323277 15.750008,-5.678058 1.749943,3.484315 1.999935,12.517644 0.374987,16.905265 4,4.903796 6.124927,11.485295 6.124927,18.195703 0,15.872916 -11.624877,27.874385 -28.374983,30.068263 4.249992,2.838962 7.125028,9.033332 7.125028,16.131002 v 13.42095 c 0,3.87145 3.125028,6.06519 6.875037,4.51667 C 110.25006,118.59508 128,95.23736 128,66.330625 128,29.810041 99.250025,3.2178539e-7 63.875003,0 28.499984,-3.2178539e-7 2.6122451e-7,29.810041 0,66.330625 -2.4816324e-7,94.979273 17.624947,118.72412 41.374955,127.62841 44.749975,128.91885 48,126.59606 48,123.11175 v -10.32391 c -1.749942,0.7744 -4,1.29058 -6.000066,1.29058 -8.249992,0 -13.124962,-4.64571 -16.624979,-13.29205 C 24,97.302194 22.500049,95.23736 19.625012,94.850229 c -1.499951,-0.129044 -2.000065,-0.774262 -2.000065,-1.548524 0,-1.54866 2.50005,-2.710053 5.000098,-2.710053 3.625013,0 6.74991,2.322921 9.999935,7.097674 2.500048,3.742404 5.124962,5.419974 8.249992,5.419974 3.125028,0 5.124962,-1.1614 8,-4.129537 2.125061,-2.193878 3.750008,-4.129534 5.250089,-5.419971 z"
+                />
+              </g>
+            </svg>
+          </a>
+        </button>
+
+      </nav>
+
+
+
+      <!--  ======  ..C..O..S..M..I..C.. ..W..R..A..P..  ======  -->
+      <div class="cosmic-wrap">
+
+
+        <!-- ==== .L.E.F.T. .P.A.N.E.L. ==== -->
+        <aside>
+          <!-- Side-bar header -->
+          <header>
+            <!-- chapter title -->
+            <h2><u>Chapter II</u><br/>$ RC $</h2>
+            <!-- arrow -->
+            <button onclick="toggleSidebar()">
+              <span>&xlarr;</span>
+            </button>
+          </header>
+          <!-- Sections list -->
+          <nav>
+            <ul>
+              <!-- top -->
+              <li>
+                <a href="#top">
+                  &uparrow; (Top)
+                </a>
+              </li>
+              <!-- #01 Do I know what a filter is? -->
+              <li>
+                <a
+                  href="#01"
+                  data-target="01"
+                  title="Do I know what a filter is?"
+                >
+                  01 — Do I know what a filter is?
+                </a>
+              </li>
+              <!-- #02 Electricity -->
+              <li>
+                <a
+                  href="#02"
+                  data-target="02"
+                  title="Electricity"
+                >
+                  02 — Electricity
+                </a>
+              </li>
+              <!-- #03 Ohm's law-->
+              <li>
+                <a
+                  href="#03"
+                  data-target="03"
+                  title="Ohm's law"
+                >
+                  03 — Ohm's law
+                </a>
+              </li>
+              <!-- #04 Electrical breakdown -->
+              <li>
+                <a
+                  href="#04"
+                  data-target="04"
+                  title="Electrical breakdown"
+                >
+                  04 — Electrical breakdown
+                </a>
+              </li>
+              <!-- #05 DC / AC  (not a typo.) -->
+              <li>
+                <a
+                  href="#05"
+                  data-target="05"
+                  title="DC / AC  (not a typo.)"
+                >
+                  05 — DC / AC  (not a typo.)
+                </a>
+              </li>
+              <!-- #06 Differential equations -->
+              <li>
+                <a
+                  href="#06"
+                  data-target="06"
+                  title="Differential equations"
+                >
+                  06 — Differential equations
+                </a>
+              </li>
+              <!-- APPENDIX: DC + RC -->
+              <li>
+                <a
+                  href="#APPENDIX"
+                  data-target="APPENDIX"
+                  title="DC + RC"
+                >
+                  <span class="small-caps">Appendix:</span> DC + $ RC $
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="handle"></div>
+        </aside>
+
+
+        <!-- ==== .M.A.I.N. .W.I.N.D.O.W. ==== -->
+        <main>
+
+
+          <!-- == CHAPTER == -->
+          <div class="chapter" id="top">
+            <!-- = Chapter title = -->
+            <h2><u>Chapter II</u>: $ RC $</h2>
+
+
+            <!-- = Section #01 = -->
+            <section id="01">
+              <!-- top quote -->
+              <header>
+                <blockquote>Scuse me while I kiss the sky.</blockquote>
+                <footer>— Jimi Hendrix (<cite>Purple Haze</cite>)</footer>
+              </header>
+              <!-- section title -->
+              <h3>01 — Do I know what a
+              <a
+                title="Wikipedia.org | Separation process"
+                target="_blank"
+                type="text/html"
+                charset="UTF-8"
+                rel="external"
+                href="https://en.wikipedia.org/wiki/Separation_process"
+              >
+                filter
+              </a>
+              is?
+            </h3>
+
+              <div role="paragraph">
+                Being a caffeine addict, I should certainly hope so.
+                <br/>
+                Some people enjoy Turkish coffee. Good for them. I don't.
+                <br/>
+                I like the grains in my cup to be under a certain size.
+                And I choose my coffee filters accordingly.
+                <br/>
+                Fine grains go in my cup, coarse grains go in the compost.
+                <br/>
+                The sum of the fine grains in my cup and the coarse grains in the compost
+                is equal to the unfiltered coffee.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Maybe the coffee paradigm is not as irrelevant as it would seem
+                (Turkish people might disagree...).
+                <br/>
+                We've written Chapter I together, we know what a spectrum and its partials are.
+                <br/>
+                Let <cite>unfiltered coffee</cite> be the name of a spectrum and
+                <cite>grain</cite> be an alias of <cite>partial</cite>.
+                <br/>
+                Now what could <cite>coarse</cite> and <cite>fine</cite> possibly mean?
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                All partials can very well have amplitude $ = 1 $ and phase $ = 0 $,
+                the spectrum remains a spectrum.
+                <br>
+                Their frequency is their identity.
+                Their frequency is linked by definition to their period.
+                <br/>
+                So coarse could mean either <cite>high frequency</cite> or <cite>long period</cite>.
+                <br/>
+                And since we're free (aren't we?) we can assign the pointer
+                to what feels the most intuitive.
+                <br/>
+                Frequency is abstract (speed is not something you can see,
+                it's the first derivative of something you can see);
+                while a period is very palpable on a plot.
+                <br/>
+                I'll assign <cite>coarse</cite> to <cite>long period</cite>
+                and <cite>fine</cite> to <cite>short period</cite>.
+                <a
+                  title="Editing Working-class-filter-design/Chapter 02 - RC at main · antoineportes/Working-class-filter-design"
+                  target="_blank"
+                  type="text/html"
+                  charset="UTF-8"
+                  rel="external"
+                  href="https://github.com/antoineportes/Working-class-filter-design/edit/main/Chapter%2002%20-%20RC"
+                >
+                  Pull a request
+                </a>
+                if you disagree.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                It would mean that frequencies under a threshold set to my taste
+                would end up in the compost.
+                <br/>
+                And <cite>the filter</cite> would remain <cite>the filter</cite>.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                But how would such a filter work? How do we separate velocities?
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                I can think of a way, but if you don't like my parables... well bad news.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                <h4>Second paradigm: Lost in the woods.</h4>
+                A group of people is <b>lost</b> in the woods.
+                No known destination, just moving forward towards the unknown.
+                <br/>
+                It's heavily raining and they're not dressed adequately.
+                <br/>
+                They reach a crossroad.
+                <ul>
+                  <li>
+                    One path is not covered by trees, the rain falls upon it.
+                  </li>
+                  <li>
+                    One path has a gap over which you can jump on the condition that you're fast enough.
+                  </li>
+                </ul>
+                Everyone wants to take the path they consider the easiest.
+                <br/>
+                For fast people it means <cite>no rain</cite>. ($ := $ group H)
+                For slow people it means <cite>no gap</cite>. ($ := $ group L)
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                The group splits. I've filtered people based on their velocity.
+                <br/>
+                Notice that group H $ + $ group L $ = $ initial group.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Now replace <cite>people</cite> with <cite>electric potential</cite>,
+                <cite>rainy path</cite> with <cite>Resistor</cite>
+                and <cite>gaped path</cite> with <cite>Capacitor</cite>.
+                <br/>
+                You get what is called an
+                <a
+                  title="Wikipedia.org | RC cicuit"
+                  target="_blank"
+                  type="text/html"
+                  charset="UTF-8"
+                  rel="external"
+                  href="https://en.wikipedia.org/wiki/RC_circuit"
+                >
+                  $ RC $ circuit
+                </a>.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                <div class="comment">
+                  <h4 class="edit">Edit</h4>
+                  This is mainly bullshit, as the rest of the chapter will reveal.
+                  <br/>
+                  We learn from our mistakes, don't we? Well I've learnt a lot here!
+                </div>
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Which path leads to the ground (compost) and which to the output (coffee cup)
+                depends on whether you want a filter that discards low frequencies
+                and lets high frequencies pass (High-Pass filter);
+                or one that discards high frequencies and lets low frequencies pass (Low-Pass filter).
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                An $ RC $ circuit is an electrical circuit. What is electricity?
+              </div><!-- end p -->
+
+            </section><!-- end #01 -->
+
+
+            <!-- = Section #02 = -->
+            <section id="02">
+              <!-- section title -->
+              <h3>02 —
+                <a
+                  title="Wikipedia.org | Electricity"
+                  target="_blank"
+                  type="text/html"
+                  charset="UTF-8"
+                  rel="external"
+                  href="https://en.wikipedia.org/wiki/Electricity"
+                >
+                  Electricity
+                </a>
+              </h3>
+
+              <div role="paragraph"></div><!-- end p -->
+
+https://en.wikipedia.org/wiki/Conservation_of_energy
+https://en.wikipedia.org/wiki/Entropy
+https://en.wikipedia.org/wiki/First_law_of_thermodynamics
+https://en.wikipedia.org/wiki/Second_law_of_thermodynamics
+https://en.wikipedia.org/wiki/Proton
+https://en.wikipedia.org/wiki/Electron
+https://en.wikipedia.org/wiki/Elementary_charge
+https://en.wikipedia.org/wiki/Neutron
+https://en.wikipedia.org/wiki/Atom
+https://en.wikipedia.org/wiki/Ion
+https://en.wikipedia.org/wiki/Electric_charge
+https://en.wikipedia.org/wiki/Electric_potential
+https://en.wikipedia.org/wiki/Electrical_energy
+https://en.wikipedia.org/wiki/Electric_potential
+https://en.wikipedia.org/wiki/Coulomb's_law
+https://en.wikipedia.org/wiki/Electric_field
+https://en.wikipedia.org/wiki/Drift_velocity
+
+            </section><!-- end #02 -->
+
+
+            <!-- = Section #03 = -->
+            <section id="03">
+              <!-- section title -->
+              <h3>03 — Ohm's law</h3>
+
+              <div role="paragraph"></div><!-- end p -->
+
+            </section><!-- end #03 -->
+
+
+            <!-- = Section #04 = -->
+            <section id="04">
+              <!-- section title -->
+              <h3>04 — Electrical breakdown</h3>
+
+              <div role="paragraph">
+                Connecting our pseudo-prismatic sandwich to $ A $ and $ B $ would look like:
+                <div class="monospace">
+                  <span>    A o----------          </span><br/>
+                  <span>                |          </span><br/>
+                  <span>      [ conductive_base_α ]</span><br/>
+                  <span>      [=====insulator=====]</span><br/>
+                  <span>      [ conductive_base_β ]</span><br/>
+                  <span>                |          </span><br/>
+                  <span>    B o----------          </span>
+                </div><!-- end code -->
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Let's define:
+                <dl>
+                  <dt>
+                    <div class="math-def-wrap">
+                      $$
+                        U_A
+                      $$
+                    </div>
+                  </dt>
+                  <dd>the electric potential of $ A $</dd>
+                  <dt>
+                    <div class="math-def-wrap">
+                      $$
+                        U_B
+                      $$
+                    </div>
+                  </dt>
+                  <dd>the electric potential of $ B $</dd>
+                  <dt>
+                    <div class="math-def-wrap">
+                      $$
+                        U_{\alpha}
+                      $$
+                    </div>
+                  </dt>
+                  <dd>the electric potential of base $ \alpha $</dd>
+                  <dt>
+                    <div class="math-def-wrap">
+                      $$
+                        U_{\beta}
+                      $$
+                    </div>
+                  </dt>
+                  <dd>the electric potential of base $ \beta $</dd>
+                  <dt>
+                    <div class="math-def-wrap">
+                      $$
+                        U_{bd}
+                      $$
+                    </div>
+                  </dt>
+                  <dd>the breakdown voltage of the insulator.</dd>
+                </dl>
+                <div class="split pseudo-grid">
+                  <div>Initial state</div>
+                  <div class="math-split-wrap">
+                    $$
+                      \ \longrightarrow \quad U_{\alpha} = U_{\beta}
+                    $$
+                  </div>
+                </div><!-- end split -->
+              </div><!-- end p -->
+
+              <div role="paragraph" class="outlined">
+                <h4>
+                  First case: $ \qquad U_B - U_A \ \geq \ U_{bd} $
+                </h4>
+                <div class="sub-p">
+                  This is the easy one:
+                  an electrical breakdown will allow a current to flow through the insulator.
+                  <br/>
+                  The previously infinite Resistance will be broken to some finite value ($ R $)
+                  and the system drawn by the schematic would be equivalent
+                  to a resistor between $ A $ and $ B $.
+                  If we know $ R $, Ohm's law gives us $ \ I \ = \ {(U_B - U_A) / R} \ $.
+                  <br/>
+                  The electric field travels from $ B $ to $ A $, crossing the insulator.
+                  Equilibrium is achieved ($ U_B = U_A $), the electrical breakdown ends.
+                  <br/>
+                  The total voltage is zero and the insulator is an insulator again
+                  (probably damaged though).
+                </div><!-- end sub-p -->
+              </div><!-- end p -->
+
+              <div role="paragraph" class="outlined">
+                <h4>
+                  Second case: $ \qquad U_B - U_A \ \leq \ U_{bd} $
+                </h4>
+                <div class="sub-p">
+                  In nodal analysis, an ideal cable is considered equivalent to a node
+                  (segment $ \approx $ point), because the electric field is so fast
+                  that its displacement can be approximated as instantaneous for practical uses.
+                  Let's allow this assumption.
+                  <br/>
+                  As soon as we connect our tripartite anonymous toy,
+                  the electric field gets (temporarily) dissipated.
+                  <br/>
+                  The potential energy of $ A $ is transferred to electrons across the ideal cable.
+                  <br/>
+                  Voltage is not energy, it's energy <b>per charge</b>.
+                  So $ U_A = U_{\alpha} $ will take time.
+                </div><!-- end sub-p -->
+                <div class="sub-p">
+                  In our current example this time is undefined because it relies on $ I $
+                  (intensity of the current $ = $ charge per time)
+                  which is inversely proportional to $ R $ and therefore relies (here)
+                  on a division by zero (since $ R = 0 $).
+                  <br/>
+                  Never mind, let's assume it's ok.
+                </div><!-- end sub-p -->
+                <div class="sub-p">
+                  Remember: if electrons can move, they will.
+                  Between $ A $ and $ \alpha $ they can, so they will.
+                  <br/>
+                  The electric charge will accumulate on $ \alpha $.
+                  The initial potential energy at $ A $ is now kinetic energy in the ideal cable,
+                  progressively converting back into potential energy at $ \alpha $.
+                  <br/>
+                  $ U_{\alpha} $ is increasing.
+                </div><!-- end sub-p -->
+                <div class="sub-p">
+                  Now let's break on through to the other side.
+                  <br/>
+                  Remember: the energy in one charge carrier
+                  is dependent upon the other charge carriers that surround it.
+                  <br/>
+                  So $ \alpha $ charging will affect $ \beta $.
+                  There will be an electric field across the insulator
+                  whose strength is dependent upon $ \alpha $'s and $ \beta $'s surface
+                  and the distance between them:
+                  the more charge carriers are facing each other and the closer they are,
+                  the more energy per charge.
+                  <br/>
+                  Or, thinking backwards: the charge required
+                  to reach a certain voltage across the insulator
+                  grows with the bases' surface and proximity.
+                </div><!-- end sub-p -->
+                <div class="sub-p">
+                  So now there's a vector in $ \alpha $ and an identical one in $ \beta $.
+                  <br/>
+                  "Electrons can move" means (1) they're urged to and (2) the path is clear.
+                  <br/>
+                  The path between $ \beta $ and $ B $ satisfies both conditions.
+                  <br/>
+                  Then whatever happens at $ \alpha $ will be reflected at $ B $.
+                  <br/>
+                  Then $ \alpha $ charging will result in $ \beta $ discharging in equal proportion:
+                  electrons will drift towards $ B $.
+                  <br/>
+                  (By "charging" I mean "negatively charging".
+                  I could mean "positively charging", then the words "charging" and "discharging"
+                  would have to switch places.
+                  They're interchangeable concepts based on your test charge
+                  — which I took negative, which is not what you're supposed to do...
+                  Sorry, I'm bad at following rules.)
+                </div><!-- end sub-p -->
+                <div class="sub-p">
+                  <div class="comment">
+                    <h4>Important clarification — I had a really hard time solving this:</h4>
+                    <h5>Aporia:</h5>
+                    <div class="sub-p">
+                      The description above makes it look like there is a linear causal chain
+                      from $ A $ to $ B $ where $ \alpha $ charges ergo $ \beta $ discharges.
+                      Period.
+                      <br/>
+                      Working on some later part of this chapter,
+                      I realised that this model isn't sufficient.
+                      <br/>
+                      In short: what happens between $ \beta $ and $ B $
+                      influences what happens between $ A $ and $ \alpha $.
+                      <br/>
+                      It looked like causality went circular — that is: breaking its own laws.
+                      <br/>
+                      A consequence affecting its cause... Zero delay feedback loops
+                      — in a filter? why not — in my brain? no thanks.
+                      <br/>
+                      It seemed unfair: I do my best to not mention anything that would distract us
+                      from the point and Quantum physics strikes unannounced?
+                    </div><!-- end sub-sub-p-->
+                    <h5>Solution:</h5>
+                    <div class="sub-p">
+                      <span class="spoiler"><span>There is indeed a circularity, but it's not instantaneous;
+                      it just happens really fast.</span></span>
+                      <br/>
+                      The repartition of the charge inside matter is responsible for potential energy.
+                      Potential energy creates electric fields.
+                      <br/>
+                      Electric fields make the charge move. <span class="small-caps">REPEAT</span>.
+                      <br/>
+                      <br/>
+                      Also "electric fields" (plural) got me confused.
+                      An electric field is a vector.
+                      Addition can be performed on vectors.
+                      <br/>
+                      So it would probably be more intuitive to consider
+                      the total electric field of the system.
+                      <br/>
+                      Which both reacts to and generates movement,
+                      and has a magnitude and a direction
+                      but could have its origin anywhere between $ A $ and $ B $.
+                      <br/>
+                      Everything starts with particles attracting and repelling each other.
+                      Their repartition shapes electricity.
+                      <br/>
+                      So when they move, electricity changes shape.
+                      <br/>
+                      <br/>
+                      The tendency towards equilibrium is constant.
+                      <br/>
+                      So $ \alpha $ starts charging, then $ \beta $ starts discharging,
+                      this allows $ \alpha $ to keep charging,
+                      which makes $ \beta $ keep discharging, etc
+                      <span class="eq-nb" id="eq-c">[c]</span>.
+                      <br/>
+                      <br/>
+                      The whole confusion came from a universal axiom:
+                      $ \alpha $ and $ \beta $ always have the same absolute charge
+                      and opposite polarities.
+                      <br/>
+                      This is false.
+                      <br/>
+                      There is a back-and-forth causal alternation during the charge.
+                      The fact that it's close to the fastest speed we know doesn't make
+                      it literally instantaneous.
+                    </div><!-- end sub-sub-p-->
+                    If you're neurotypical, you must think I'm stupid right now.
+                    <br/>
+                    The French call this <cite>enculer des mouches</cite>,
+                    which literally translates to <cite>fucking flies in the arse</cite>
+                    — classy, right?
+                    <br/>
+                    It means nit-picking for its own sake.
+                    <br/>
+                    This "obvious" approximation took a full day of my life
+                    that I'm never recovering.
+                    Not a game here.
+                  </div><!-- end comment -->
+                </div><!-- end sub-p -->
+                <div class="sub-p">
+                  Full picture:
+                  <ul>
+                    <li>current between $ A $ and $ \alpha $</li>
+                    <li>no current between $ \alpha $ and $ \beta $</li>
+                    <li>current between $ \beta $ and $ B $</li>
+                  </ul>
+                  Until enough electric charge from $ A $ has drifted to $ \alpha $
+                  so that $ \ {U_A = U_{\alpha}} \ $;
+                  <br/>
+                  and enough electric charge from $ \beta $ has drifted to $ B $
+                  so that $ \ {U_B = U_{\beta}} \ $.
+                  <br/>
+                  Which means that once the charge has finished drifting,
+                  $ \ {U_B - U_A} \ = \ {U_{\beta} - U_{\alpha}} \ $.
+                  <br/>
+                  Or: the voltage between $ A $ and $ B $ has decreased,
+                  the one between $ \alpha $ and $ \beta $ has increased;
+                  and now they're equal to one another.
+                </div><!-- end sub-p -->
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                The bases $ \alpha $ and $ \beta $ are called plates.
+                <br/>
+                The insulator is called the dielectric.
+                All three together form a condenser (or, more commonly, a capacitor).
+                <div class="comment">
+                  <cite>Condenser</cite> is obsolete in English (except when talking microphones).
+                  <cite>Condensateur</cite> is still the French standard.
+                </div>
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                The dielectric has a breakdown voltage $ U_{bd} $
+                dependent on its composition and its geometry.
+                <br/>
+                The plates have a maximum charge $ Q_{max} $
+                dependent on their geometry — but also on the dielectric's breakdown voltage.
+                <div class="comment">
+                  Indeed, imagine there's room for $ x $ Coulombs (charge) on each plate,
+                  depending on the overall geometry this means $ \chi $ Volts (voltage).
+                  <br/>
+                  If $ \ \chi \gt U_{bd} \ $ it will never be reached:
+                  electrical breakdown will always happen first.
+                </div>
+                $ Q_{max} $ determines how many charge carriers face each other at once.
+                So a higher $ Q_{max} $ means more potential energy per charge
+                which means more maximum voltage across the dielectric.
+                $ \quad \longrightarrow \ {Q_{max} \ = \ k \cdot \chi} $
+                <br/>
+                But $ \chi $ might very well be unreachable,
+                so $ U_{bd} $ is a more useful constant.
+                Let's redefine:
+                <div class="math-block-wrap">
+                  $$
+                    k \ = \ Q_{max} / U_{bd}
+                  $$
+                </div>
+                The constant $ k $ seems quite useful. What would its dimension be?
+                $ \quad \longrightarrow \quad $ Charge per voltage.
+                <br/>
+                So "how much charge contributes to voltage"
+                or "how much charge is needed to reach a certain voltage".
+                <br/>
+                Its actual name is Capacitance and its usual symbol is $ C $.
+                $ Q_{max} $ and $ U_{bd} $ are extreme cases, the general one is:
+                <div class="math-block-wrap">
+                  $$
+                    C \ = \ q / U  \qquad  ;  \qquad  q \ = \ C \cdot U  \qquad  ;
+                    \qquad  U \ = \ q / C
+                  $$
+                </div>
+                where $ q $ is the absolute value of the charge of either of the plates
+                and $ U $ is the voltage across the dielectric.
+                <br/>
+                (An ideal capacitor has a constant capacitance.)
+                <br/>
+                These parenthesis are doing harm, this is important: $ \quad C \ $ is a constant.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                And it relies on the dielectric's dielectric strength,
+                which relies on composition and geometry.
+                <br/>
+                Composition can be paper, ceramic, air, vacuum...
+                anything with a breakdown voltage (preferably not too low).
+                <br/>
+                Geometry: $ C $ increases with the area of the plates
+                and decreases with the thickness of the dielectric.
+              </div><!-- end p -->
+
+            </section><!-- end #04 -->
+
+
+            <!-- Section #05 -->
+            <section id="05">
+              <!-- top quote -->
+              <header>
+                <blockquote>It's a long way to the top if you wanna rock 'n' roll.</blockquote>
+                <footer>— Bon Scott (<cite>It's a long way to the top</cite>)</footer>
+              </header>
+              <!-- section title -->
+              <h3>05 — DC / AC  (not a typo.)</h3>
+
+              <div role="paragraph"></div><!-- end p -->
+
+            </section><!-- end #05 -->
+
+
+            <!-- section #06 -->
+            <section id="06">
+              <!-- section title -->
+              <h3>06 — Differential equations</h3>
+
+              <div role="paragraph"></div><!-- end p -->
+
+            </section><!-- end #06 -->
+
+
+            <!-- = APPENDIX = -->
+            <section id="APPENDIX">
+              <!-- section title -->
+              <h3><span class="small-caps">Appendix</span> — DC + $ RC $</h3>
+
+              <div role="paragraph">
+                <div class="comment">
+                  <h4 class="edit">Edit</h4>
+                  <div class="sub-p">
+                    In what follows we'll be using some of the
+                    <a
+                      title="Wikipedia.org | Differentiation rules"
+                      target="_blank"
+                      type="text/html"
+                      charset="UTF-8"
+                      rel="external"
+                      href="https://en.wikipedia.org/wiki/Differentiation_rules"
+                    >
+                      rules of differentiation
+                    </a>.
+                    <br/>
+                    If you want proofs that they're valid, hold your breath until next chapter.
+                  </div><!-- end sub-p -->
+                </div><!-- end comment -->
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Let's simplify the nomenclature of our equation by making the substitutions:
+                <dl>
+                  <dt>
+                    <div class="math-def-wrap">
+                      $$
+                        f (x)
+                      $$
+                    </div>
+                  </dt>
+                  <dd>
+                    <div class="math-def-wrap">
+                      $$
+                        \longleftarrow \qquad U_C (t)
+                      $$
+                    </div>
+                  </dd>
+                  <dt>
+                    <div class="math-def-wrap">
+                      $$
+                        f_0
+                      $$
+                    </div>
+                  </dt>
+                  <dd>
+                    <div class="math-def-wrap">
+                      $$
+                        \longleftarrow \qquad U_C (0)
+                      $$
+                    </div>
+                  </dd>
+                  <dt>
+                    <div class="math-def-wrap">
+                      $$
+                        k
+                      $$
+                    </div>
+                  </dt>
+                  <dd>
+                    <div class="math-def-wrap">
+                      $$
+                        \longleftarrow \qquad 1/RC
+                      $$
+                    </div>
+                  </dd>
+                  <dt>
+                    <div class="math-def-wrap">
+                      $$
+                        a
+                      $$
+                    </div>
+                  </dt>
+                  <dd>
+                    <div class="split">
+                      <div class="math-def-wrap">
+                        $$
+                          \longleftarrow \qquad U_A (t)
+                        $$
+                      </div>
+                      <div class="split-comment">
+                        <div>
+                          Later: $ \ U_A \ $
+                          (a constant over time doesn't need to be expressed as a function of time).
+                        </div><!-- end dummy -->
+                      </div><!-- end comment -->
+                    </div><!-- end split -->
+                  </dd>
+                </dl>
+                <div class="split pseudo-grid">
+                  <div>
+                    Then:
+                  </div>
+                  <div class="math-split-wrap">
+                    $$
+                      df/dx \ = \ k \bigl( a - f (x) \bigr)
+                    $$
+                  </div>
+                  <div class="split-comment">
+                    <div>
+                      That's just equation
+                      <span class="eq-popup-trig">
+                        [1]
+                        <span class="eq-popup-actual">
+                          $$
+                            \frac{d U_C}{dt} \ = \ \frac{U_A (t) - U_C (t)}{RC}
+                          $$
+                        </span>
+                      </span>
+                      after the substitutions.
+                    </div><!-- end dummy -->
+                  </div><!-- end comment -->
+                </div><!-- end split -->
+                Let $ \ g (x) \ = \ a - f (x) $
+                <br/>
+                Then:
+                <a
+                  title="Wikipedia.org | Linearity of differentiation"
+                  target="_blank"
+                  type="text/html"
+                  charset="UTF-8"
+                  rel="external"
+                  href="https://en.wikipedia.org/wiki/Linearity_of_differentiation"
+                >
+                  $ \ {dg/dx} \ = \ {d (a - f) / dx} \ = \ {(da - df) / dx} $
+                </a>
+                <br/>
+                $ a $ is a constant so $ \ {da = 0} \ $.
+                <br/>
+                Then:
+                $ \ {dg / dx} \ = \ {- df / dx} \quad \iff \quad {df / dx} \ = \ {- dg / dx} \ $
+                <div class="split pseudo-grid">
+                  <div>
+                    So:
+                  </div>
+                  <div class="math-split-wrap">
+                    $$
+                      - dg / dx \ = \ k g (x) \quad \iff \quad
+                      dg / dx \ = \ - k g (x)
+                    $$
+                  </div>
+                </div><!-- end split -->
+                We know that $ \ \exp (x) \ $ is its own derivative,
+                then according to the
+                <a
+                  title="Wikipedia.org | Chain_rule"
+                  target="_blank"
+                  type="text/html"
+                  charset="UTF-8"
+                  rel="external"
+                  href="https://en.wikipedia.org/wiki/Chain_rule"
+                >
+                  chain rule
+                </a>:
+                <div class="math-block-wrap">
+                  $$
+                    d \exp (-k x) / dx \ = \ -k \cdot \exp (-k x)
+                  $$
+                </div>
+                which is equivalent to:
+                $ \quad {dg / dx} \ = \ {-k \cdot g (x)} \quad $
+                if we let
+                $ \quad {g (x)} \ = \ {\exp (-k x)} \ $.
+                <div class="split pseudo-grid">
+                  <div>
+                    So:
+                  </div>
+                  <div class="math-split-wrap">
+                    $$
+                      a - f (x) \ = \ \exp (-k x)  \quad  \iff  \quad
+                      f (x) \ = \ a - \exp (-k x)
+                    $$
+                  </div>
+                </div><!-- end split -->
+                <div class="split pseudo-grid">
+                  <div>
+                    Reversing the substitutions:
+                  </div>
+                  <div class="math-block-wrap">
+                    $$
+                      U_C (t) \ = \ U_A - \exp (-t / RC)
+                    $$
+                  </div>
+                </div><!-- end split -->
+                This gives: $ \quad {U_C (0)} \ = \ {U_A - 1}  \quad $
+                while it should be $ f_0 $ which should be independent from $ U_A $.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Back to "$ \ {dg / dx} \ = \ {-k g (x)}  \quad $
+                if we let $ \quad  {g (x)} \ = \ {\exp (-k x)} \ $" ...
+                <br/>
+                We might have been a bit quick to conclude from
+                "this is a solution" to "this is the only solution".
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Indeed, according to the constant factor rule:
+                <div class="math-block-wrap">
+                  $$
+                    d C \exp (-k x) / dx \ = \ -k C \exp (-k x)
+                  $$
+                </div>
+                which also satisfies: $ \quad  dg / dx \ = \ -k g (x) $
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Then we need to give a known value to the constant $ C $.
+                Instead of hoping for it to provide $ f_0 $, let's make it a condition.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Then: $ \quad {C \exp (-k \cdot 0)} \ = \ {a - f_0}
+                \quad \iff \quad C \ = \ {a - f_0} $
+                <br/>
+                Then: $ \quad g (x) \ = \ {(a - f_0) \exp (-k x)} $
+                <br/>
+                Then:
+                <div class="math-block-wrap">
+                  $$
+                    a - f (x) \ = \ (a - f_0) \exp (-k x) \quad \iff \quad
+                    f (x) \ = \ a - (a - f_0) \exp (-k x)
+                  $$
+                </div>
+                Reversing the substitutions (again):
+                <div class="math-block-wrap">
+                  $$
+                    U_C (t) \ = \ U_A - \bigl( U_A - U_C (0) \bigr) \exp (-t / RC)
+                  $$
+                </div>
+                <div class="math-hybrid-wrap">
+                  $$
+                    \begin{align}
+                      \text{then:} \quad && U_C (0) \ = \ & U_C (0) \quad & \longrightarrow \ \text{check.} &
+                      \\
+                      \text{and:} \quad && U_C (\infty) \ = \ & U_A \quad & \longrightarrow \ \text{check.} &
+                    \end{align}
+                  $$
+                </div>
+                So we start at $ U_C (0) $ and end at $ U_A $,
+                at which point $ \ q_C \ = \ {C U_A} \ $
+                — it's constant so $ \ I (t) \ = \ {dq_C / dt} \ = \ 0 \ $.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                If $ \quad  U_C (0) \ = \ 0  \quad $
+                then: $ \quad  U_C (t) \ = \ {U_A \bigl( 1 - \exp (-t / RC) \bigr)} $
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                In plain Frenglish: a DC generator connected to an $ RC $ circuit
+                will draw current until the voltage across the capacitor equals
+                the voltage across the generator.
+                This never strictly happens: there's an asymptote in $ U_A $ ad infinitum
+                and the curve is exponential.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Or maybe it's logarithmic...
+                Hard — pointless? — to say with all the negative signs.
+                <br/>
+                Better look at it (and play with the parameters):
+              </div><!-- end p -->
+
+              <!-- Desmos: DC + RC:  U_C (t) -->
+              <iframe
+                class="desmos"
+                src="https://www.desmos.com/calculator/d08bipkpd1?embed"
+              ></iframe>
+
+              <div role="paragraph">
+                What does this mean in terms of analogue signal?
+                <br/>
+                First of all, we've silenced $ \ U_R (t) \ $ — but
+                $ \ U_A (t) \ = \ {U_C (t) + U_R (t)} \ $ means
+                $ \ U_R (t) \ = \ \bigl( U_A - U_C (0) \bigr) \exp (-t / RC) \ $.
+                <br/>
+                At $ \ {t = \infty} \ $ this gives zero.
+                Which makes sense: $ \ U_R (t) \ = \ RC dU_C / dt \ $
+                (remember?), so once $ \ U_C (t) \ $ equals $ U_A $ and becomes constant,
+                its rate of change becomes $ \ dU_C / dt \ = \ 0 \ $,
+                so $ \ U_R (t) \ = \ RC $ times zero... so zero.
+                <br/>
+                Another way to get this result was:
+                $ \ U_C (\infty) \ = \ U_A \ $ and
+                $ \ U_R (t) \ = \ {U_A - U_C (t)} \ $
+                so $ \ U_R (\infty) \ = \ {U_A - U_A} \ = \ 0 \ $.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Ok. Now an analogue signal being a voltage measure,
+                if our output signal is $ U_C $ (the voltage across the capacitor),
+                it will converge very fast to our constant input signal ($ U_A $).
+                The greater the value of $ RC $, the slower the convergence.
+                Indeed: $ \ -t / RC \ $ is inversely proportional to $ RC $.
+                <br/>
+                A constant voltage is a DC offset. $ \ U_C (t) \ $ will not block DC:
+                it will progressively rebuild it: a fade-in with an exponential curve.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                Next: what if we take the output across the resistor?
+                <br/>
+                $ U_R (t) \ = \ {\bigl( U_A - U_C (0) \bigr) \exp (-t / RC)} $
+                <br/>
+                $ {-t / RC} \ = \ {-\omega_c t} \ $ and $ \ U_A - U_C (0) \ $
+                is constant, so the chain rule and the constant factor rule give:
+                <div class="math-block-wrap">
+                  $$
+                    dU_R / dt \ = \ -\omega_c \bigl( U_A - U_C (0) \bigr)
+                    \exp (-\omega_c t) \ = \ \bigl( U_C (0) - U_A \bigr)
+                    \omega_c \exp (-\omega_c t)
+                  $$
+                </div>
+                The rate of change is exponentially decaying.
+                Not a crucial information but I guess I like Calculus now.
+              </div><!-- end p -->
+
+              <div role="paragraph">
+                What actually matters:
+                $ \ U_R (0) \ = \ {\bigl( U_A - U_C (0) \bigr) \exp (-0 / RC)} \
+                = \ {U_A - U_C (0)} \quad $
+                (or $ U_A $ if $ \ U_C (0) \ = \ 0 \ $).
+                <br/>
+                We already know that $ \ U_R (\infty) \ = \ 0 \ $.
+                <br/>
+                So we start with an initial voltage $ \ U_A - U_C (0) \ $
+                and converge very fast to zero.
+                Again: how fast grows with $ \omega_c $ (same reason as before).
+              </div><!-- end p -->
+
+              <!-- Desmos: DC + RC:  U_R (t) -->
+              <iframe
+                class="desmos"
+                src="https://www.desmos.com/calculator/toiiqvpnij?embed"
+              ></iframe>
+
+            </section><!-- end APPENDIX -->
+
+
+          </div><!-- end chapter -->
+
+
+          <footer>
+            &COPY; &nbsp; No, thanks.
+          </footer>
+
+
+        </main><!-- End Main -->
+
+
+      </div><!-- END COSMIC-WRAP -->
+
+
+    </body>
+
+
+</html>
